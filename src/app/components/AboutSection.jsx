@@ -55,7 +55,7 @@ const TAB_DATA = [
                 <motion.img
                     src={skillData.row2}
                     alt="Skills row 2"
-                    className="w-full max-w-[300px] h-auto "
+                    className="w-full max-w-[300px] h-auto"
                     variants={fadeInAnimationVariants}
                     initial="initial"
                     animate="animate"
@@ -77,7 +77,7 @@ const TAB_DATA = [
                         animate="animate"
                         viewport={{ once: true }}
                         custom={index}
-                        className="border-gray-300 border-2 p-3 rounded-lg" style={{ backgroundColor: "#e9ecef"}}
+                        className="border-[#DADADA] rounded-xl overflow-hidden group border p-3" style={{ backgroundColor: "#EBEBEB"}}
                     >
                         <div className="flex items-center gap-3">
                             <FaTrophy className="text-yellow-500 w-5 h-5" />
@@ -134,13 +134,13 @@ const AboutSection = () => {
                             selectTab={() => handleTabChange("skills")}
                             active={tab === "skills"}
                         >
-                            Skills
+                            사용 기술
                         </TabButton>
                         <TabButton
                             selectTab={() => handleTabChange("award")}
                             active={tab === "award"}
                         >
-                            Award
+                            수상 실적
                         </TabButton>
                     </div>
                     <div className="mt-8">

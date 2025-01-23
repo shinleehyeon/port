@@ -27,7 +27,7 @@ const HeroSection = () => {
                             wrapper="span"
                             speed={10}
                             repeat={Infinity}
-                            className="text-[#e9ecef] text-4xl sm:text-5xl lg:text-7xl block"
+                            className="text-[#727272] text-4xl sm:text-5xl lg:text-7xl block"
                         />
                     </h1>
                     <p className="text-gray-400 text-base sm:text-lg mb-6 lg:text-xl">

@@ -34,18 +34,18 @@ const StrengthCard = ({ strength, isOpen, onToggle }) => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="relative bg-[#121212] rounded-2xl overflow-hidden group border border-gray-800 h-full"
+                className="relative bg-[#EBEBEB] rounded-2xl overflow-hidden group border border-[#DADADA] h-full"
             >
                 <div className="p-6 cursor-pointer" onClick={onToggle}>
                     <div className="flex items-center justify-between">
-                        <h3 className={`text-xl font-bold ${isOpen ? 'text-white' : 'text-[#ADB7BE]'}`}>
+                        <h3 className={`text-xl font-medium ${isOpen ? 'text-black' : 'text-[#6D6D6D]'}`}>
                             {strength.keyword}
                         </h3>
                         <motion.div
                             animate={{ rotate: isOpen ? 180 : 0 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <ChevronDown className="w-5 h-5 text-white" />
+                            <ChevronDown className="w-5 h-5 text-black" />
                         </motion.div>
                     </div>
 
@@ -58,7 +58,7 @@ const StrengthCard = ({ strength, isOpen, onToggle }) => {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                             >
-                                <p className="text-[#ADB7BE] text-sm mt-4 pt-4 border-t border-gray-700">
+                                <p className="text-[#1E1E1E] text-sm mt-4 pt-4 border-t border-gray-700">
                                     {strength.detail}
                                 </p>
                             </motion.div>
@@ -93,7 +93,7 @@ const StrengthsSection = () => {
                     transition={{duration: 0.5}}
                     className="flex flex-col space-y-6"
                 >
-                    <h2 className="text-4xl font-bold text-white">
+                    <h2 className="text-4xl font-bold text-black">
                         Strengths
                     </h2>
 
