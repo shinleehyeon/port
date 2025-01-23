@@ -3,11 +3,11 @@ import { FaInstagram, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <footer className="footer bg-black text-gray-500 px-20 py-6 text-xs">
+        <footer className="footer bg-gray-100 text-gray-500 px-20 py-6 text-xs">
             <div className="w-full flex flex-col sm:flex-row justify-between items-center">
                 <div className="text-center sm:text-left">
                     <p>신이현 / 선린인터넷고등학교 / TAPIE</p>
-                    <p>전화번호 : 010-2984-6694 / 이메일 : shinlee7878@gmail.com</p>
+                    <p>이메일 : shinlee7878@gmail.com</p>
                     <p className="mt-2 text-gray-500">Copyright ⓒ 2024 신이현. All rights reserved.</p>
                 </div>
 
@@ -16,17 +16,18 @@ const Footer = () => {
                         href="https://www.instagram.com/hyun._.s08/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center border border-gray-500 hover:border-white text-white px-4 py-2 rounded-full transition-colors gap-2 text-xs"
+                        className="flex items-center border border-black hover:scale-105 text-black px-4 py-2 rounded-full transition-all duration-300 ease-in-out gap-2 text-xs"
+
                     >
-                        <FaInstagram size={16} /> instagram
+                        <FaInstagram size={16} /> hyun._.s08
                     </a>
                     <a
                         href="https://github.com/shinleehyeon"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center border border-gray-500 hover:border-white text-white px-4 py-2 rounded-full transition-colors gap-2 text-xs"
+                        className="flex items-center border border-black hover:scale-105 text-black px-4 py-2 rounded-full transition-all duration-300 ease-in-out gap-2 text-xs"
                     >
-                        <FaGithub size={16} /> github
+                        <FaGithub size={16} /> shinleehyeon
                     </a>
                 </div>
             </div>
