@@ -7,17 +7,17 @@ import Footer from "./components/Footer";
 import StrengthsSection from "./components/StrengthsSection";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col bg-[#fff]">
-      <Navbar />
-      <div className="container mt-24 mx-auto  px-4 py-4 max-w-6xl">
-        <HeroSection />
-        <AboutSection />
-          <StrengthsSection />
-        <ProjectsSection />
-        <EmailSection />
-      </div>
-      <Footer />
-    </main>
-  );
+    return (
+        <main className="relative flex min-h-screen flex-col bg-[#fff]">
+            <Navbar />
+            <div className="container mx-auto px-10 py-4 max-w-6xl mt-[96px]">
+                <HeroSection />
+                <AboutSection />
+                <StrengthsSection />
+                <ProjectsSection />
+                <EmailSection />
+            </div>
+            <Footer />
+        </main>
+    );
 }

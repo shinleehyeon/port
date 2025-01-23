@@ -6,7 +6,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 const ProjectTag = ({ name, onClick, isSelected }) => {
     const buttonStyles = isSelected
         ? "text-white border-primary-500 bg-black"
-        : "text-[#ADB7BE] border-slate-600 hover:border-white";
+        : "text-[#6D6D6D] border-slate-600 hover:border-white";
 
     return (
         <button
