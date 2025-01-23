@@ -12,14 +12,6 @@ const EmailSection = () => {
         subject: '',
         message: ''
     });
-    const [showButton, setShowButton] = useState(false);
-
-    useEffect(() => {
-        const isFormFilled = formData.email !== '' &&
-            formData.subject !== '' &&
-            formData.message !== '';
-        setShowButton(isFormFilled);
-    }, [formData]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -60,19 +52,19 @@ const EmailSection = () => {
         }
     };
 
-    const inputStyles = "bg-transparent border border-primary-500 text-gray-100 text-sm rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent block w-full p-3 transition-all duration-300 ease-in-out";
+    const inputStyles = "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent block w-full p-3 transition-all duration-300 ease-in-out";
 
     return (
         <section id="contact">
             <div className="mt-24">
-                <h2 className="text-4xl font-bold text-white mb-8">
+                <h2 className="text-4xl font-bold text-black mb-8">
                     Contact
                 </h2>
 
                 {showAnimation ? (
                     <div className="flex flex-col items-center justify-center h-full max-w-xl ml-0">
                         <div className="bg-green-500 rounded-full p-2 mb-4 animate-bounce">
-                            <Check className="w-8 h-8 text-white" />
+                            <Check className="w-8 h-8 text-black" />
                         </div>
                         <p className="text-green-500 text-lg font-medium animate-fade-in">
                             이메일 보내기 완료!
@@ -81,7 +73,7 @@ const EmailSection = () => {
                 ) : (
                     <form className="flex flex-col space-y-6 max-w-xl pb-24" onSubmit={handleSubmit}>
                         <div>
-                            <label htmlFor="email" className="text-white block mb-2 text-sm font-medium">
+                            <label htmlFor="email" className="text-black block mb-2 text-sm font-medium">
                                 Your email
                             </label>
                             <input
@@ -96,7 +88,7 @@ const EmailSection = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="subject" className="text-white block text-sm mb-2 font-medium">
+                            <label htmlFor="subject" className="text-black block text-sm mb-2 font-medium">
                                 Subject
                             </label>
                             <input
@@ -111,7 +103,7 @@ const EmailSection = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="message" className="text-white block text-sm mb-2 font-medium">
+                            <label htmlFor="message" className="text-black block text-sm mb-2 font-medium">
                                 Message
                             </label>
                             <textarea
@@ -124,25 +116,22 @@ const EmailSection = () => {
                                 value={formData.message}
                             />
                         </div>
-                        {showButton && (
-                            <motion.button
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.3 }}
-                                type="submit"
-                                disabled={isLoading}
-                                className="group bg-transparent border border-primary-500 text-primary-500 font-medium py-3 px-5 rounded-lg w-full disabled:opacity-50 transition-all duration-300 hover:bg-primary-500 hover:text-white hover:scale-[1.02] active:scale-[0.98]"
-                            >
-                                {isLoading ? (
-                                    "Sending..."
-                                ) : (
-                                    <span className="flex items-center justify-center gap-2">
-                                        Send Message
-                                        <Send className="w-4 h-4 transform group-hover:rotate-12 transition-transform" />
-                                    </span>
-                                )}
-                            </motion.button>
-                        )}
+                        <motion.button
+                            initial={{ opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                            type="submit"
+                            disabled={isLoading}
+                            className="group bg-[#6D6D6D] border border-[#6D6D6D] text-white font-medium py-3 px-5 rounded-lg w-full disabled:opacity-50 transition-all duration-300 hover:text-white"
+                        >
+                            {isLoading ? (
+                                "Sending..."
+                            ) : (
+                                <span className="flex items-center justify-center gap-2">
+                                    Send Message
+                                    <Send className="w-4 h-4 transform group-hover:rotate-12 transition-transform" />
+                                </span>
+                            )}
+                        </motion.button>
                     </form>
                 )}
             </div>
