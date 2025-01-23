@@ -14,7 +14,7 @@ const HeroSection = () => {
                     className="place-self-center text-center sm:text-left justify-self-start"
                 >
                     <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-7xl lg:leading-normal font-extrabold">
-                        <span className="text-white block">
+                        <span className="text-black block">
                             프론트엔드 개발자
                         </span>
                         <TypeAnimation
@@ -27,10 +27,10 @@ const HeroSection = () => {
                             wrapper="span"
                             speed={10}
                             repeat={Infinity}
-                            className="text-[#ADB7BE] text-4xl sm:text-5xl lg:text-7xl -mt-4 block"
+                            className="text-gray-500 text-4xl sm:text-5xl lg:text-7xl -mt-4 block"
                         />
                     </h1>
-                    <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
+                    <p className="text-gray-400 text-base sm:text-lg mb-6 lg:text-xl">
                         새로운 지식을 탐구하며 창의적이고 열정적인 개발자
                         <br/>
                         지속적으로 성장하고 배움을 통해 가치를 창출하는 개발자
