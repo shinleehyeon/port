@@ -14,8 +14,8 @@ const HeroSection = () => {
                     className="place-self-center text-center sm:text-left justify-self-start"
                 >
                     <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-7xl lg:leading-normal font-extrabold">
-                        <span className="text-black block">
-                            프론트엔드 개발자
+                        <span className="text-black block mb-1">
+                            끈임없이 배우는 개발자
                         </span>
                         <TypeAnimation
                             sequence={[
@@ -27,7 +27,7 @@ const HeroSection = () => {
                             wrapper="span"
                             speed={10}
                             repeat={Infinity}
-                            className="text-gray-500 text-4xl sm:text-5xl lg:text-7xl -mt-4 block"
+                            className="text-[#e9ecef] text-4xl sm:text-5xl lg:text-7xl block"
                         />
                     </h1>
                     <p className="text-gray-400 text-base sm:text-lg mb-6 lg:text-xl">
