@@ -5,12 +5,12 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const ProjectTag = ({ name, onClick, isSelected }) => {
     const buttonStyles = isSelected
-        ? "text-white border-primary-500 bg-primary-700 hover:bg-primary-600"
+        ? "text-white border-primary-500 bg-black"
         : "text-[#ADB7BE] border-slate-600 hover:border-white";
 
     return (
         <button
-            className={`${buttonStyles} rounded-full px-6 py-3 text-xl cursor-pointer transition-all duration-300 hover:text-white hover:scale-105`}
+            className={`${buttonStyles} rounded-xl px-6 py-3 text-xl cursor-pointer transition-all duration-300 hover:scale-105`}
             onClick={() => onClick(name)}
         >
             {name}
@@ -22,7 +22,7 @@ const projectsData = [
     {
         id: 1,
         title: "fresio",
-        description: "SW동행 해커톤",
+        description: "AI 냉장고 어시스턴트 서비스",
         image: "/images/projects/fresio.png",
         tag: ["All", "Mobile"],
         gitUrl: "https://github.com/shinleehyun/fresio",
@@ -30,26 +30,26 @@ const projectsData = [
     {
         id: 2,
         title: "SaveQuest",
-        description: "STAC 공모전 작품",
+        description: "절약을 쉽고 재미있게 하도록 도와주는 서비스",
         image: "/images/projects/SaveQuest.png",
         tag: ["All", "Mobile"],
         gitUrl: "https://github.com/SaveQuest",
     },
     {
         id: 3,
-        title: "Albant",
-        description: "선린 방학 프로젝트",
-        image: "/images/projects/Albant.png",
-        tag: ["All", "Mobile"],
-        gitUrl: "https://github.com/shinleehyun/albant",
-    },
-    {
-        id: 4,
         title: "Chromate",
-        description: "음성ai 어시스턴트",
+        description: "지체 장애인을 위한 AI 음성 확장 프로그램",
         image: "/images/projects/Chromate.png",
         tag: ["All", "Web"],
         gitUrl: "https://github.com/shinleehyeon/chromate",
+    },
+    {
+        id: 4,
+        title: "Albant",
+        description: "선린 내에서 이룰 수 있는 심부름 서비스",
+        image: "/images/projects/Albant.png",
+        tag: ["All", "Mobile"],
+        gitUrl: "https://github.com/shinleehyun/albant",
     },
     {
         id: 5,
@@ -70,7 +70,7 @@ const projectsData = [
     {
         id: 7,
         title: "KanBan",
-        description: "드래그를 이용한 할일 리스트",
+        description: "드래그 앤 드롭을 이용한 kanban 서비스",
         image: "/images/projects/kanban.png",
         tag: ["All", "Web"],
         gitUrl: "https://github.com/shinleehyeon/taskproject",
@@ -113,7 +113,7 @@ const ProjectsSection = () => {
 
     return (
         <section id="portfolio">
-            <h2 className="text-left text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
+            <h2 className="text-left text-4xl font-bold text-black mt-4 mb-8 md:mb-12">
                 Portfolio
             </h2>
             <div className="text-white flex flex-row justify-center items-center gap-4 py-8">
