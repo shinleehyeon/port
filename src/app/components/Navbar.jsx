@@ -54,7 +54,7 @@ const Navbar = () => {
             </div>
 
             <div
-                className={`md:hidden absolute top-full left-0 right-0 bg-white/75 backdrop-blur-md transition-all duration-300 ease-in-out ${
+                className={`md:hidden absolute top-full left-0 right-0 bg-white transition-all duration-300 ease-in-out ${
                     navbarOpen ? "opacity-100 visible" : "opacity-0 invisible"
                 }`}
             >
