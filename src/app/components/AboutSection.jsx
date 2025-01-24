@@ -117,7 +117,7 @@ const TAB_DATA = [
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-500 mt-6">
                     <Info className="w-4 h-4"/>
-                    <p>아이콘을 클릭하여 설명 보기</p>
+                    <p>아이콘을 클릭하여 자세한 설명 보기</p>
                 </div>
             </div>
         ),
