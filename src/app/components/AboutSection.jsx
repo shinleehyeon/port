@@ -74,7 +74,7 @@ const SkillSection = ({ title, skills, selectedSkill, onSkillClick }) => (
             ) : (
                 <motion.div
                     key="icons"
-                    className="flex flex-wrap gap-8"
+                    className="flex flex-wrap gap-4"
                 >
                     {skills.map((skill, index) => (
                         <motion.div
