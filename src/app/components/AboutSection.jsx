@@ -111,7 +111,7 @@ const AboutSection = () => {
             <div className="md:grid md:grid-cols-2 items-start gap-10 relative">
                 <div className="relative w-[300px] h-[400px]">
                     <Image
-                        src="/images/img.png"
+                        src="/images/about.png"
                         alt="Hero image"
                         fill
                         className="rounded-xl object-cover"
