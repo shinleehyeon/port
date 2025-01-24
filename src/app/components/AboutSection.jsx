@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaTrophy } from "react-icons/fa";
 
 const skillData = {
-    row1: "https://skillicons.dev/icons?i=react,nextjs,vite,tailwind",
+    row1: "https://skillicons.dev/icons?i=react,nextjs,vite,tailwind,typescript",
     row2: "https://skillicons.dev/icons?i=nodejs,python,mysql,firebase",
 };
 
