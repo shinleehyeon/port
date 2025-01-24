@@ -1,13 +1,25 @@
 "use client";
-import React, { useTransition, useState } from "react";
+import React, {useTransition, useState} from "react";
 import Image from "next/image";
 import TabButton from "./TabButton";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaTrophy } from "react-icons/fa";
+import {motion, AnimatePresence} from "framer-motion";
+import {FaTrophy} from "react-icons/fa";
+import {ChevronDown, Info} from "lucide-react";
 
 const skillData = {
-    row1: "https://skillicons.dev/icons?i=react,nextjs,vite,tailwind,typescript",
-    row2: "https://skillicons.dev/icons?i=nodejs,python,mysql,firebase",
+    frontend: [
+        {icon: "https://skillicons.dev/icons?i=react", desc: "React를 활용한 컴포넌트 기반 개발과 상태관리 익숙합니다."},
+        {icon: "https://skillicons.dev/icons?i=nextjs", desc: "Next.js를 이용한 서버 사이드 렌더링 경험이 있습니다."},
+        {icon: "https://skillicons.dev/icons?i=vite", desc: "Vite를 활용하여 빠른 개발 환경을 구축할 수 있습니다."},
+        {icon: "https://skillicons.dev/icons?i=tailwind", desc: "Tailwind CSS로 반응형 디자인을 구현할 수 있습니다."},
+        {icon: "https://skillicons.dev/icons?i=typescript", desc: "TypeScript를 사용하여 타입을 안전하게 관리할 수 있습니다."},
+    ],
+    backend: [
+        {icon: "https://skillicons.dev/icons?i=nodejs", desc: "Node.js로 서버 애플리케이션을 개발할 수 있습니다."},
+        {icon: "https://skillicons.dev/icons?i=python", desc: "Python으로 데이터 처리와 자동화를 구현할 수 있습니다."},
+        {icon: "https://skillicons.dev/icons?i=mysql", desc: "MySQL을 사용한 데이터베이스 설계 경험이 있습니다."},
+        {icon: "https://skillicons.dev/icons?i=firebase", desc: "Firebase로 실시간 데이터베이스를 구현할 수 있습니다."},
+    ],
 };
 
 const awardsData = [
@@ -22,52 +34,98 @@ const awardsData = [
 ];
 
 const fadeInAnimationVariants = {
-    initial: {
-        opacity: 0,
-        y: 50,
-    },
-    animate: (index) => ({
+    initial: {opacity: 0},
+    animate: {
         opacity: 1,
-        y: 0,
         transition: {
-            delay: 0.1 * index,
             duration: 0.5,
-            ease: "easeOut",
-        },
-    }),
+            ease: "easeOut"
+        }
+    },
+    exit: {
+        opacity: 0,
+        transition: {
+            duration: 0.3,
+            ease: "easeIn"
+        }
+    }
 };
+
+const SkillSection = ({ title, skills, selectedSkill, onSkillClick }) => (
+    <div className="mb-6">
+        <h3 className="text-lg font-semibold mb-3 text-black">{title}</h3>
+        <AnimatePresence mode="wait">
+            {selectedSkill ? (
+                <motion.div
+                    key="description"
+                    initial={{opacity: 0, y: 20}}
+                    animate={{opacity: 1, y: 0}}
+                    exit={{opacity: 0, y: -20}}
+                    transition={{duration: 0.5, ease: "easeInOut"}}
+                    className="cursor-pointer"
+                    onClick={() => onSkillClick(null)}
+                >
+                    <div className="flex items-center gap-4">
+                        <img src={selectedSkill.icon} alt="skill" className="w-12 h-12"/>
+                        <p className="text-gray-700">{selectedSkill.desc}</p>
+                        <ChevronDown className="w-5 h-5 ml-auto text-gray-500 rotate-180" />
+                    </div>
+                </motion.div>
+            ) : (
+                <motion.div
+                    key="icons"
+                    className="flex flex-wrap gap-8"
+                >
+                    {skills.map((skill, index) => (
+                        <motion.div
+                            key={index}
+                            variants={fadeInAnimationVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            onClick={() => onSkillClick(skill)}
+                            className="cursor-pointer hover:scale-110 transition-transform"
+                        >
+                            <img src={skill.icon} alt="skill" className="w-12 h-12"/>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            )}
+        </AnimatePresence>
+    </div>
+);
 
 const TAB_DATA = [
     {
         title: "Skills",
         id: "skills",
-        content: (
-            <div className="flex flex-col gap-4">
-                <motion.img
-                    src={skillData.row1}
-                    alt="Skills row 1"
-                    className="w-3/4 max-w-[300px] h-auto"
-                    variants={fadeInAnimationVariants}
-                    initial="initial"
-                    animate="animate"
-                    custom={0}
-                />
-                <motion.img
-                    src={skillData.row2}
-                    alt="Skills row 2"
-                    className="w-full max-w-[300px] h-auto"
-                    variants={fadeInAnimationVariants}
-                    initial="initial"
-                    animate="animate"
-                    custom={0}
-                />
+        content: ({selectedFrontend, selectedBackend, onFrontendClick, onBackendClick}) => (
+            <div>
+                <div className="flex flex-col space-y-1">
+                    <SkillSection
+                        title="Frontend"
+                        skills={skillData.frontend}
+                        selectedSkill={selectedFrontend}
+                        onSkillClick={onFrontendClick}
+                    />
+                    <SkillSection
+                        title="Backend"
+                        skills={skillData.backend}
+                        selectedSkill={selectedBackend}
+                        onSkillClick={onBackendClick}
+                    />
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-500 mt-6">
+                    <Info className="w-4 h-4"/>
+                    <p>아이콘을 클릭하여 설명 보기</p>
+                </div>
             </div>
         ),
     },
     {
         title: "Award",
         id: "award",
-        content: (
+        content: () => (
             <div className="grid grid-cols-1 gap-4">
                 {awardsData.map((award, index) => (
                     <motion.div
@@ -75,12 +133,13 @@ const TAB_DATA = [
                         variants={fadeInAnimationVariants}
                         initial="initial"
                         animate="animate"
-                        viewport={{ once: true }}
+                        viewport={{once: true}}
                         custom={index}
-                        className="border-[#DADADA] rounded-xl overflow-hidden group border p-3" style={{ backgroundColor: "#EBEBEB"}}
+                        className="border-[#DADADA] rounded-xl overflow-hidden group border p-3"
+                        style={{backgroundColor: "#EBEBEB"}}
                     >
                         <div className="flex items-center gap-3">
-                            <FaTrophy className="text-yellow-500 w-5 h-5" />
+                            <FaTrophy className="text-yellow-500 w-5 h-5"/>
                             <div>
                                 <span className="text-primary-500 text-sm">
                                     {award.year}
@@ -97,11 +156,15 @@ const TAB_DATA = [
 
 const AboutSection = () => {
     const [tab, setTab] = useState("skills");
+    const [selectedFrontend, setSelectedFrontend] = useState(null);
+    const [selectedBackend, setSelectedBackend] = useState(null);
     const [isPending, startTransition] = useTransition();
 
     const handleTabChange = (id) => {
         startTransition(() => {
             setTab(id);
+            setSelectedFrontend(null);
+            setSelectedBackend(null);
         });
     };
 
@@ -151,7 +214,15 @@ const AboutSection = () => {
                                 exit={{opacity: 0, y: -20}}
                                 transition={{duration: 0.5}}
                             >
-                                {TAB_DATA.find((t) => t.id === tab).content}
+                                {tab === "skills"
+                                    ? TAB_DATA[0].content({
+                                        selectedFrontend,
+                                        selectedBackend,
+                                        onFrontendClick: setSelectedFrontend,
+                                        onBackendClick: setSelectedBackend
+                                    })
+                                    : TAB_DATA[1].content()
+                                }
                             </motion.div>
                         </AnimatePresence>
                     </div>
