@@ -46,7 +46,7 @@ const TAB_DATA = [
                 <motion.img
                     src={skillData.row1}
                     alt="Skills row 1"
-                    className="w-full max-w-[300px] h-auto "
+                    className="w-3/4 max-w-[300px] h-auto"
                     variants={fadeInAnimationVariants}
                     initial="initial"
                     animate="animate"
@@ -108,14 +108,13 @@ const AboutSection = () => {
     return (
         <section id="about" className="pt-24">
             <h2 className="text-4xl font-bold text-black mb-8">About</h2>
-            <div className="md:grid md:grid-cols-2 items-start gap-8">
-                <div className="relative w-full h-[360px] md:h-[360px]">
+            <div className="md:grid md:grid-cols-2 items-start gap-10 relative">
+                <div className="relative w-[300px] h-[400px]">
                     <Image
-                        src="/images/hero-image.jpeg"
+                        src="/images/img.png"
                         alt="Hero image"
                         fill
                         className="rounded-xl object-cover"
-                        style={{ objectFit: 'cover' }}
                     />
                 </div>
                 <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
@@ -147,10 +146,10 @@ const AboutSection = () => {
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={tab}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.5 }}
+                                initial={{opacity: 0, y: 20}}
+                                animate={{opacity: 1, y: 0}}
+                                exit={{opacity: 0, y: -20}}
+                                transition={{duration: 0.5}}
                             >
                                 {TAB_DATA.find((t) => t.id === tab).content}
                             </motion.div>
