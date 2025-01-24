@@ -7,12 +7,12 @@ import { ChevronDown } from "lucide-react";
 const strengthsList = [
     {
         keyword: "새로운 기술을 배우려는 열정",
-        detail: "새로운 기술과 도구를 학습하는 것을 즐기며, 지속적인 자기 개발을 통해 더 나은 개발자가 되기 위해 노력합니다.",
+        detail: "새로운 기술과 툴을 배우는것을 두려워 하지 않고 더 나은 방법을 찾는것에 열정이 있습니다.",
         color: "bg-gradient-to-br from-primary-500 to-secondary-500"
     },
     {
-        keyword: "헌신적으로 프로젝트에 참여",
-        detail: "맡은 프로젝트에 대한 강한 책임감을 가지고 있으며, 팀원들과의 협업을 통해 최상의 결과를 도출하기 위해 노력합니다.",
+        keyword: "팀원과 소통하며 프로젝트에 참여",
+        detail: "맡은 프로젝트를 책임감있게 임하며, 팀원들과의 소통을 통해 최상의 결과를 도출하기 위해 노력합니다.",
         color: "bg-gradient-to-br from-primary-500 to-secondary-500"
     },
     {
@@ -21,8 +21,8 @@ const strengthsList = [
         color: "bg-gradient-to-br from-primary-500 to-secondary-500"
     },
     {
-        keyword: "시작하면 끝까지 몰입하는 열정",
-        detail: "한 번 시작한 일은 끝까지 해내려는 강한 의지를 가지고 있으며, 깊은 몰입을 통해 최상의 결과물을 만들어냅니다.",
+        keyword: "맡은 일을 포기하지 않는 열정",
+        detail: "한 번 시작한 일은 끝까지 해내려는 강한 의지가 있고, 깊은 몰입을 통해 최상의 결과물을 만들어냅니다.",
         color: "bg-gradient-to-br from-primary-500 to-secondary-500"
     }
 ];

@@ -124,8 +124,8 @@ const AboutSection = () => {
                         transition={{duration: 0.5}}
                     >
                         <p className="text-black text-base lg:text-lg">
-                            안녕하세요👋, 저는 대한민국에서 소프트웨어를 공부하고 있는 선린인터넷고등학교 프론트엔드
-                            개발자 신이현입니다. 저는 새로운 기술을 배우는 것을 좋아하며 사람들에게 실질적인 가치를 제공하는 서비스를 만들고 싶습니다.
+                            안녕하세요👋, 저는 대한민국에서 소프트웨어를 공부하고 있는 선린인터넷고등학교에 재학중인
+                            신이현입니다. 저는 새로운 기술을 배우는 것을 좋아하며 사람들에게 실질적인 가치와 도움을 제공하는 서비스를 만들고 싶습니다.
                         </p>
                     </motion.div>
                     <div className="flex flex-row justify-start mt-8">
