@@ -1,28 +1,27 @@
-# Portfolio Website
+# 포트폴리오 사이트
 
-This is a portfolio website built with Next.js and Tailwind CSS. It showcases your skills, projects, and achievements in an elegant and responsive design.
+이 포트폴리오 웹사이트는 Next.js와 Tailwind CSS로 구현 하였습니다.
 
-## Installation
+## 설치방법
 
-1. Clone the repository: `git clone https://github.com/shinleehyeon/port`
-2. Navigate to the project directory: `cd port`
-3. Install the dependencies: `npm install`
+1. 레포지토리 클론: `git clone https://github.com/shinleehyeon/port`
+2. 프로젝트 디렉토리로 이동: `cd port`
+3. 의존성 패키지 설치: `npm install`
 
-## Usage
+## 사용방법
 
-1. Start the development server: `npm run dev`
-2. Open your browser and visit `http://localhost:3000` to view the website.
+1. 개발 서버 시작: `npm run dev`
+2. 브라우저를 열고 `http://localhost:3000` 에 접속하여 웹사이트를 확인.
 
-## Dependencies
+## 의존성 패키지 설치
 
-The following dependencies are required for this project:
+이 프로젝트에 필요한 의존성 패키지들은 다음과 같습니다:
 
-- Next.js: A React framework for server-side rendering and static site generation.
-- Tailwind CSS: A highly customizable CSS framework.
-- React: A JavaScript library for building user interfaces.
-- React Icons: A collection of popular icons for React projects.
-- TypeScript: A typed superset of JavaScript that compiles to plain JavaScript.
-- Resend: Resend is the email API for developers.
+- Next.js: 서버 사이드 렌더링과 정적 사이트 생성을 위한 React 프레임워크
+- Tailwind CSS: CSS 프레임워크
+- React: 사용자 인터페이스를 구축하기 위한 JavaScript 라이브러리
+- React Icons: 프로젝트를 위한 아이콘 모음
+- Resend: 개발자를 위한 이메일 API
 
 ## License
 
