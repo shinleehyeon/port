@@ -2,6 +2,17 @@
 import React, { useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { FaReact, FaNodeJs, FaAndroid } from "react-icons/fa";
+import {
+    SiNextdotjs,
+    SiTailwindcss,
+    SiFirebase,
+    SiKotlin,
+    SiSpring,
+    SiNestjs,
+    SiPython,
+    SiNodemon, SiExpress
+} from "react-icons/si";
 
 const ProjectTag = ({ name, onClick, isSelected }) => {
     const buttonStyles = isSelected
@@ -26,6 +37,7 @@ const projectsData = [
         image: "/images/projects/fresio.png",
         tag: ["All", "Mobile"],
         gitUrl: "https://github.com/shinleehyun/fresio",
+        techStack: [FaReact, SiPython]
     },
     {
         id: 2,
@@ -34,6 +46,7 @@ const projectsData = [
         image: "/images/projects/SaveQuest.png",
         tag: ["All", "Mobile"],
         gitUrl: "https://github.com/SaveQuest",
+        techStack: [FaReact, SiNestjs]
     },
     {
         id: 3,
@@ -42,6 +55,7 @@ const projectsData = [
         image: "/images/projects/Chromate.png",
         tag: ["All", "Web"],
         gitUrl: "https://github.com/shinleehyeon/chromate",
+        techStack: [FaReact, SiTailwindcss]
     },
     {
         id: 4,
@@ -50,6 +64,7 @@ const projectsData = [
         image: "/images/projects/Albant.png",
         tag: ["All", "Mobile"],
         gitUrl: "https://github.com/shinleehyun/albant",
+        techStack: [FaReact, SiPython]
     },
     {
         id: 5,
@@ -58,6 +73,7 @@ const projectsData = [
         image: "/images/projects/mangoland.png",
         tag: ["All", "Mobile"],
         gitUrl: "/",
+        techStack: [FaReact, SiPython]
     },
     {
         id: 6,
@@ -66,14 +82,7 @@ const projectsData = [
         image: "/images/projects/chat.png",
         tag: ["All", "Web"],
         gitUrl: "https://github.com/shinleehyeon/nodechatapp",
-    },
-    {
-        id: 7,
-        title: "KanBan",
-        description: "드래그 앤 드롭을 이용한 kanban 서비스",
-        image: "/images/projects/kanban.png",
-        tag: ["All", "Web"],
-        gitUrl: "https://github.com/shinleehyeon/taskproject",
+        techStack: [FaReact, SiExpress]
     },
 ];
 
@@ -159,6 +168,7 @@ const ProjectsSection = () => {
                                     imgUrl={project.image}
                                     gitUrl={project.gitUrl}
                                     previewUrl={project.previewUrl}
+                                    techStack={project.techStack}
                                 />
                             </motion.li>
                         ))}

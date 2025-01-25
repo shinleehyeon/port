@@ -2,7 +2,7 @@ import React from "react";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 
-const ProjectCard = ({ imgUrl, title, description, gitUrl }) => {
+const ProjectCard = ({ imgUrl, title, description, gitUrl, techStack = [] }) => {
     return (
         <div>
             <div
@@ -15,8 +15,7 @@ const ProjectCard = ({ imgUrl, title, description, gitUrl }) => {
                     backgroundColor: "#181818"
                 }}
             >
-                <div
-                    className="overlay flex items-center justify-center absolute top-0 left-0 w-full h-full bg-[#181818] opacity-0 group-hover:opacity-80 group-hover:rounded-t-xl transition-all duration-500 ease-in-out">
+                <div className="overlay flex items-center justify-center absolute top-0 left-0 w-full h-full bg-[#181818] opacity-0 group-hover:opacity-80 group-hover:rounded-t-xl transition-all duration-500 ease-in-out">
                     <Link
                         href={gitUrl}
                         className="h-14 w-14 border-2 relative rounded-full border-[#ADB7BE] hover:border-white transition-all duration-300 hover:scale-110"
@@ -28,7 +27,14 @@ const ProjectCard = ({ imgUrl, title, description, gitUrl }) => {
                 </div>
             </div>
             <div className="text-[#6D6D6D] rounded-b-xl bg-[#EBEBEB] py-6 px-4">
-                <h5 className="text-xl font-semibold mb-2">{title}</h5>
+                <div className="flex items-center justify-between mb-2">
+                    <h5 className="text-xl font-semibold">{title}</h5>
+                    <div className="flex gap-2">
+                        {techStack.map((Icon, index) => (
+                            <Icon key={index} className="w-4 h-4 text-gray-600" />
+                        ))}
+                    </div>
+                </div>
                 <p className="text-[#6D6D6D]">{description}</p>
             </div>
         </div>
