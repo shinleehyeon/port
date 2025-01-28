@@ -4,9 +4,9 @@ import React, { useState, useTransition } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Info } from "lucide-react";
+import { FaTrophy } from "react-icons/fa";
 import TabButton from "../../ui/button/TabButton";
 import { skillData } from "@/lib/constants/skills";
-
 import type { Skill } from "@/types/common";
 
 const fadeInAnimationVariants = {
@@ -27,6 +27,17 @@ const fadeInAnimationVariants = {
     },
 };
 
+const awardsData = [
+    {
+        title: "동행 해커톤 창의재단이사장상(2위)",
+        year: "2024",
+    },
+    {
+        title: "스마틴 앱챌린지 (STAC) 가작상",
+        year: "2024",
+    },
+];
+
 interface SkillSectionProps {
     title: string;
     skills: Skill[];
@@ -35,11 +46,11 @@ interface SkillSectionProps {
 }
 
 const SkillSection: React.FC<SkillSectionProps> = ({
-                                                       title,
-                                                       skills,
-                                                       selectedSkill,
-                                                       onSkillClick,
-                                                   }) => (
+    title,
+    skills,
+    selectedSkill,
+    onSkillClick,
+}) => (
     <div className="mb-6">
         <h3 className="text-lg font-semibold mb-3 text-black">{title}</h3>
         <AnimatePresence mode="wait">
@@ -54,11 +65,7 @@ const SkillSection: React.FC<SkillSectionProps> = ({
                     onClick={() => onSkillClick(null)}
                 >
                     <div className="flex items-center gap-4">
-                        <img
-                            src={selectedSkill.icon}
-                            alt="skill"
-                            className="w-12 h-12"
-                        />
+                        <img src={selectedSkill.icon} alt="skill" className="w-12 h-12" />
                         <p className="text-gray-700">{selectedSkill.desc}</p>
                         <ChevronDown className="w-5 h-5 ml-auto text-gray-500 rotate-180" />
                     </div>
@@ -75,16 +82,39 @@ const SkillSection: React.FC<SkillSectionProps> = ({
                             onClick={() => onSkillClick(skill)}
                             className="cursor-pointer hover:scale-110 transition-transform"
                         >
-                            <img
-                                src={skill.icon}
-                                alt="skill"
-                                className="w-12 h-12"
-                            />
+                            <img src={skill.icon} alt="skill" className="w-12 h-12" />
                         </motion.div>
                     ))}
                 </motion.div>
             )}
         </AnimatePresence>
+    </div>
+);
+
+const AwardSection = () => (
+    <div className="grid grid-cols-1 gap-4">
+        {awardsData.map((award, index) => (
+            <motion.div
+                key={index}
+                variants={fadeInAnimationVariants}
+                initial="initial"
+                animate="animate"
+                viewport={{ once: true }}
+                custom={index}
+                className="border-[#DADADA] rounded-xl overflow-hidden group border p-3"
+                style={{ backgroundColor: "#EBEBEB" }}
+            >
+                <div className="flex items-center gap-3">
+                    <FaTrophy className="text-yellow-500 w-5 h-5" />
+                    <div>
+                        <span className="text-primary-500 text-sm">
+                            {award.year}
+                        </span>
+                        <p className="font-medium text-black">{award.title}</p>
+                    </div>
+                </div>
+            </motion.div>
+        ))}
     </div>
 );
 
@@ -170,7 +200,7 @@ const AboutSection = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div> {/* 수상 실적 내용 추가 */} </div>
+                                    <AwardSection />
                                 )}
                             </motion.div>
                         </AnimatePresence>
