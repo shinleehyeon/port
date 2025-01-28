@@ -150,9 +150,10 @@ const AboutSection = () => {
             <div className="md:grid md:grid-cols-2 items-start gap-10 relative">
                 <div className="relative w-[300px] h-[400px]">
                     <Image
-                        src="/images/about.png"
+                        src="/images/con.png"
                         alt="Hero image"
                         fill
+                        priority
                         className="rounded-xl object-cover user-select-none"
                         draggable="false"
                         onMouseDown={(e) => e.preventDefault()}
