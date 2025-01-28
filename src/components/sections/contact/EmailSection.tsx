@@ -56,9 +56,9 @@ const EmailSection = () => {
         "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent block w-full p-3 transition-all duration-300 ease-in-out";
 
     return (
-        <section id="contact">
+        <section id="interact">
             <div className="mt-24">
-                <h2 className="text-4xl font-bold text-black mb-8">Contact</h2>
+                <h2 className="text-4xl font-bold text-black mb-8">Interact</h2>
 
                 {showAnimation ? (
                     <div className="flex flex-col items-center justify-center h-full max-w-xl ml-0">
