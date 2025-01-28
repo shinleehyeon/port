@@ -66,6 +66,7 @@ const ProjectsSection: React.FC = () => {
                 <ProjectCard
                   title={project.title}
                   description={project.description}
+                  details={project.details}
                   imgUrl={project.image}
                   gitUrl={project.gitUrl}
                   techStack={project.techStack}

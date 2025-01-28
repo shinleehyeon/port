@@ -3,14 +3,13 @@ import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import type { ProjectCardProps } from "@/types/common";
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ 
-  imgUrl, 
-  title, 
-  description, 
-  gitUrl, 
-  techStack = [] 
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  imgUrl,
+  title,
+  description,
+  gitUrl,
+  techStack = []
 }) => {
-  // FastAPI 공식 색상으로 변경 (#009688)
   const getIconStyle = (iconUrl: string) => {
     if (iconUrl.includes('fastapi')) {
       return { filter: 'invert(41%) sepia(68%) saturate(434%) hue-rotate(127deg) brightness(95%) contrast(94%)' };
@@ -56,18 +55,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <h5 className="text-xl font-semibold">{title}</h5>
           <div className="flex gap-2">
             {techStack.map((iconUrl, index) => (
-              <div 
+              <div
                 key={index}
                 className="group relative flex items-center justify-center"
               >
-                <img 
-                  src={iconUrl} 
+                <img
+                  src={iconUrl}
                   alt={getIconName(iconUrl)}
                   className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
                   style={getIconStyle(iconUrl)}
                 />
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 hidden group-hover:block z-10">
-                  <div className="bg-[#6D6D6D] text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="bg-black text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {getIconName(iconUrl)}
                   </div>
                 </div>
