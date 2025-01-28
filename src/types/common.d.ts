@@ -15,7 +15,15 @@ export interface Project {
   image: string;
   tag: string[];
   gitUrl: string;
-  techStack: IconType[];
+  techStack: string[];
+}
+
+export interface ProjectCardProps {
+  imgUrl: string;
+  title: string;
+  description: string;
+  gitUrl: string;
+  techStack: string[];
 }
 
 export interface Strength {

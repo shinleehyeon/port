@@ -1,19 +1,3 @@
-import { FaReact, FaNodeJs, FaAndroid } from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiTailwindcss,
-  SiFirebase,
-  SiKotlin,
-  SiSpring,
-  SiNestjs,
-  SiPython,
-  SiNodemon,
-  SiExpress,
-  SiPwa,
-  SiWebpack,
-  SiFastapi,
-  SiTypescript
-} from "react-icons/si";
 import type { Project } from '@/types/common';
 
 export const projectsData: Project[] = [
@@ -24,7 +8,11 @@ export const projectsData: Project[] = [
     image: "/images/projects/fresio.png",
     tag: ["All", "Mobile"],
     gitUrl: "https://github.com/shinleehyun/fresio",
-    techStack: [FaReact, SiFastapi, SiTypescript]
+    techStack: [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+    ]
   },
   {
     id: 2,
@@ -33,7 +21,11 @@ export const projectsData: Project[] = [
     image: "/images/projects/SaveQuest.png",
     tag: ["All", "Mobile"],
     gitUrl: "https://github.com/SaveQuest",
-    techStack: [FaReact, SiNestjs, SiTypescript]
+    techStack: [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+    ]
   },
   {
     id: 3,
@@ -42,7 +34,11 @@ export const projectsData: Project[] = [
     image: "/images/projects/Chromate.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/shinleehyeon/chromate",
-    techStack: [FaReact, SiTailwindcss, SiFastapi]
+    techStack: [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg"
+    ]
   },
   {
     id: 4,
@@ -51,15 +47,22 @@ export const projectsData: Project[] = [
     image: "/images/projects/Albant.png",
     tag: ["All", "Mobile"],
     gitUrl: "https://github.com/shinleehyun/albant",
-    techStack: [FaReact, SiFastapi]
+    techStack: [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg"
+    ]
   },
   {
-    id: 7,
+    id: 5,
     title: "PortFolio",
     description: "포트폴리오 사이트",
     image: "/images/projects/port.png",
     tag: ["All", "Web"],
-    gitUrl: "hhttps://github.com/shinleehyeon/port",
-    techStack: [SiNextdotjs, SiTailwindcss, SiTypescript]
+    gitUrl: "https://github.com/shinleehyeon/port",
+    techStack: [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+    ]
   }
-]
+];
