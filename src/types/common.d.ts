@@ -1,5 +1,3 @@
-import { IconType } from 'react-icons';
-
 export interface NavItem {
   title: string;
   path: string;
@@ -10,11 +8,6 @@ export interface Skill {
   desc: string;
 }
 
-export interface TechDescription {
-  tech: string;
-  icon: IconType;
-}
-
 export interface Project {
   id: number;
   title: string;
@@ -23,16 +16,10 @@ export interface Project {
   tag: string[];
   gitUrl: string;
   techStack: IconType[];
-  details: ProjectDetails;
 }
 
-export interface Project {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  tag: string[];
-  gitUrl: string;
-  techStack: IconType[];
-  details: ProjectDetails;
+export interface Strength {
+  keyword: string;
+  detail: string;
+  color: string;
 }
