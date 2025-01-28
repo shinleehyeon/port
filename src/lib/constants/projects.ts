@@ -51,21 +51,12 @@ export const projectsData: Project[] = [
     techStack: [FaReact, SiPython]
   },
   {
-    id: 5,
-    title: "Mangoland",
-    description: "클릭커 게임 앱",
-    image: "/images/projects/mangoland.png",
-    tag: ["All", "Mobile"],
-    gitUrl: "/",
-    techStack: [FaReact, SiPython]
-  },
-  {
-    id: 6,
-    title: "NodeChat",
-    description: "실시간 채팅 사이트",
-    image: "/images/projects/chat.png",
+    id: 7,
+    title: "PortFolio",
+    description: "포트폴리오 사이트",
+    image: "/images/projects/port.png",
     tag: ["All", "Web"],
-    gitUrl: "https://github.com/shinleehyun/nodechatapp",
-    techStack: [FaReact, SiExpress]
+    gitUrl: "hhttps://github.com/shinleehyeon/port",
+    techStack: [SiNextdotjs, SiTailwindcss]
   }
-];
+]

@@ -22,6 +22,10 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       icon: "https://skillicons.dev/icons?i=typescript",
       desc: "TypeScript를 사용하여 타입을 안전하게 관리할 수 있습니다."
     },
+    {
+      icon: "https://skillicons.dev/icons?i=webpack", 
+      desc: "Webpack을 활용한 모듈 번들링과 최적화 경험이 있습니다."
+    },
   ],
   backend: [
     {
