@@ -43,7 +43,7 @@ const Footer = () => {
                         <span className="mx-1">/</span>
                         <span 
                             onClick={() => handleCopy("shinlee7878@gmail.com", "이메일")}
-                            className="cursor-pointer hover:text-black flex items-center gap-1 transition-colors group"
+                            className="cursor-pointer hover:text-black flex items-center gap-1 transition-all duration-500 ease-in-out group"
                         >
                             이메일 : shinlee7878@gmail.com
                             <Copy className="h-3 w-3 inline opacity-50 group-hover:opacity-100" />
