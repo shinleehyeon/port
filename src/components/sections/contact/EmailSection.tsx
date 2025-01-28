@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Check, Send } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -39,11 +39,6 @@ const EmailSection = () => {
                 setShowAnimation(true);
                 setFormData({ email: "", subject: "", message: "" });
                 e.currentTarget.reset();
-
-                setTimeout(() => {
-                    setShowAnimation(false);
-                    setEmailSubmitted(false);
-                }, 3000);
             }
         } catch (error) {
             console.error("Failed to send email:", error);
@@ -51,6 +46,17 @@ const EmailSection = () => {
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (showAnimation) {
+            const timer = setTimeout(() => {
+                setShowAnimation(false);
+                setEmailSubmitted(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showAnimation]);
 
     const inputStyles =
         "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent block w-full p-3 transition-all duration-300 ease-in-out";
