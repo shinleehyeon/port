@@ -24,6 +24,7 @@ export interface ProjectCardProps {
   description: string;
   gitUrl: string;
   techStack: string[];
+  tag: string[]; 
 }
 
 export interface Strength {
