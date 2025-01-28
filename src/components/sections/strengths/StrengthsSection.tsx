@@ -26,8 +26,6 @@ const strengthsList = [
         color: "bg-gradient-to-br from-primary-500 to-secondary-500",
     },
 ];
-
-// Props 타입 정의
 interface StrengthCardProps {
     strength: {
         keyword: string;
