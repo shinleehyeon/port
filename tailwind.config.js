@@ -16,8 +16,8 @@ module.exports = {
     },
     colors: {
       ...colors,
-      primary: colors.gray,    // purple에서 gray로 변경
-      secondary: colors.slate, // pink에서 slate로 변경
+      primary: colors.gray,   
+      secondary: colors.slate, 
     },
   },
   plugins: [],

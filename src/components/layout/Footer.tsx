@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="w-full flex flex-col sm:flex-row justify-between items-center">
                 <div className="text-center sm:text-left">
                     <p>신이현 / 선린인터넷고등학교 / TAPIE</p>
-                    <p>이메일 : shinlee7878@gmail.com</p>
+                    <p>전화번호 : 010-2984-6694 / 이메일 : shinlee7878@gmail.com</p>
                     <p className="mt-2 text-gray-500">Copyright ⓒ 2024 신이현. All rights reserved.</p>
                 </div>
 
