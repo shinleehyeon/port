@@ -156,11 +156,6 @@ export async function POST(request: Request) {
             <div class="divider"></div>
             <p>© 2024 신이현 포트폴리오</p>
             <p>본 이메일은 포트폴리오 사이트를 통해 전송되었습니다.</p>
-            <div class="social-links">
-                <a href="https://github.com/shinleehyeon">GitHub</a>
-                |
-                <a href="https://www.instagram.com/hyun._.s08/">Instagram</a>
-            </div>
         </div>
     </div>
 </body>
@@ -170,7 +165,7 @@ export async function POST(request: Request) {
             from: 'Portfolio <port@resend.dev>',
             to: ['shinlee7878@gmail.com'],
             reply_to: email,
-            subject: `[포트폴리오 문의] ${subject}`,
+            subject: `[포트폴리오 문의]`,
             html: emailTemplate
         });
 
