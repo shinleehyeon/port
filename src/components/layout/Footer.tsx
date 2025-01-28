@@ -27,7 +27,7 @@ const Footer = () => {
                         rel="noopener noreferrer"
                         className="flex items-center border border-black hover:scale-105 text-black px-4 py-2 rounded-full transition-all duration-300 ease-in-out gap-2 text-xs"
                     >
-                        <FaGithub size={16} /> shinleehyeon
+                        <FaGithub size={16} /> shinleehyun
                     </a>
                 </div>
             </div>
