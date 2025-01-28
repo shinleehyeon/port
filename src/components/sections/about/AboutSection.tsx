@@ -65,7 +65,13 @@ const SkillSection: React.FC<SkillSectionProps> = ({
                     onClick={() => onSkillClick(null)}
                 >
                     <div className="flex items-center gap-4">
-                        <img src={selectedSkill.icon} alt="skill" className="w-12 h-12" />
+                        <img 
+                            src={selectedSkill.icon}
+                            alt="skill" 
+                            className="w-12 h-12 user-select-none"
+                            draggable="false"
+                            onMouseDown={(e) => e.preventDefault()} 
+                        />
                         <p className="text-gray-700">{selectedSkill.desc}</p>
                         <ChevronDown className="w-5 h-5 ml-auto text-gray-500 rotate-180" />
                     </div>
@@ -82,7 +88,13 @@ const SkillSection: React.FC<SkillSectionProps> = ({
                             onClick={() => onSkillClick(skill)}
                             className="cursor-pointer hover:scale-110 transition-transform"
                         >
-                            <img src={skill.icon} alt="skill" className="w-12 h-12" />
+                            <img 
+                                src={skill.icon} 
+                                alt="skill" 
+                                className="w-12 h-12 user-select-none"
+                                draggable="false"
+                                onMouseDown={(e) => e.preventDefault()} 
+                            />
                         </motion.div>
                     ))}
                 </motion.div>
@@ -141,7 +153,9 @@ const AboutSection = () => {
                         src="/images/about.png"
                         alt="Hero image"
                         fill
-                        className="rounded-xl object-cover"
+                        className="rounded-xl object-cover user-select-none"
+                        draggable="false"
+                        onMouseDown={(e) => e.preventDefault()}
                     />
                 </div>
                 <div className="mt-4 md:mt-0 text-left flex flex-col h-full">

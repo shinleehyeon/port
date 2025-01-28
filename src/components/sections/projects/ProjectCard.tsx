@@ -71,7 +71,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 <img
                   src={iconUrl}
                   alt={getTechName(iconUrl)}
-                  className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
+                  className="w-4 h-4 transition-transform duration-300 group-hover:scale-110 user-select-none"
+                  draggable="false"
+                  onMouseDown={(e) => e.preventDefault()}
                   style={getIconStyle(iconUrl)}
                 />
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 hidden group-hover:block z-10">
