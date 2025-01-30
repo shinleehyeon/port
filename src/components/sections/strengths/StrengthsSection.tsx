@@ -47,7 +47,7 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ strength, isOpen, onToggle 
             >
                 <div className="p-6 cursor-pointer" onClick={onToggle}>
                     <div className="flex items-center justify-between">
-                        <h3 className={`text-xl font-medium ${isOpen ? "text-black" : "text-[#6D6D6D]"}`}>
+                        <h3 className={`text-xl font-medium ${isOpen ? "text-black" : "text-[#6D6D6D]"} select-none`}>
                             {strength.keyword}
                         </h3>
                         <motion.div
@@ -67,7 +67,7 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ strength, isOpen, onToggle 
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                             >
-                                <p className="text-[#1E1E1E] text-sm mt-4 pt-4 border-t border-gray-700">
+                                <p className="text-[#1E1E1E] text-sm mt-4 pt-4 border-t border-gray-700 select-none">
                                     {strength.detail}
                                 </p>
                             </motion.div>
