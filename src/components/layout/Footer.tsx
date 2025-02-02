@@ -50,7 +50,7 @@ const Footer = () => {
                         </span>
                     </p>
                     <p className="mt-2 text-gray-500">
-                        Copyright ⓒ 2024 신이현. All rights reserved.
+                        Copyright ⓒ 2025 신이현. All rights reserved.
                     </p>
                 </div>
 
