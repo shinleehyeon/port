@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sprout } from 'lucide-react';
 
 const HangulTypingEffect = ({ text }) => {
@@ -32,34 +32,59 @@ const HangulTypingEffect = ({ text }) => {
     let currentCharIndex = 0;
     let currentJamoIndex = 0;
     let currentText = '';
-
+    
     if (decomposedChars.length === 0) return;
 
-    intervalRef.current = setInterval(() => {
-      if (currentCharIndex >= decomposedChars.length) {
-        clearInterval(intervalRef.current);
-        return;
-      }
+          let lastTime = 0;
+      const smoothWrite = (currentTime) => {
+        if (currentCharIndex >= decomposedChars.length) {
+          cancelAnimationFrame(intervalRef.current);
+          return;
+        }
 
-      const currentJamo = decomposedChars[currentCharIndex][currentJamoIndex];
-      currentText += currentJamo;
-      setDisplayText(currentText);
+        const deltaTime = currentTime - lastTime;
+        if (deltaTime > 100) { 
+          const currentJamo = decomposedChars[currentCharIndex][currentJamoIndex];
+          currentText += currentJamo;
+          setDisplayText(currentText);
+          
+          currentJamoIndex++;
+          if (currentJamoIndex >= decomposedChars[currentCharIndex].length) {
+            currentCharIndex++;
+            currentJamoIndex = 0;
+          }
+          lastTime = currentTime;
+        }
 
-      currentJamoIndex++;
-      if (currentJamoIndex >= decomposedChars[currentCharIndex].length) {
-        currentCharIndex++;
-        currentJamoIndex = 0;
-      }
-    }, 100);
+        intervalRef.current = requestAnimationFrame(smoothWrite);
+    };
+
+    intervalRef.current = requestAnimationFrame(smoothWrite);
 
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+        cancelAnimationFrame(intervalRef.current);
       }
     };
   }, [decomposedChars]);
 
-  return <span>{displayText}</span>;
+  return (
+    <AnimatePresence>
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ 
+          opacity: 1,
+          transition: {
+            duration: 0.8,
+            ease: [0.43, 0.13, 0.23, 0.96]
+          }
+        }}
+        className="font-hangul"
+      >
+        {displayText}
+      </motion.span>
+    </AnimatePresence>
+  );
 };
 
 const HeroSection = () => {
@@ -67,9 +92,12 @@ const HeroSection = () => {
     <section className="lg:py-16">
       <div className="grid grid-cols-1">
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.8,
+            ease: [0.43, 0.13, 0.23, 0.96]
+          }}
           className="place-self-center text-center sm:text-left justify-self-start"
         >
           <h1 className="mb-4 text-4xl sm:text-5xl lg:text-7xl lg:leading-normal font-extrabold">
@@ -78,7 +106,13 @@ const HeroSection = () => {
             </span>
             <span className="text-[#6f4f28] block mb-1 flex items-center justify-center sm:justify-start">
               <HangulTypingEffect text="성장하는 개발자" />
-              <Sprout className="ml-2" color="#22c55e" size={38} />
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 2.5, duration: 0.5 }}
+              >
+                <Sprout className="ml-2" color="#22c55e" size={38} />
+              </motion.div>
             </span>
           </h1>
         </motion.div>
