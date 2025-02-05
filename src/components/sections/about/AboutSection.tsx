@@ -29,7 +29,7 @@ const fadeInAnimationVariants = {
 
 const awardsData = [
     {
-        title: "동행 해커톤 창의재단이사장상(2위)",
+        title: "동행 해커톤 한국 과학 창의재단 이사장상",
         year: "2024",
     },
     {
