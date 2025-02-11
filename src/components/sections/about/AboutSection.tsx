@@ -150,7 +150,7 @@ const AboutSection = () => {
 
     return (
         <section id="about" className="pt-24">
-            <h2 className="text-4xl font-bold text-black mb-8">About</h2>
+            <h2 className="text-4xl font-semibold text-black mb-8">자기소개</h2>
             <div className="md:grid md:grid-cols-2 items-start gap-10 relative">
                 <div className="relative w-[300px] h-[400px]">
                     <Image

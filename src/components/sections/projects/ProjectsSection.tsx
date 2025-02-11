@@ -23,8 +23,8 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <section id="portfolio">
-      <h2 className="text-left text-4xl font-bold text-black mt-4 mb-8 md:mb-12">
-        Portfolio
+      <h2 className="text-left text-4xl font-semibold text-black mt-4 mb-8 md:mb-12">
+        포트폴리오
       </h2>
       <div className="text-white flex flex-row justify-center items-center gap-4 py-8">
         <ProjectTag

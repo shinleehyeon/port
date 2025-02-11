@@ -6,10 +6,10 @@ import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 
 const navLinks = [
-    { title: "About", path: "#about" },
-    { title: "Strengths", path: "#strengths" },
-    { title: "Portfolio", path: "#portfolio" },
-    { title: "Interact", path: "#interact" },
+    { title: "자기소개", path: "#about" },
+    { title: "강점", path: "#strengths" },
+    { title: "포트폴리오", path: "#portfolio" },
+    { title: "문의", path: "#interact" },
 ];
 
 const Navbar = () => {

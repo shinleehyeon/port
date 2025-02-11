@@ -103,7 +103,7 @@ const StrengthsSection: React.FC = () => {
                     transition={{ duration: 0.5 }}
                     className="flex flex-col space-y-6"
                 >
-                    <h2 className="text-4xl font-bold text-black">Strengths</h2>
+                    <h2 className="text-4xl font-semibold text-black">강점</h2>
 
                     <div className="flex flex-col space-y-4">
                         {strengthsList.map((strength, index) => (

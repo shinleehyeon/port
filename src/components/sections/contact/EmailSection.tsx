@@ -64,7 +64,7 @@ const EmailSection = () => {
     return (
         <section id="interact">
             <div className="mt-24">
-                <h2 className="text-4xl font-bold text-black mb-8">Interact</h2>
+                <h2 className="text-4xl font-semibold text-black mb-8">문의</h2>
 
                 {showAnimation ? (
                     <div className="flex flex-col items-center justify-center h-full max-w-xl ml-0">
