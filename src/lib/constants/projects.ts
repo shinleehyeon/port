@@ -64,5 +64,18 @@ export const projectsData: Project[] = [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
     ]
+  },
+  {
+    id: 6,
+    title: "Speakit",
+    description: "발표를 압도적으로 편안하게",
+    image: "/images/projects/Speakit.png",
+    tag: ["All", "Mobile"],
+    gitUrl: "https://github.com/shinleehyeon/Speakit",
+    techStack: [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+    ]
   }
 ];
