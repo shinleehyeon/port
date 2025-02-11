@@ -33,8 +33,8 @@ const awardsData = [
         year: "2024",
     },
     {
-        title: "29회 앱잼 최우수상",
-        year: "202",
+        title: "29th 앱잼 미래부문 최우수상",
+        year: "2025",
     },
     {
         title: "스마틴 앱챌린지 (STAC) 가작상",
