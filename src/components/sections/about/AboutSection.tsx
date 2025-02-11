@@ -33,7 +33,7 @@ const awardsData = [
         year: "2024",
     },
     {
-        title: "29th AppJam 최우수상",
+        title: "29회 앱잼 최우수상",
         year: "202",
     },
     {
