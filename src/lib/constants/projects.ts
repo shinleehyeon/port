@@ -6,7 +6,7 @@ export const projectsData: Project[] = [
     title: "fresio",
     description: "AI 냉장고 어시스턴트 서비스",
     image: "/images/projects/fresio.png",
-    tag: ["All", "Mobile"],
+    tag: ["All", "App"],
     gitUrl: "https://github.com/shinleehyun/fresio",
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
@@ -19,7 +19,7 @@ export const projectsData: Project[] = [
     title: "Speakit",
     description: "발표를 압도적으로 편안하게",
     image: "/images/projects/Speakit.png",
-    tag: ["All", "Mobile"],
+    tag: ["All", "App"],
     gitUrl: "https://github.com/shinleehyeon/Speakit",
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
@@ -32,7 +32,7 @@ export const projectsData: Project[] = [
     title: "SaveQuest",
     description: "절약을 쉽고 재미있게 하도록 도와주는 서비스",
     image: "/images/projects/SaveQuest.png",
-    tag: ["All", "Mobile"],
+    tag: ["All", "App"],
     gitUrl: "https://github.com/SaveQuest",
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
@@ -58,7 +58,7 @@ export const projectsData: Project[] = [
     title: "Albant",
     description: "선린 내에서 이룰 수 있는 심부름 서비스",
     image: "/images/projects/Albant.png",
-    tag: ["All", "Mobile"],
+    tag: ["All", "App"],
     gitUrl: "https://github.com/shinleehyun/albant",
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",

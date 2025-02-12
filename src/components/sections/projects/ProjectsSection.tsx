@@ -39,8 +39,8 @@ const ProjectsSection: React.FC = () => {
         />
         <ProjectTag
           onClick={handleTagChange}
-          name="Mobile"
-          isSelected={tag === "Mobile"}
+          name="App"
+          isSelected={tag === "App"}
         />
       </div>
       <div ref={ref} className="relative">

@@ -19,7 +19,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   const getTechName = (iconUrl: string) => {
-    const isMobile = tag.includes('Mobile');
+    const isMobile = tag.includes('App');
     
     if (iconUrl.includes('react')) {
       return isMobile ? 'React Native' : 'React';
