@@ -49,8 +49,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="overlay flex items-center justify-center absolute top-0 left-0 w-full h-full bg-[#181818] opacity-0 group-hover:opacity-80 group-hover:rounded-t-xl transition-all duration-500 ease-in-out">
           <Link
             href={gitUrl}
-            target="_blank"
-            rel="noopener noreferrer"
             className="h-14 w-14 border-2 relative rounded-full border-[#ADB7BE] hover:border-white transition-all duration-300 hover:scale-110"
           >
             <FaGithub
