@@ -154,7 +154,7 @@ export async function POST(request: Request) {
         
         <div class="footer">
             <div class="divider"></div>
-            <p>© 2024 신이현 포트폴리오</p>
+            <p>© 2025 신이현 포트폴리오</p>
             <p>본 이메일은 포트폴리오 사이트를 통해 전송되었습니다.</p>
         </div>
     </div>
