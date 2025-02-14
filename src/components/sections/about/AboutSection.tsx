@@ -31,14 +31,17 @@ const awardsData = [
     {
         title: "동행 해커톤 한국 과학 창의재단 이사장상",
         year: "2024",
+        organization: "과학기술정보통신부"
     },
     {
         title: "29th 앱잼 미래부문 최우수상",
         year: "2025",
+        organization: "SK플래닛"
     },
     {
         title: "스마틴 앱챌린지 (STAC) 가작상",
         year: "2024",
+        organization: "SK플래닛"
     },
 ];
 
@@ -109,30 +112,34 @@ const SkillSection: React.FC<SkillSectionProps> = ({
 
 const AwardSection = () => (
     <div className="grid grid-cols-1 gap-4">
-        {awardsData.map((award, index) => (
-            <motion.div
-                key={index}
-                variants={fadeInAnimationVariants}
-                initial="initial"
-                animate="animate"
-                viewport={{ once: true }}
-                custom={index}
-                className="border-[#DADADA] rounded-xl overflow-hidden group border p-3"
-                style={{ backgroundColor: "#EBEBEB" }}
-            >
-                <div className="flex items-center gap-3">
-                    <FaTrophy className="text-yellow-500 w-5 h-5" />
-                    <div>
-                        <span className="text-primary-500 text-sm">
-                            {award.year}
-                        </span>
-                        <p className="font-medium text-black">{award.title}</p>
-                    </div>
-                </div>
-            </motion.div>
-        ))}
+      {awardsData.map((award, index) => (
+        <motion.div
+          key={index}
+          variants={fadeInAnimationVariants}
+          initial="initial"
+          animate="animate"
+          viewport={{ once: true }}
+          custom={index}
+          className="border-[#DADADA] rounded-xl overflow-hidden group border p-3"
+          style={{ backgroundColor: "#EBEBEB" }}
+        >
+          <div className="flex items-center gap-3">
+            <FaTrophy className="text-yellow-500 w-5 h-5" />
+            <div>
+              <span className="text-gray-500 font-medium text-sm mr-1">
+                {award.year}
+              </span>
+              <span className="text-gray-300 mx-1">•</span>
+              <span className="text-gray-400 text-sm ml-1">
+                주최 : {award.organization}
+              </span>
+              <p className="font-medium text-black">{award.title}</p>
+            </div>
+          </div>
+        </motion.div>
+      ))}
     </div>
-);
+  );
 
 const AboutSection = () => {
     const [tab, setTab] = useState<"skills" | "award">("skills");
