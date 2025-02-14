@@ -24,11 +24,24 @@ export interface ProjectCardProps {
   description: string;
   gitUrl: string;
   techStack: string[];
-  tag: string[]; 
+  tag: string[];
 }
 
 export interface Strength {
   keyword: string;
   detail: string;
   color: string;
+}
+
+export type AwardType = "최우수상" | "한국 과학 창의재단 이사장상" | "가작상";
+
+export interface AwardBadgeProps {
+  type: AwardType;
+}
+
+export interface Award {
+  title: string;
+  year: string;
+  organization: string;
+  type: AwardType;
 }

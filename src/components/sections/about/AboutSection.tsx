@@ -4,10 +4,9 @@ import React, { useState, useTransition } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Info } from "lucide-react";
-import { FaTrophy } from "react-icons/fa";
 import TabButton from "../../ui/button/TabButton";
 import { skillData } from "@/lib/constants/skills";
-import type { Skill } from "@/types/common";
+import type { Skill, Award, AwardType, AwardBadgeProps } from "@/types/common";
 
 const fadeInAnimationVariants = {
     initial: { opacity: 0 },
@@ -27,23 +26,47 @@ const fadeInAnimationVariants = {
     },
 };
 
-const awardsData = [
+const awardsData: Award[] = [
     {
-        title: "동행 해커톤 한국 과학 창의재단 이사장상",
+        title: "SW 동행 해커톤",
         year: "2024",
-        organization: "과학기술정보통신부"
+        organization: "과학기술정보통신부",
+        type: "한국 과학 창의재단 이사장상"
     },
     {
-        title: "29th 앱잼 미래부문 최우수상",
+        title: "29th 앱잼",
         year: "2025",
-        organization: "SK플래닛"
+        organization: "SK플래닛",
+        type: "최우수상"
     },
     {
-        title: "스마틴 앱챌린지 (STAC) 가작상",
+        title: "스마틴 앱챌린지 (STAC)",
         year: "2024",
-        organization: "SK플래닛"
+        organization: "SK플래닛",
+        type: "가작상"
     },
 ];
+
+const AwardBadge: React.FC<AwardBadgeProps> = ({ type }) => {
+    const getBadgeColors = (type: AwardType) => {
+        switch (type) {
+            case "최우수상":
+                return "bg-purple-50 text-purple-600";
+            case "한국 과학 창의재단 이사장상":
+                return "bg-emerald-50 text-emerald-600";
+            default:
+                return "bg-amber-50 text-amber-600";
+        }
+    };
+    
+    const colors = getBadgeColors(type);
+    
+    return (
+        <div className={`rounded-full px-3 py-1 text-sm font-medium ${colors}`}>
+            {type}
+        </div>
+    );
+};
 
 interface SkillSectionProps {
     title: string;
@@ -92,7 +115,7 @@ const SkillSection: React.FC<SkillSectionProps> = ({
                             initial="initial"
                             animate="animate"
                             exit="exit"
-                            onClick={() => onSkillClick(skill)}
+                            onClick={() => onSkillClick(skill)} 
                             className="cursor-pointer hover:scale-110 transition-transform"
                         >
                             <img 
@@ -110,38 +133,37 @@ const SkillSection: React.FC<SkillSectionProps> = ({
     </div>
 );
 
-const AwardSection = () => (
+const AwardSection: React.FC = () => (
     <div className="grid grid-cols-1 gap-4">
-      {awardsData.map((award, index) => (
-        <motion.div
-          key={index}
-          variants={fadeInAnimationVariants}
-          initial="initial"
-          animate="animate"
-          viewport={{ once: true }}
-          custom={index}
-          className="border-[#DADADA] rounded-xl overflow-hidden group border p-3"
-          style={{ backgroundColor: "#EBEBEB" }}
-        >
-          <div className="flex items-center gap-3">
-            <FaTrophy className="text-yellow-500 w-5 h-5" />
-            <div>
-              <span className="text-gray-500 font-medium text-sm mr-1">
-                {award.year}
-              </span>
-              <span className="text-gray-300 mx-1">•</span>
-              <span className="text-gray-400 text-sm ml-1">
-                주최 : {award.organization}
-              </span>
-              <p className="font-medium text-black">{award.title}</p>
-            </div>
-          </div>
-        </motion.div>
-      ))}
+        {awardsData.map((award, index) => (
+            <motion.div
+                key={index}
+                variants={fadeInAnimationVariants}
+                initial="initial"
+                animate="animate"
+                viewport={{ once: true }}
+                custom={index}
+                className="bg-white rounded-xl overflow-hidden border border-primary-400 p-4"
+            >
+                <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                        <div className="text-sm text-gray-500 space-x-2">
+                            <span>{award.year}</span>
+                            <span>•</span>
+                            <span>{award.organization}</span>
+                        </div>
+                        <AwardBadge type={award.type} />
+                    </div>
+                    <h3 className="font-medium text-gray-900">
+                        {award.title}
+                    </h3>
+                </div>
+            </motion.div>
+        ))}
     </div>
-  );
+);
 
-const AboutSection = () => {
+const AboutSection: React.FC = () => {
     const [tab, setTab] = useState<"skills" | "award">("skills");
     const [selectedFrontend, setSelectedFrontend] = useState<Skill | null>(null);
     const [selectedBackend, setSelectedBackend] = useState<Skill | null>(null);
