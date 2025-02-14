@@ -31,7 +31,7 @@ const Navbar = () => {
                         className="w-auto h-8 md:h-10"
                         priority
                     />
-                    <span className="text-black text-lg md:text-xl font-bold">hyun</span>
+                    <span className="text-black text-lg md:text-xl font-bold">hyeon</span>
                 </Link>
 
                 <div className="hidden md:flex items-center gap-8">
