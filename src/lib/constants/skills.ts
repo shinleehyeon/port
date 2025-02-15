@@ -3,7 +3,7 @@ import type { Skill } from '@/types/common';
 export const skillData: Record<'frontend' | 'backend', Skill[]> = {
   frontend: [
     {
-      icon: "https://skillicons.dev/icons?i=react",
+      icon: "/icons/skills/react.svg",
       desc: "React를 활용한 컴포넌트 기반 개발과 상태관리 익숙합니다."
     },
     {
