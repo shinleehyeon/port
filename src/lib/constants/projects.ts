@@ -9,9 +9,9 @@ export const projectsData: Project[] = [
     tag: ["All", "App"],
     gitUrl: "https://github.com/shinleehyun/fresio",
     techStack: [
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "/icons/skills/react.svg",
       "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg",
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+      "/icons/skills/typescript.svg"
     ]
   },
   {
@@ -24,7 +24,7 @@ export const projectsData: Project[] = [
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+      "/icons/skills/typescript.svg"
     ]
   },
   {
@@ -37,7 +37,7 @@ export const projectsData: Project[] = [
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+      "/icons/skills/typescript.svg"
     ]
   },
   {
@@ -75,7 +75,7 @@ export const projectsData: Project[] = [
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+      "/icons/skills/typescript.svg"
     ]
   }
 ];
