@@ -3,17 +3,20 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
 import NavLink from "./NavLink";
+import LanguageButton from "./LanguageButton";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-
-const navLinks = [
-    { title: "자기소개", path: "#about" },
-    { title: "강점", path: "#strengths" },
-    { title: "포트폴리오", path: "#portfolio" },
-    { title: "문의", path: "#interact" },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar = () => {
     const [navbarOpen, setNavbarOpen] = useState(false);
+    const { t } = useLanguage();
+
+    const navLinks = [
+        { title: t("nav.about"), path: "#about" },
+        { title: t("nav.strengths"), path: "#strengths" },
+        { title: t("nav.portfolio"), path: "#portfolio" },
+        { title: t("nav.contact"), path: "#contact" },
+    ];
 
     const closeNavbar = () => {
         setNavbarOpen(false);
@@ -38,9 +41,11 @@ const Navbar = () => {
                     {navLinks.map((link, index) => (
                         <NavLink key={index} href={link.path} title={link.title} />
                     ))}
+                    <LanguageButton />
                 </div>
 
-                <div className="md:hidden">
+                <div className="md:hidden flex items-center gap-4">
+                    <LanguageButton />
                     <button
                         onClick={() => setNavbarOpen(!navbarOpen)}
                         className="flex items-center px-3 py-2 border rounded border-gray-300 text-gray-600 hover:text-black hover:border-black transition-colors"
