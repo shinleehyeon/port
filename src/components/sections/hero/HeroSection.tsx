@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sprout } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const HangulTypingEffect: React.FC<{ text: string }> = ({ text }) => {
   const [displayText, setDisplayText] = useState('');
@@ -36,31 +37,31 @@ const HangulTypingEffect: React.FC<{ text: string }> = ({ text }) => {
 
     if (decomposedChars.length === 0) return;
 
-          let lastTime = 0;
-      const smoothWrite = (currentTime: number): void => {
-        if (currentCharIndex >= decomposedChars.length) {
-            // @ts-ignore
-          cancelAnimationFrame(intervalRef.current);
-          return;
-        }
-
-        const deltaTime = currentTime - lastTime;
-        if (deltaTime > 100) {
-          const currentJamo = decomposedChars[currentCharIndex][currentJamoIndex];
-          currentText += currentJamo;
-          setDisplayText(currentText);
-
-          currentJamoIndex++;
-          // @ts-ignore
-          if (currentJamoIndex >= decomposedChars[currentCharIndex].length) {
-            currentCharIndex++;
-            currentJamoIndex = 0;
-          }
-          lastTime = currentTime;
-        }
-
+    let lastTime = 0;
+    const smoothWrite = (currentTime: number): void => {
+      if (currentCharIndex >= decomposedChars.length) {
         // @ts-ignore
-        intervalRef.current = requestAnimationFrame(smoothWrite);
+        cancelAnimationFrame(intervalRef.current);
+        return;
+      }
+
+      const deltaTime = currentTime - lastTime;
+      if (deltaTime > 100) {
+        const currentJamo = decomposedChars[currentCharIndex][currentJamoIndex];
+        currentText += currentJamo;
+        setDisplayText(currentText);
+
+        currentJamoIndex++;
+        // @ts-ignore
+        if (currentJamoIndex >= decomposedChars[currentCharIndex].length) {
+          currentCharIndex++;
+          currentJamoIndex = 0;
+        }
+        lastTime = currentTime;
+      }
+
+      // @ts-ignore
+      intervalRef.current = requestAnimationFrame(smoothWrite);
     };
 
     // @ts-ignore
@@ -93,6 +94,8 @@ const HangulTypingEffect: React.FC<{ text: string }> = ({ text }) => {
 };
 
 const HeroSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="lg:py-16">
       <div className="grid grid-cols-1">
@@ -107,10 +110,10 @@ const HeroSection = () => {
         >
           <h1 className="mb-4 text-4xl sm:text-5xl lg:text-7xl lg:leading-normal font-extrabold">
             <span className="text-black block">
-              끊임없는 배움으로
+              {t("hero.title1")}
             </span>
             <span className="text-[#6f4f28] block mb-1 flex items-center justify-center sm:justify-start">
-              <HangulTypingEffect text="성장하는 개발자" />
+              <HangulTypingEffect text={t("hero.title2")} />
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}

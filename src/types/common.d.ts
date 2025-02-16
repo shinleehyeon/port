@@ -6,6 +6,7 @@ export interface NavItem {
 export interface Skill {
   icon: string;
   desc: string;
+  descEn: string;
 }
 
 export interface Project {
@@ -36,12 +37,17 @@ export interface Strength {
 export type AwardType = "최우수상" | "한국 과학 창의재단 이사장상" | "가작상";
 
 export interface AwardBadgeProps {
-  type: AwardType;
+  type: string;
+  typeEn: string;
+  isEnglish: boolean;
 }
 
 export interface Award {
-  title: string;
+  titleKo: string;    
+  titleEn: string;     
   year: string;
-  organization: string;
-  type: AwardType;
+  organizationKo: string; 
+  organizationEn: string;  
+  typeKo: string;     
+  typeEn: string;    
 }
