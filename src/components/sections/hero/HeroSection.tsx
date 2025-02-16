@@ -4,10 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sprout } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const HangulTypingEffect: React.FC<{ text: string }> = ({ text }) => {
+const HangulTypingEffect: React.FC<{ text: string; onComplete: () => void }> = ({ text, onComplete }) => {
   const [displayText, setDisplayText] = useState('');
-  const [decomposedChars, setDecomposedChars] = useState([]);
-  const intervalRef = useRef(null);
+  const [decomposedChars, setDecomposedChars] = useState<string[][]>([]);
+  const intervalRef = useRef<number | null>(null);
+  const hasCompletedRef = useRef(false);
 
   const decomposeHangul = (char: string): string[][] => {
     const code = char.charCodeAt(0) - 0xAC00;
@@ -25,23 +26,34 @@ const HangulTypingEffect: React.FC<{ text: string }> = ({ text }) => {
   };
 
   useEffect(() => {
-    // @ts-ignore
     setDecomposedChars(text.split('').flatMap(decomposeHangul));
     setDisplayText('');
+    hasCompletedRef.current = false;
+
+    return () => {
+      if (intervalRef.current) {
+        cancelAnimationFrame(intervalRef.current);
+      }
+    };
   }, [text]);
 
   useEffect(() => {
+    if (decomposedChars.length === 0 || hasCompletedRef.current) return;
+
     let currentCharIndex = 0;
     let currentJamoIndex = 0;
     let currentText = '';
-
-    if (decomposedChars.length === 0) return;
-
     let lastTime = 0;
+
     const smoothWrite = (currentTime: number): void => {
       if (currentCharIndex >= decomposedChars.length) {
-        // @ts-ignore
-        cancelAnimationFrame(intervalRef.current);
+        if (intervalRef.current) {
+          cancelAnimationFrame(intervalRef.current);
+        }
+        if (!hasCompletedRef.current) {
+          hasCompletedRef.current = true;
+          onComplete();
+        }
         return;
       }
 
@@ -50,9 +62,8 @@ const HangulTypingEffect: React.FC<{ text: string }> = ({ text }) => {
         const currentJamo = decomposedChars[currentCharIndex][currentJamoIndex];
         currentText += currentJamo;
         setDisplayText(currentText);
-
         currentJamoIndex++;
-        // @ts-ignore
+        
         if (currentJamoIndex >= decomposedChars[currentCharIndex].length) {
           currentCharIndex++;
           currentJamoIndex = 0;
@@ -60,11 +71,9 @@ const HangulTypingEffect: React.FC<{ text: string }> = ({ text }) => {
         lastTime = currentTime;
       }
 
-      // @ts-ignore
       intervalRef.current = requestAnimationFrame(smoothWrite);
     };
 
-    // @ts-ignore
     intervalRef.current = requestAnimationFrame(smoothWrite);
 
     return () => {
@@ -72,29 +81,36 @@ const HangulTypingEffect: React.FC<{ text: string }> = ({ text }) => {
         cancelAnimationFrame(intervalRef.current);
       }
     };
-  }, [decomposedChars]);
+  }, [decomposedChars, onComplete]);
 
   return (
-    <AnimatePresence>
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: {
-            duration: 0.8,
-            ease: [0.43, 0.13, 0.23, 0.96]
-          }
-        }}
-        className="font-hangul"
-      >
-        {displayText}
-      </motion.span>
-    </AnimatePresence>
+    <motion.span
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="font-hangul"
+    >
+      {displayText}
+    </motion.span>
   );
 };
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const previousTextRef = useRef('');
+
+  useEffect(() => {
+    const currentText = t("hero.title2");
+    if (previousTextRef.current !== currentText) {
+      previousTextRef.current = currentText;
+      setIsTypingComplete(false);
+    }
+  }, [t]);
+
+  const handleTypingComplete = () => {
+    setIsTypingComplete(true);
+  };
 
   return (
     <section className="lg:py-16">
@@ -113,14 +129,21 @@ const HeroSection = () => {
               {t("hero.title1")}
             </span>
             <span className="text-[#6f4f28] mb-1 flex items-center justify-center sm:justify-start">
-              <HangulTypingEffect text={t("hero.title2")} />
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 2.5, duration: 0.5 }}
-              >
-                <Sprout className="ml-2" color="#22c55e" size={38} />
-              </motion.div>
+              <HangulTypingEffect 
+                text={t("hero.title2")} 
+                onComplete={handleTypingComplete}
+              />
+              <AnimatePresence mode="wait">
+                {isTypingComplete && (
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Sprout className="ml-2" color="#22c55e" size={38} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </span>
           </h1>
         </motion.div>
