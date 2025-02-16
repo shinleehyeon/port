@@ -112,7 +112,7 @@ const HeroSection = () => {
             <span className="text-black block">
               {t("hero.title1")}
             </span>
-            <span className="text-[#6f4f28] block mb-1 flex items-center justify-center sm:justify-start">
+            <span className="text-[#6f4f28] mb-1 flex items-center justify-center sm:justify-start">
               <HangulTypingEffect text={t("hero.title2")} />
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
