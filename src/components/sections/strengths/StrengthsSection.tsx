@@ -3,40 +3,37 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const strengthsList = [
     {
-        keyword: "새로운 기술을 배우려는 열정",
-        detail: "새로운 기술과 툴을 배우는것을 두려워 하지 않고 더 나은 방법을 찾는것에 열정이 있습니다.",
+        id: 1,
         color: "bg-gradient-to-br from-primary-500 to-secondary-500",
     },
     {
-        keyword: "팀원과 소통하며 프로젝트에 참여",
-        detail: "맡은 프로젝트를 책임감있게 임하며, 팀원들과의 소통을 통해 최상의 결과를 도출하기 위해 노력합니다.",
+        id: 2,
         color: "bg-gradient-to-br from-primary-500 to-secondary-500",
     },
     {
-        keyword: "체계적인 문제 해결 능력",
-        detail: "문제를 논리적으로 분석하고 체계적인 접근 방식으로 해결책을 찾아내는 것을 즐깁니다.",
+        id: 3,
         color: "bg-gradient-to-br from-primary-500 to-secondary-500",
     },
     {
-        keyword: "맡은 일을 포기하지 않는 열정",
-        detail: "한 번 시작한 일은 끝까지 해내려는 강한 의지가 있고, 깊은 몰입을 통해 최상의 결과물을 만들어냅니다.",
+        id: 4,
         color: "bg-gradient-to-br from-primary-500 to-secondary-500",
     },
 ];
+
 interface StrengthCardProps {
-    strength: {
-        keyword: string;
-        detail: string;
-        color: string;
-    };
+    id: number;
+    color: string;
     isOpen: boolean;
     onToggle: () => void;
 }
 
-const StrengthCard: React.FC<StrengthCardProps> = ({ strength, isOpen, onToggle }) => {
+const StrengthCard: React.FC<StrengthCardProps> = ({ id, color, isOpen, onToggle }) => {
+    const { t } = useLanguage();
+    
     return (
         <div className="w-full">
             <motion.div
@@ -48,7 +45,7 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ strength, isOpen, onToggle 
                 <div className="p-6 cursor-pointer" onClick={onToggle}>
                     <div className="flex items-center justify-between">
                         <h3 className={`text-xl font-medium ${isOpen ? "text-black" : "text-[#6D6D6D]"} select-none`}>
-                            {strength.keyword}
+                            {t(`strengths.${id}.keyword` as const)}
                         </h3>
                         <motion.div
                             animate={{ rotate: isOpen ? 180 : 0 }}
@@ -68,7 +65,7 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ strength, isOpen, onToggle 
                                 className="overflow-hidden"
                             >
                                 <p className="text-[#1E1E1E] text-sm mt-4 pt-4 border-t border-gray-700 select-none">
-                                    {strength.detail}
+                                    {t(`strengths.${id}.detail` as const)}
                                 </p>
                             </motion.div>
                         )}
@@ -80,6 +77,7 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ strength, isOpen, onToggle 
 };
 
 const StrengthsSection: React.FC = () => {
+    const { t } = useLanguage();
     const [openStates, setOpenStates] = useState<boolean[]>(new Array(strengthsList.length).fill(false));
 
     const toggleCard = (index: number) => {
@@ -103,13 +101,14 @@ const StrengthsSection: React.FC = () => {
                     transition={{ duration: 0.5 }}
                     className="flex flex-col space-y-6"
                 >
-                    <h2 className="text-4xl font-semibold text-black">강점</h2>
+                    <h2 className="text-4xl font-semibold text-black">{t("strengths.title")}</h2>
 
                     <div className="flex flex-col space-y-4">
                         {strengthsList.map((strength, index) => (
                             <StrengthCard
                                 key={index}
-                                strength={strength}
+                                id={strength.id}
+                                color={strength.color}
                                 isOpen={openStates[index]}
                                 onToggle={() => toggleCard(index)}
                             />
