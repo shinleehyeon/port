@@ -1,12 +1,11 @@
-"use client";
-
+'use client';
 import React, { useState, useTransition } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Info } from "lucide-react";
 import TabButton from "../../ui/button/TabButton";
 import { skillData } from "@/lib/constants/skills";
-import type { Skill, Award, AwardType, AwardBadgeProps } from "@/types/common";
+import type { Skill, Award, AwardBadgeProps } from "@/types/common";
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const fadeInAnimationVariants = {
@@ -164,7 +163,7 @@ const AwardSection: React.FC = () => {
                     animate="animate"
                     viewport={{ once: true }}
                     custom={index}
-                    className="bg-white rounded-xl overflow-hidden border border-primary-400 p-4"
+                    className="bg-white rounded-xl overflow-hidden border border-primary-400 p-4 max-w-[500px]"
                 >
                     <div className="space-y-3">
                         <div className="flex items-center justify-between">
@@ -190,19 +189,9 @@ const AwardSection: React.FC = () => {
 };
 
 const AboutSection: React.FC = () => {
-    const [tab, setTab] = useState<"skills" | "award">("skills");
     const [selectedFrontend, setSelectedFrontend] = useState<Skill | null>(null);
     const [selectedBackend, setSelectedBackend] = useState<Skill | null>(null);
-    const [isPending, startTransition] = useTransition();
     const { t } = useLanguage();
-
-    const handleTabChange = (id: "skills" | "award") => {
-        startTransition(() => {
-            setTab(id);
-            setSelectedFrontend(null);
-            setSelectedBackend(null);
-        });
-    };
 
     return (
         <section id="about" className="pt-24">
@@ -229,54 +218,27 @@ const AboutSection: React.FC = () => {
                             {t("about.description")}
                         </p>
                     </motion.div>
-                    <div className="flex flex-row justify-start mt-8">
-                        <TabButton
-                            selectTab={() => handleTabChange("skills")}
-                            active={tab === "skills"}
-                        >
-                            {t("about.tabs.skills")}
-                        </TabButton>
-                        <TabButton
-                            selectTab={() => handleTabChange("award")}
-                            active={tab === "award"}
-                        >
-                            {t("about.tabs.awards")}
-                        </TabButton>
-                    </div>
-                    <div className="mt-8">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={tab}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.5 }}
-                            >
-                                {tab === "skills" ? (
-                                    <div>
-                                        <SkillSection
-                                            title="Frontend"
-                                            skills={skillData.frontend}
-                                            selectedSkill={selectedFrontend}
-                                            onSkillClick={setSelectedFrontend}
-                                        />
-                                        <SkillSection
-                                            title="Backend"
-                                            skills={skillData.backend}
-                                            selectedSkill={selectedBackend}
-                                            onSkillClick={setSelectedBackend}
-                                        />
-                                        <div className="flex items-center gap-2 text-sm text-gray-500 mt-6">
-                                            <Info className="w-4 h-4" />
-                                            <p>{t("about.skillsInfo")}</p>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <AwardSection />
-                                )}
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
+                </div>
+            </div>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div>
+                    <h3 className="text-2xl font-semibold text-black mb-4">{t("about.tabs.awards")}</h3>
+                    <AwardSection />
+                </div>
+                <div>
+                    <h3 className="text-2xl font-semibold text-black mb-4">{t("about.tabs.skills")}</h3>
+                    <SkillSection
+                        title="Frontend"
+                        skills={skillData.frontend}
+                        selectedSkill={selectedFrontend}
+                        onSkillClick={setSelectedFrontend}
+                    />
+                    <SkillSection
+                        title="Backend"
+                        skills={skillData.backend}
+                        selectedSkill={selectedBackend}
+                        onSkillClick={setSelectedBackend}
+                    />
                 </div>
             </div>
         </section>
