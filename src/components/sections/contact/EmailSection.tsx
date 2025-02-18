@@ -9,6 +9,7 @@ const EmailSection = () => {
     const [showAnimation, setShowAnimation] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
+        phoneNumber: "",
         subject: "",
         message: "",
     });
@@ -37,7 +38,7 @@ const EmailSection = () => {
             if (response.ok) {
                 setEmailSubmitted(true);
                 setShowAnimation(true);
-                setFormData({ email: "", subject: "", message: "" });
+                setFormData({ email: "", phoneNumber: "", subject: "", message: "" });
                 e.currentTarget.reset();
             }
         } catch (error) {
@@ -59,7 +60,7 @@ const EmailSection = () => {
     }, [showAnimation]);
 
     const inputStyles =
-        "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent block w-full p-3 transition-all duration-300 ease-in-out";
+        "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-gray-500 focus:outline-none focus:border-gray-500 block w-full p-4 transition-all duration-300 ease-in-out";
 
     return (
         <section id="contact" className="mt-24">
@@ -79,23 +80,43 @@ const EmailSection = () => {
                     className="flex flex-col space-y-6 max-w-xl pb-24"
                     onSubmit={handleSubmit}
                 >
-                    <div>
-                        <label
-                            htmlFor="email"
-                            className="text-black block mb-2 text-sm font-medium"
-                        >
-                            Your email
-                        </label>
-                        <input
-                            name="email"
-                            type="email"
-                            id="email"
-                            required
-                            className={inputStyles}
-                            placeholder="example@email.com"
-                            onChange={handleInputChange}
-                            value={formData.email}
-                        />
+                    <div className="flex space-x-4">
+                        <div className="w-1/2">
+                            <label
+                                htmlFor="email"
+                                className="text-black block mb-2 text-sm font-medium"
+                            >
+                                Your email
+                            </label>
+                            <input
+                                name="email"
+                                type="email"
+                                id="email"
+                                required
+                                className={inputStyles}
+                                placeholder="example@email.com"
+                                onChange={handleInputChange}
+                                value={formData.email}
+                            />
+                        </div>
+                        <div className="w-1/2">
+                            <label
+                                htmlFor="phoneNumber"
+                                className="text-black block mb-2 text-sm font-medium"
+                            >
+                                Phone Number
+                            </label>
+                            <input
+                                name="phoneNumber"
+                                type="text"
+                                id="phoneNumber"
+                                required
+                                className={inputStyles}
+                                placeholder="Phone Number"
+                                onChange={handleInputChange}
+                                value={formData.phoneNumber}
+                            />
+                        </div>
                     </div>
                     <div>
                         <label
