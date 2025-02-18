@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import LanguageButton from "./LanguageButton";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { AnimatePresence, motion } from 'framer-motion';
+import NavLink from "./NavLink";  // NavLink 컴포넌트 import
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -28,10 +30,20 @@ const Navbar = () => {
     setNavbarOpen(false);
   };
 
+  const headerMotionProps = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.3, delay: 0.18 },
+  };
+
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-20 bg-white/75 backdrop-blur-md">
-        <div className="container mx-auto px-10 py-4 max-w-7xl flex items-center justify-between">
+      <nav className="fixed top-0 left-0 right-0 z-20 bg-white">
+        <motion.div 
+          className="container mx-auto px-10 py-4 max-w-7xl flex items-center justify-between"
+          {...headerMotionProps}
+        >
           <Link href={"/"} className="flex items-center gap-2">
             <Image
               src="/logo.svg"
@@ -45,68 +57,80 @@ const Navbar = () => {
           </Link>
           <button
             onClick={() => setNavbarOpen(!navbarOpen)}
-            className={`flex items-center px-3 py-2 border rounded border-gray-300 text-gray-600 hover:text-black hover:border-black transition-all duration-300 ${navbarOpen ? 'hidden' : ''}`}
+            className="flex items-center px-3 py-2 border rounded border-gray-300 text-gray-600 hover:text-black hover:border-black transition-all duration-300"
           >
-            {navbarOpen ? (
-              <XMarkIcon className="h-5 w-5" />
-            ) : (
-              <>
-                <Bars3Icon className="h-5 w-5" />
-                <span className="ml-2">{t("menu")}</span>
-              </>
-            )}
-          </button>
-        </div>
-        <div
-          className={`absolute top-full left-0 right-0 bg-white/75 backdrop-blur-md transition-all duration-500 ease-in-out transform ${
-            navbarOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
-          }`}
-        >
-          <div className="container mx-auto px-10 py-4">
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link, index) => (
-                <Link
-                  key={index}
-                  href={link.path}
-                  onClick={closeNavbar}
-                  className="text-gray-500 hover:text-black text-2xl tracking-wider transform transition-all duration-300 hover:translate-x-2 hover:scale-105 opacity-0"
-                  style={
-                    navbarOpen
-                      ? {
-                          animation: `slideIn 0.3s forwards`,
-                          animationDelay: `${150 + index * 100}ms`,
-                        }
-                      : {}
-                  }
-                >
-                  {link.title}
-                </Link>
-              ))}
-              <div className="pt-2">
-                <LanguageButton />
-              </div>
+            <div className="flex items-center">
+              {navbarOpen ? (
+                <>
+                  <XMarkIcon className="h-5 w-5" />
+                  <span className="ml-2">{t("close")}</span>
+                </>
+              ) : (
+                <>
+                  <Bars3Icon className="h-5 w-5" />
+                  <span className="ml-2">{t("menu")}</span>
+                </>
+              )}
             </div>
-          </div>
-        </div>
+          </button>
+        </motion.div>
+        <AnimatePresence mode="wait">
+          {navbarOpen && (
+            <div className="fixed top-[73px] left-0 right-0 h-[calc(100vh-73px)]">
+              <motion.div
+                className="absolute inset-0 bg-black/50"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={closeNavbar}
+              />
+              <motion.div
+                className="relative bg-white z-10 overflow-hidden"
+                initial={{ height: 0 }}
+                animate={{ height: 'auto' }}
+                exit={{ height: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="container mx-auto px-10 py-4">
+                  <div className="flex flex-col space-y-4">
+                    {navLinks.map((link, index) => (
+                      <motion.div
+                        key={link.path}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: navbarOpen ? index * 0.03 + 0.18 : 0,
+                        }}
+                      >
+                        <NavLink
+                          href={link.path}
+                          title={link.title}
+                          onClick={closeNavbar}
+                        />
+                      </motion.div>
+                    ))}
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: navbarOpen ? navLinks.length * 0.03 + 0.18 : 0,
+                      }}
+                      className="pt-2"
+                    >
+                      <LanguageButton />
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </nav>
-      <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-all duration-500 ease-in-out ${
-          navbarOpen ? "opacity-100 visible z-10" : "opacity-0 invisible -z-10"
-        }`}
-        onClick={closeNavbar}
-      />
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
     </>
   );
 };

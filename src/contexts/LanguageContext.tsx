@@ -39,6 +39,7 @@ interface TranslationKeys {
   
   // Navbar
   "menu": string;
+  "close": string;
 }
 
 type Translations = {
@@ -60,6 +61,7 @@ export const translations: Translations = {
     "nav.portfolio": "포트폴리오",
     "nav.contact": "문의",
     "menu": "메뉴", 
+    "close": "닫기",
     "hero.title1": "끊임없는 배움으로",
     "hero.title2": "성장하는 개발자",
     "about.title": "자기소개",
@@ -90,6 +92,7 @@ export const translations: Translations = {
     "nav.portfolio": "Portfolio",
     "nav.contact": "Contact",
     "menu": "Menu", 
+    close: "Close",
     "hero.title1": "Continuous Learning,",
     "hero.title2": "Growing Developer",
     "about.title": "About Me",
