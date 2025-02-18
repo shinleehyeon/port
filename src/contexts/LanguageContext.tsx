@@ -36,6 +36,9 @@ interface TranslationKeys {
   "contact.message": string;
   "contact.send": string;
   "contact.success": string;
+  
+  // Navbar
+  "menu": string;
 }
 
 type Translations = {
@@ -56,6 +59,7 @@ export const translations: Translations = {
     "nav.strengths": "강점",
     "nav.portfolio": "포트폴리오",
     "nav.contact": "문의",
+    "menu": "메뉴", 
     "hero.title1": "끊임없는 배움으로",
     "hero.title2": "성장하는 개발자",
     "about.title": "자기소개",
@@ -85,6 +89,7 @@ export const translations: Translations = {
     "nav.strengths": "Strengths",
     "nav.portfolio": "Portfolio",
     "nav.contact": "Contact",
+    "menu": "Menu", 
     "hero.title1": "Continuous Learning,",
     "hero.title2": "Growing Developer",
     "about.title": "About Me",
