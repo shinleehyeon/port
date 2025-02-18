@@ -34,8 +34,6 @@ interface StrengthCardProps {
 const StrengthCard: React.FC<StrengthCardProps> = ({ id, color, isOpen, onToggle }) => {
     const { t } = useLanguage();
     
-    const createTranslationKey = (section: string) => `strengths.${id}.${section}` as const;
-    
     return (
         <div className="w-full">
             <motion.div
@@ -47,7 +45,7 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ id, color, isOpen, onToggle
                 <div className="p-6 cursor-pointer" onClick={onToggle}>
                     <div className="flex items-center justify-between">
                         <h3 className={`text-xl font-medium ${isOpen ? "text-black" : "text-[#6D6D6D]"} select-none`}>
-                            {t(createTranslationKey('keyword'))}
+                            {t(`strengths.${id}.keyword`)}
                         </h3>
                         <motion.div
                             animate={{ rotate: isOpen ? 180 : 0 }}
@@ -67,7 +65,7 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ id, color, isOpen, onToggle
                                 className="overflow-hidden"
                             >
                                 <p className="text-[#1E1E1E] text-sm mt-4 pt-4 border-t border-gray-700 select-none">
-                                    {t(createTranslationKey('detail'))}
+                                    {t(`strengths.${id}.detail`)}
                                 </p>
                             </motion.div>
                         )}

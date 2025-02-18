@@ -21,9 +21,9 @@ export const projectTranslations: ProjectTranslations = {
   ko: {
     title: "포트폴리오",
     tags: {
-      "All": "전체",
-      "Web": "웹",
-      "App": "앱"
+      "All": "All",
+      "Web": "Web",
+      "App": "App"
     },
     projects: {
       "fresio": {

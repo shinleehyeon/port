@@ -23,14 +23,8 @@ interface TranslationKeys {
   
   // Strengths
   "strengths.title": string;
-  "strengths.1.keyword": string;
-  "strengths.1.detail": string;
-  "strengths.2.keyword": string;
-  "strengths.2.detail": string;
-  "strengths.3.keyword": string;
-  "strengths.3.detail": string;
-  "strengths.4.keyword": string;
-  "strengths.4.detail": string;
+  [key: `strengths.${number}.keyword`]: string;
+  [key: `strengths.${number}.detail`]: string;
   
   // Projects
   "projects.title": string;
@@ -51,7 +45,7 @@ type Translations = {
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: keyof TranslationKeys) => string;
+  t: (key: keyof TranslationKeys | string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -120,8 +114,8 @@ export const translations: Translations = {
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('ko');
 
-  const t = (key: keyof TranslationKeys): string => {
-    return translations[language][key];
+  const t = (key: keyof TranslationKeys | string): string => {
+    return translations[language][key as keyof typeof translations[typeof language]] || key;
   };
 
   return (
