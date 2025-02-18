@@ -94,7 +94,7 @@ const StrengthsSection: React.FC = () => {
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-gradient-to-b from-primary-500/20 to-transparent blur-3xl -z-10"
             />
 
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-full mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

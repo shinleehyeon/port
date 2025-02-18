@@ -20,7 +20,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   const getTechName = (iconUrl: string) => {
     const isMobile = tag.includes('App');
-    
     if (iconUrl.includes('react')) {
       return isMobile ? 'React Native' : 'React';
     }
@@ -29,7 +28,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     if (iconUrl.includes('tailwindcss')) return 'Tailwind CSS';
     if (iconUrl.includes('fastapi')) return 'FastAPI';
     if (iconUrl.includes('nestjs')) return 'NestJS';
-    
     const namePart = iconUrl.split('/').pop()?.split('-')[0] || '';
     return namePart.charAt(0).toUpperCase() + namePart.slice(1);
   };
@@ -57,7 +55,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </Link>
         </div>
       </div>
-      <div className="text-[#6D6D6D] rounded-xl bg-[#EBEBEB] py-6 px-4">
+      <div className="text-[#6D6D6D] rounded-b-xl bg-[#EBEBEB] py-6 px-4">
         <div className="flex items-center justify-between mb-2">
           <h5 className="text-xl font-semibold">{title}</h5>
           <div className="flex gap-2">
@@ -75,7 +73,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                   style={getIconStyle(iconUrl)}
                 />
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 hidden group-hover:block z-10">
-                  <div className="bg-black text-white text-xs py-1 px-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="bg-black text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {getTechName(iconUrl)}
                   </div>
                 </div>

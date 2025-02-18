@@ -11,7 +11,7 @@ const Home: NextPage = () => {
     return (
         <main className="relative flex min-h-screen flex-col bg-[#fff]">
             <Navbar />
-            <div className="container mx-auto px-10 py-4 max-w-6xl mt-[96px]">
+            <div className="container mx-auto px-10 py-4 max-w-[1400px] mt-[96px]">
                 <HeroSection />
                 <AboutSection />
                 <StrengthsSection />

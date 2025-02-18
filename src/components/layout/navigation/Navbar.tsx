@@ -41,7 +41,7 @@ const Navbar = () => {
         <>
             <nav className="fixed top-0 left-0 right-0 z-20 bg-white">
                 <motion.div
-                    className="container mx-auto px-10 py-4 max-w-7xl flex items-center justify-between"
+                    className="container mx-auto px-10 py-4 max-w-[1400px] flex items-center justify-between"
                     {...headerMotionProps}
                 >
                     <Link href={"/"} className="flex items-center gap-2">
