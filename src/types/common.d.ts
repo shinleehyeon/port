@@ -28,11 +28,17 @@ export interface ProjectCardProps {
   tag: string[];
 }
 
+export interface ProjectTagProps {
+  name: string;
+  displayName: string;
+  onClick: (name: string) => void;
+  isSelected: boolean;
+}
+
 export interface Strength {
   keyword: string;
   detail: string;
   color: string;
-  keyword : string;
 }
 
 export type AwardType = "최우수상" | "한국 과학 창의재단 이사장상" | "가작상";
@@ -44,11 +50,11 @@ export interface AwardBadgeProps {
 }
 
 export interface Award {
-  titleKo: string;    
-  titleEn: string;     
+  titleKo: string;
+  titleEn: string;
   year: string;
-  organizationKo: string; 
-  organizationEn: string;  
-  typeKo: string;     
-  typeEn: string;    
+  organizationKo: string;
+  organizationEn: string;
+  typeKo: string;
+  typeEn: string;
 }
