@@ -57,7 +57,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </Link>
         </div>
       </div>
-      <div className="text-[#6D6D6D] rounded-b-xl bg-[#EBEBEB] py-6 px-4">
+      <div className="text-[#6D6D6D] rounded-xl bg-[#EBEBEB] py-6 px-4">
         <div className="flex items-center justify-between mb-2">
           <h5 className="text-xl font-semibold">{title}</h5>
           <div className="flex gap-2">
@@ -75,7 +75,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                   style={getIconStyle(iconUrl)}
                 />
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 hidden group-hover:block z-10">
-                  <div className="bg-black text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="bg-black text-white text-xs py-1 px-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {getTechName(iconUrl)}
                   </div>
                 </div>

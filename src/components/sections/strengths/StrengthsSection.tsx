@@ -40,7 +40,7 @@ const StrengthCard: React.FC<StrengthCardProps> = ({ id, color, isOpen, onToggle
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="relative bg-[#EBEBEB] rounded-2xl overflow-hidden group border border-[#DADADA] h-full"
+                className="relative bg-[#EBEBEB] rounded-xl overflow-hidden group border border-[#DADADA] h-full"
             >
                 <div className="p-6 cursor-pointer" onClick={onToggle}>
                     <div className="flex items-center justify-between">

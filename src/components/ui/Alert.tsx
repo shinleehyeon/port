@@ -7,7 +7,7 @@ interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Alert: React.FC<AlertProps> = ({ children, className, ...props }) => {
   return (
     <div
-      className={`rounded-lg p-4 animate-fadeIn ${className}`}
+      className={`rounded-xl p-4 animate-fadeIn ${className}`}
       role="alert"
       {...props}
     >
