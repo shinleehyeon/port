@@ -5,13 +5,16 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
 import { projectsData } from "@/lib/constants/projects";
+import { projectTranslations } from "@/lib/constants/projectTranslations";
 import { fadeInAnimationVariants } from "@/lib/utils/animations";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { Project } from "@/types/common";
 
 const ProjectsSection: React.FC = () => {
   const [tag, setTag] = useState<string>("All");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
+  const { language } = useLanguage();
 
   const handleTagChange = (newTag: string): void => {
     setTag(newTag);
@@ -24,24 +27,18 @@ const ProjectsSection: React.FC = () => {
   return (
     <section id="portfolio">
       <h2 className="text-left text-4xl font-semibold text-black mt-4 mb-8 md:mb-12">
-        포트폴리오
+        {projectTranslations[language].title}
       </h2>
       <div className="text-white flex flex-row justify-center items-center gap-4 py-8">
-        <ProjectTag
-          onClick={handleTagChange}
-          name="All"
-          isSelected={tag === "All"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="Web"
-          isSelected={tag === "Web"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="App"
-          isSelected={tag === "App"}
-        />
+        {["All", "Web", "App"].map((tagName) => (
+          <ProjectTag
+            key={tagName}
+            name={tagName}
+            displayName={projectTranslations[language].tags[tagName]}
+            isSelected={tag === tagName}
+            onClick={handleTagChange}
+          />
+        ))}
       </div>
       <div ref={ref} className="relative">
         <AnimatePresence mode="wait">
@@ -64,12 +61,12 @@ const ProjectsSection: React.FC = () => {
                 layout
               >
                 <ProjectCard
-                  title={project.title}
-                  description={project.description}
+                  title={projectTranslations[language].projects[project.title].title}
+                  description={projectTranslations[language].projects[project.title].description}
                   imgUrl={project.image}
                   gitUrl={project.gitUrl}
                   techStack={project.techStack}
-                  tag={project.tag} 
+                  tag={project.tag}
                 />
               </motion.li>
             ))}
