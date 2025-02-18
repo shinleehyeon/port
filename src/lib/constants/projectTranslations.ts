@@ -32,7 +32,7 @@ export const projectTranslations: ProjectTranslations = {
       },
       "Speakit": {
         title: "Speakit",
-        description: "발표를 압도적으로 편안하게"
+        description: "발표를 압도적으로 편안하게 도와주는 서비스"
       },
       "SaveQuest": {
         title: "SaveQuest",
@@ -66,7 +66,7 @@ export const projectTranslations: ProjectTranslations = {
       },
       "Speakit": {
         title: "Speakit",
-        description: "Making Presentations Comfortable"
+        description: "A Service that Makes Presentations Overwhelmingly Comfortable"
       },
       "SaveQuest": {
         title: "SaveQuest",
