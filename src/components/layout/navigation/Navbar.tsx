@@ -57,7 +57,7 @@ const Navbar = () => {
                     </Link>
                     <button
                         onClick={() => setNavbarOpen(!navbarOpen)}
-                        className="flex items-center px-3 py-2 border rounded-xl border-gray-300 text-gray-600 hover:text-black hover:border-black transition-all duration-300"
+                        className="flex items-center px-3 py-2 border rounded-xl border-black text-gray-600 hover:text-black transition-all duration-300"
                     >
                         <div className="flex items-center">
                             {navbarOpen ? (

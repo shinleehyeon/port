@@ -14,17 +14,14 @@ const NavLink: React.FC<NavLinkProps> = ({ href, title, onClick }) => {
       e.preventDefault();
       const targetId = href.replace('#', '');
       const elem = document.getElementById(targetId);
-      
       if (elem) {
         const navHeight = 80;
         const elementPosition = elem.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - navHeight;
-        
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth"
         });
-        
         setTimeout(() => {
           if (onClick) {
             onClick();
