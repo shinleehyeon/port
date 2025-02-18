@@ -60,7 +60,7 @@ const EmailSection = () => {
     }, [showAnimation]);
 
     const inputStyles =
-        "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent block w-full p-4 transition-all duration-300 ease-in-out";
+        "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-gray-400 focus:outline-none block w-full p-4 transition-all duration-300 ease-in-out";
 
     return (
         <section id="contact" className="mt-24">
