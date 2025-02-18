@@ -22,7 +22,7 @@ const LanguageButton: React.FC<LanguageButtonProps> = ({ onLanguageChange }) => 
  return (
    <button
      onClick={toggleLanguage}
-     className="flex items-center gap-2 px-3 py-2 border rounded border-gray-300 text-gray-600 hover:text-black hover:border-black transition-colors"
+     className="flex items-center gap-2 px-3 py-2 border rounded-xl border-gray-300 text-gray-600 hover:text-black hover:border-black transition-colors"
    >
      <Globe className="w-4 h-4" />
      <span className="text-sm font-medium">{displayLanguage}</span>
