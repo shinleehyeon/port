@@ -25,7 +25,7 @@ const ProjectsSection: React.FC = () => {
   );
 
   return (
-    <section id="portfolio">
+    <section id="portfolio" className="mb-24">
       <h2 className="text-left text-4xl font-semibold text-black mt-4 mb-8 md:mb-12">
         {projectTranslations[language].title}
       </h2>

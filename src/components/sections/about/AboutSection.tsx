@@ -194,7 +194,7 @@ const AboutSection: React.FC = () => {
     const { t } = useLanguage();
 
     return (
-        <section id="about" className="pt-24">
+        <section id="about" className="pt-24 mb-24">
             <h2 className="text-4xl font-semibold text-black mb-8">{t("about.title")}</h2>
             <div className="md:grid md:grid-cols-2 items-start gap-10 relative">
                 <div className="relative w-[300px] h-[400px]">

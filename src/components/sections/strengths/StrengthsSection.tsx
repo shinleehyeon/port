@@ -89,7 +89,7 @@ const StrengthsSection: React.FC = () => {
     };
 
     return (
-        <section id="strengths" className="relative py-16 overflow-hidden mt-4">
+        <section id="strengths" className="relative py-16 overflow-hidden mt-4 mb-24">
             <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-gradient-to-b from-primary-500/20 to-transparent blur-3xl -z-10"
             />

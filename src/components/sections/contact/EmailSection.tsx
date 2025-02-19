@@ -63,7 +63,7 @@ const EmailSection = () => {
         "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-gray-400 focus:outline-none block w-full p-4 transition-all duration-300 ease-in-out";
 
     return (
-        <section id="contact" className="mt-24">
+        <section id="contact" className="mt-24 pt-24">
             <h2 className="text-4xl font-semibold text-black mb-8">문의</h2>
 
             {showAnimation ? (

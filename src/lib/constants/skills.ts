@@ -23,9 +23,9 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       descEn: "Can implement responsive designs using Tailwind CSS."
     },
     {
-      icon: "/icons/skills/typescript.svg",
-      desc: "TypeScript를 사용하여 타입을 안전하게 관리할 수 있습니다.",
-      descEn: "Can safely manage types using TypeScript."
+      icon: "/icons/skills/scss.svg",
+      desc: "SCSS를 사용하여 효율적이고 유지보수가 쉬운 스타일링을 구현할 수 있습니다.",
+      descEn: "Can implement efficient and maintainable styling using SCSS."
     },
   ],
   backend: [
@@ -33,6 +33,11 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       icon: "/icons/skills/nodejs.svg",
       desc: "Node.js로 서버 애플리케이션을 개발할 수 있습니다.",
       descEn: "Can develop server applications using Node.js."
+    },
+    {
+      icon: "/icons/skills/express.svg",
+      desc: "Express.js를 사용하여 RESTful API를 설계하고 구현할 수 있습니다.",
+      descEn: "Can design and implement RESTful APIs using Express.js."
     },
     {
       icon: "/icons/skills/python.svg", 
