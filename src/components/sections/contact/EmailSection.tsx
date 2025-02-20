@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { Check, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const EmailSection = () => {
+    const { t } = useLanguage();
     const [emailSubmitted, setEmailSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [showAnimation, setShowAnimation] = useState(false);
@@ -64,7 +66,7 @@ const EmailSection = () => {
 
     return (
         <section id="contact" className="mt-24 pt-24">
-            <h2 className="text-4xl font-semibold text-black mb-8">문의</h2>
+            <h2 className="text-4xl font-semibold text-black mb-8">{t('contact.title')}</h2>
 
             {showAnimation ? (
                 <section className="flex flex-col items-center justify-center h-full max-w-xl ml-0">
@@ -72,7 +74,7 @@ const EmailSection = () => {
                         <Check className="w-8 h-8 text-black" />
                     </article>
                     <p className="text-green-500 text-lg font-medium animate-fade-in">
-                        이메일 보내기 완료!
+                        {t('contact.success')}
                     </p>
                 </section>
             ) : (
@@ -86,7 +88,7 @@ const EmailSection = () => {
                                 htmlFor="email"
                                 className="text-black block mb-2 text-sm font-medium"
                             >
-                                Your email
+                                {t('contact.email')}
                             </label>
                             <input
                                 name="email"
@@ -104,7 +106,7 @@ const EmailSection = () => {
                                 htmlFor="phoneNumber"
                                 className="text-black block mb-2 text-sm font-medium"
                             >
-                                Phone Number
+                                {t('contact.phone')}
                             </label>
                             <input
                                 name="phoneNumber"
@@ -112,7 +114,7 @@ const EmailSection = () => {
                                 id="phoneNumber"
                                 required
                                 className={inputStyles}
-                                placeholder="Phone Number"
+                                placeholder={t('contact.phoneNumber')}
                                 onChange={handleInputChange}
                                 value={formData.phoneNumber}
                             />
@@ -123,7 +125,7 @@ const EmailSection = () => {
                             htmlFor="subject"
                             className="text-black block text-sm mb-2 font-medium"
                         >
-                            Subject
+                            {t('contact.subject')}
                         </label>
                         <input
                             name="subject"
@@ -131,7 +133,7 @@ const EmailSection = () => {
                             id="subject"
                             required
                             className={inputStyles}
-                            placeholder="제목"
+                            placeholder={t('contact.subject')}
                             onChange={handleInputChange}
                             value={formData.subject}
                         />
@@ -141,14 +143,14 @@ const EmailSection = () => {
                             htmlFor="message"
                             className="text-black block text-sm mb-2 font-medium"
                         >
-                            Message
+                            {t('contact.message')}
                         </label>
                         <textarea
                             name="message"
                             id="message"
                             className={inputStyles}
                             rows={4}
-                            placeholder="여기에 메시지를 작성해주세요"
+                            placeholder={t('contact.message')}
                             onChange={handleInputChange}
                             value={formData.message}
                         />
@@ -164,7 +166,7 @@ const EmailSection = () => {
                             "Sending..."
                         ) : (
                             <span className="flex items-center justify-center gap-2">
-                                Send Message
+                                {t('contact.send')}
                                 <Send className="w-4 h-4 transform group-hover:rotate-12 transition-transform" />
                             </span>
                         )}

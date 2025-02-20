@@ -35,6 +35,8 @@ interface TranslationKeys {
   "contact.subject": string;
   "contact.message": string;
   "contact.send": string;
+  "contact.phone": string;  
+  "contact.phoneNumber": string; 
   "contact.success": string;
   
   // Navbar
@@ -81,6 +83,8 @@ export const translations: Translations = {
     "projects.title": "포트폴리오",
     "contact.title": "문의",
     "contact.email": "이메일",
+    "contact.phone": "전화번호",
+    "contact.phoneNumber": "전화번호를 입력해주세요",
     "contact.subject": "제목",
     "contact.message": "메시지",
     "contact.send": "메시지 보내기",
@@ -112,6 +116,8 @@ export const translations: Translations = {
     "projects.title": "Portfolio",
     "contact.title": "Contact",
     "contact.email": "Your email",
+    "contact.phone": "Phone Number",
+    "contact.phoneNumber": "Enter your phone number",
     "contact.subject": "Subject",
     "contact.message": "Message",
     "contact.send": "Send Message",
