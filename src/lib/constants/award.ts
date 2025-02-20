@@ -1,4 +1,4 @@
-import type { Award } from '@/types/common';
+import type { Award } from '../../types/common';
 
 export const awardsData: Award[] = [
     {

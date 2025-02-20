@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import AwardBadge from '@/components/sections/about/AwardBadge';
-import { awardsData } from '@/lib/constants/awards';
+import { awardsData } from '@/lib/constants/award';
 import { fadeInAnimationVariants } from '@/lib/utils/animations';
 
 const AwardSection: React.FC = () => {
