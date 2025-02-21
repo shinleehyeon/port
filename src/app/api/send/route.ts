@@ -5,13 +5,14 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface EmailRequest {
     email: string;
+    phoneNumber: string;
     subject: string;
     message: string;
 }
 
 export async function POST(request: Request) {
     try {
-        const { email, subject, message }: EmailRequest = await request.json();
+        const { email, phoneNumber, subject, message }: EmailRequest = await request.json();
 
         const emailTemplate = `<!DOCTYPE html>
 <html>
@@ -139,6 +140,11 @@ export async function POST(request: Request) {
             <div class="info-section">
                 <div class="info-label">보낸 사람</div>
                 <div class="info-value">${email}</div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-label">연락처</div>
+                <div class="info-value">${phoneNumber}</div>
             </div>
             
             <div class="info-section">
