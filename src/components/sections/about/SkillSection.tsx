@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import type { Skill } from '@/types/common';
-import { fadeInAnimationVariants } from '@/lib/utils/animations';
 
 interface SkillSectionProps {
     title: string;
@@ -19,7 +18,7 @@ const SkillSection: React.FC<SkillSectionProps> = ({
     onSkillClick,
 }) => {
     const { language } = useLanguage();
-    
+
     return (
         <div className="mb-6">
             <h3 className="text-lg font-semibold mb-3 text-black">{title}</h3>
@@ -35,12 +34,12 @@ const SkillSection: React.FC<SkillSectionProps> = ({
                         onClick={() => onSkillClick(null)}
                     >
                         <div className="flex items-center gap-4">
-                            <img 
+                            <img
                                 src={selectedSkill.icon}
-                                alt="skill" 
+                                alt="skill"
                                 className="w-12 h-12 user-select-none"
                                 draggable="false"
-                                onMouseDown={(e) => e.preventDefault()} 
+                                onMouseDown={(e) => e.preventDefault()}
                             />
                             <p className="text-gray-700">
                                 {language === 'en' ? selectedSkill.descEn : selectedSkill.desc}
@@ -53,19 +52,18 @@ const SkillSection: React.FC<SkillSectionProps> = ({
                         {skills.map((skill, index) => (
                             <motion.div
                                 key={index}
-                                variants={fadeInAnimationVariants}
                                 initial="initial"
                                 animate="animate"
                                 exit="exit"
-                                onClick={() => onSkillClick(skill)} 
+                                onClick={() => onSkillClick(skill)}
                                 className="cursor-pointer hover:scale-110 transition-transform"
                             >
-                                <img 
-                                    src={skill.icon} 
-                                    alt="skill" 
+                                <img
+                                    src={skill.icon}
+                                    alt="skill"
                                     className="w-12 h-12 user-select-none"
                                     draggable="false"
-                                    onMouseDown={(e) => e.preventDefault()} 
+                                    onMouseDown={(e) => e.preventDefault()}
                                 />
                             </motion.div>
                         ))}

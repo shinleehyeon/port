@@ -17,12 +17,7 @@ const AboutSection: React.FC = () => {
         <section id="about" className="pt-24 mb-24">
             <h2 className="text-4xl font-semibold text-black mb-8">{t("about.title")}</h2>
             <div className="md:grid md:grid-cols-2 items-start gap-10 relative">
-                <motion.div
-                    className="relative w-[300px] h-[400px]"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
+                <div className="relative w-[300px] h-[400px]">
                     <Image
                         src="/images/about.png"
                         alt="Hero image"
@@ -32,7 +27,7 @@ const AboutSection: React.FC = () => {
                         draggable="false"
                         onMouseDown={(e) => e.preventDefault()}
                     />
-                </motion.div>
+                </div>
                 <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
