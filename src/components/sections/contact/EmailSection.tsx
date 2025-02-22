@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from "react";
 import { Check, Send } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const EmailSection = () => {
@@ -9,12 +9,18 @@ const EmailSection = () => {
     const [emailSubmitted, setEmailSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [showAnimation, setShowAnimation] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
     const [formData, setFormData] = useState({
         email: "",
         phoneNumber: "",
         subject: "",
         message: "",
     });
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -27,7 +33,6 @@ const EmailSection = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-
         try {
             const response = await fetch("/api/send", {
                 method: "POST",
@@ -36,7 +41,6 @@ const EmailSection = () => {
                 },
                 body: JSON.stringify(formData),
             });
-
             if (response.ok) {
                 setEmailSubmitted(true);
                 setShowAnimation(true);
@@ -56,7 +60,6 @@ const EmailSection = () => {
                 setShowAnimation(false);
                 setEmailSubmitted(false);
             }, 3000);
-
             return () => clearTimeout(timer);
         }
     }, [showAnimation]);
@@ -64,116 +67,151 @@ const EmailSection = () => {
     const inputStyles =
         "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-gray-400 focus:outline-none block w-full p-4 transition-all duration-300 ease-in-out";
 
-    return (
-        <section id="contact" className="mt-24 pt-24">
-            <h2 className="text-4xl font-semibold text-black mb-8">{t('contact.title')}</h2>
+    const containerVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut",
+                staggerChildren: 0.1
+            }
+        }
+    };
 
-            {showAnimation ? (
-                <section className="flex flex-col items-center justify-center h-full max-w-xl ml-0">
-                    <article className="bg-green-500 rounded-full p-2 mb-4 animate-bounce">
-                        <Check className="w-8 h-8 text-black" />
-                    </article>
-                    <p className="text-green-500 text-lg font-medium animate-fade-in">
-                        {t('contact.success')}
-                    </p>
-                </section>
-            ) : (
-                <form
-                    className="flex flex-col space-y-6 max-w-xl pb-24"
-                    onSubmit={handleSubmit}
+    const childVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5
+            }
+        }
+    };
+
+    return (
+        <AnimatePresence>
+            {mounted && (
+                <motion.section
+                    id="contact"
+                    className="mt-24 pt-24"
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
                 >
-                    <div className="flex space-x-4">
-                        <div className="w-1/2">
-                            <label
-                                htmlFor="email"
-                                className="text-black block mb-2 text-sm font-medium"
-                            >
-                                {t('contact.email')}
-                            </label>
-                            <input
-                                name="email"
-                                type="email"
-                                id="email"
-                                required
-                                className={inputStyles}
-                                placeholder="example@email.com"
-                                onChange={handleInputChange}
-                                value={formData.email}
-                            />
-                        </div>
-                        <div className="w-1/2">
-                            <label
-                                htmlFor="phoneNumber"
-                                className="text-black block mb-2 text-sm font-medium"
-                            >
-                                {t('contact.phone')}
-                            </label>
-                            <input
-                                name="phoneNumber"
-                                type="text"
-                                id="phoneNumber"
-                                required
-                                className={inputStyles}
-                                placeholder={t('contact.phoneNumber')}
-                                onChange={handleInputChange}
-                                value={formData.phoneNumber}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="subject"
-                            className="text-black block text-sm mb-2 font-medium"
-                        >
-                            {t('contact.subject')}
-                        </label>
-                        <input
-                            name="subject"
-                            type="text"
-                            id="subject"
-                            required
-                            className={inputStyles}
-                            placeholder={t('contact.subject')}
-                            onChange={handleInputChange}
-                            value={formData.subject}
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="message"
-                            className="text-black block text-sm mb-2 font-medium"
-                        >
-                            {t('contact.message')}
-                        </label>
-                        <textarea
-                            name="message"
-                            id="message"
-                            className={inputStyles}
-                            rows={4}
-                            placeholder={t('contact.message')}
-                            onChange={handleInputChange}
-                            value={formData.message}
-                        />
-                    </div>
-                    <motion.button
-                        initial={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                        type="submit"
-                        disabled={isLoading}
-                        className="group bg-[#6D6D6D] border border-[#6D6D6D] text-white font-medium py-3 px-5 rounded-lg w-full disabled:opacity-50 transition-all duration-300 hover:text-white"
+                    <motion.h2
+                        className="text-4xl font-semibold text-black mb-8"
+                        variants={childVariants}
                     >
-                        {isLoading ? (
-                            "Sending..."
-                        ) : (
-                            <span className="flex items-center justify-center gap-2">
-                                {t('contact.send')}
-                                <Send className="w-4 h-4 transform group-hover:rotate-12 transition-transform" />
-                            </span>
-                        )}
-                    </motion.button>
-                </form>
+                        {t('contact.title')}
+                    </motion.h2>
+
+                    {showAnimation ? (
+                        <motion.section
+                            className="flex flex-col items-center justify-center h-full max-w-xl ml-0"
+                            variants={childVariants}
+                        >
+                            <article className="bg-green-500 rounded-full p-2 mb-4 animate-bounce">
+                                <Check className="w-8 h-8 text-black" />
+                            </article>
+                            <p className="text-green-500 text-lg font-medium animate-fade-in">
+                                {t('contact.success')}
+                            </p>
+                        </motion.section>
+                    ) : (
+                        <motion.form
+                            className="flex flex-col space-y-6 max-w-xl pb-24"
+                            onSubmit={handleSubmit}
+                            variants={containerVariants}
+                        >
+                            <motion.div className="flex space-x-4" variants={childVariants}>
+                                <div className="w-1/2">
+                                    <label htmlFor="email" className="text-black block mb-2 text-sm font-medium">
+                                        {t('contact.email')}
+                                    </label>
+                                    <input
+                                        name="email"
+                                        type="email"
+                                        id="email"
+                                        required
+                                        className={inputStyles}
+                                        placeholder="example@email.com"
+                                        onChange={handleInputChange}
+                                        value={formData.email}
+                                    />
+                                </div>
+                                <div className="w-1/2">
+                                    <label htmlFor="phoneNumber" className="text-black block mb-2 text-sm font-medium">
+                                        {t('contact.phone')}
+                                    </label>
+                                    <input
+                                        name="phoneNumber"
+                                        type="text"
+                                        id="phoneNumber"
+                                        required
+                                        className={inputStyles}
+                                        placeholder={t('contact.phoneNumber')}
+                                        onChange={handleInputChange}
+                                        value={formData.phoneNumber}
+                                    />
+                                </div>
+                            </motion.div>
+
+                            <motion.div variants={childVariants}>
+                                <label htmlFor="subject" className="text-black block text-sm mb-2 font-medium">
+                                    {t('contact.subject')}
+                                </label>
+                                <input
+                                    name="subject"
+                                    type="text"
+                                    id="subject"
+                                    required
+                                    className={inputStyles}
+                                    placeholder={t('contact.subject')}
+                                    onChange={handleInputChange}
+                                    value={formData.subject}
+                                />
+                            </motion.div>
+
+                            <motion.div variants={childVariants}>
+                                <label htmlFor="message" className="text-black block text-sm mb-2 font-medium">
+                                    {t('contact.message')}
+                                </label>
+                                <textarea
+                                    name="message"
+                                    id="message"
+                                    className={inputStyles}
+                                    rows={4}
+                                    placeholder={t('contact.message')}
+                                    onChange={handleInputChange}
+                                    value={formData.message}
+                                />
+                            </motion.div>
+
+                            <motion.button
+                                variants={childVariants}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                type="submit"
+                                disabled={isLoading}
+                                className="group bg-[#6D6D6D] border border-[#6D6D6D] text-white font-medium py-3 px-5 rounded-lg w-full disabled:opacity-50 transition-all duration-300 hover:text-white"
+                            >
+                                {isLoading ? (
+                                    "Sending..."
+                                ) : (
+                                    <span className="flex items-center justify-center gap-2">
+                                        {t('contact.send')}
+                                        <Send className="w-4 h-4 transform group-hover:rotate-12 transition-transform" />
+                                    </span>
+                                )}
+                            </motion.button>
+                        </motion.form>
+                    )}
+                </motion.section>
             )}
-        </section>
+        </AnimatePresence>
     );
 };
 
