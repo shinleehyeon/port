@@ -9,36 +9,36 @@ interface TranslationKeys {
   "nav.strengths": string;
   "nav.portfolio": string;
   "nav.contact": string;
-  
+
   // Hero
   "hero.title1": string;
   "hero.title2": string;
-  
+
   // About
   "about.title": string;
   "about.description": string;
   "about.tabs.skills": string;
   "about.tabs.awards": string;
   "about.skillsInfo": string;
-  
+
   // Strengths
   "strengths.title": string;
   [key: `strengths.${number}.keyword`]: string;
   [key: `strengths.${number}.detail`]: string;
-  
+
   // Projects
   "projects.title": string;
-  
+
   // Contact
   "contact.title": string;
   "contact.email": string;
   "contact.subject": string;
   "contact.message": string;
   "contact.send": string;
-  "contact.phone": string;  
-  "contact.phoneNumber": string; 
+  "contact.phone": string;
+  "contact.phoneNumber": string;
   "contact.success": string;
-  
+
   // Navbar
   "menu": string;
   "close": string;
@@ -62,7 +62,7 @@ export const translations: Translations = {
     "nav.strengths": "강점",
     "nav.portfolio": "포트폴리오",
     "nav.contact": "문의",
-    "menu": "메뉴", 
+    "menu": "메뉴",
     "close": "닫기",
     "hero.title1": "끊임없는 배움과 도전으로",
     "hero.title2": "성장하는 개발자",
@@ -95,7 +95,7 @@ export const translations: Translations = {
     "nav.strengths": "Strengths",
     "nav.portfolio": "Portfolio",
     "nav.contact": "Contact",
-    "menu": "Menu", 
+    "menu": "Menu",
     close: "Close",
     "hero.title1": "Continuous Learning,",
     "hero.title2": "Growing Developer",

@@ -7,7 +7,7 @@ import { fadeInAnimationVariants } from '@/lib/utils/animations';
 
 const AwardSection: React.FC = () => {
     const { language } = useLanguage();
-    
+
     return (
         <div className="grid grid-cols-1 gap-4">
             {awardsData.map((award, index) => (
@@ -27,10 +27,10 @@ const AwardSection: React.FC = () => {
                                 <span>•</span>
                                 <span>{language === 'en' ? award.organizationEn : award.organizationKo}</span>
                             </div>
-                            <AwardBadge 
-                                type={award.typeKo} 
+                            <AwardBadge
+                                type={award.typeKo}
                                 typeEn={award.typeEn}
-                                isEnglish={language === 'en'} 
+                                isEnglish={language === 'en'}
                             />
                         </div>
                         <h3 className="font-medium text-gray-900">
