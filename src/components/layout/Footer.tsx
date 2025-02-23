@@ -31,7 +31,7 @@ const Footer = () => {
 
       <div className="w-full flex flex-col sm:flex-row justify-between items-center">
         <div className="text-center sm:text-left">
-          <p>신이현 / 선린인터넷고등학교 / TAPIE</p>
+          <p>신이현 / 선린인터넷고등학교 / 소프트웨어과</p>
           <p className="flex flex-wrap items-center gap-2">
             <span
               onClick={() => handleCopy("010-2984-6694", "전화번호")}
