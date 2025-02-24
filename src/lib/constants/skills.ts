@@ -13,12 +13,12 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       descEn: "Experience with server-side rendering using Next.js."
     },
     {
-      icon: "/icons/skills/vite.svg", 
+      icon: "/icons/skills/vite.svg",
       desc: "Vite를 활용하여 빠른 개발 환경을 구축할 수 있습니다.",
       descEn: "Can set up fast development environments using Vite."
     },
     {
-      icon: "/icons/skills/tailwindcss.svg", 
+      icon: "/icons/skills/tailwindcss.svg",
       desc: "Tailwind CSS로 반응형 디자인을 구현할 수 있습니다.",
       descEn: "Can implement responsive designs using Tailwind CSS."
     },
@@ -36,21 +36,21 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
     },
     {
       icon: "/icons/skills/express.svg",
-      desc: "Express.js를 사용하여 RESTful API를 설계하고 구현할 수 있습니다.",
+      desc: "Express.js를 활용하여 간단한 웹 서버와 API를 만들 수 있습니다.",
       descEn: "Can design and implement RESTful APIs using Express.js."
     },
     {
-      icon: "/icons/skills/python.svg", 
+      icon: "/icons/skills/python.svg",
       desc: "Python으로 데이터 처리와 자동화를 구현할 수 있습니다.",
       descEn: "Can implement data processing and automation using Python."
     },
     {
-      icon: "/icons/skills/mysql.svg", 
+      icon: "/icons/skills/mysql.svg",
       desc: "MySQL을 사용한 데이터베이스 설계 경험이 있습니다.",
       descEn: "Experience with database design using MySQL."
     },
     {
-      icon: "/icons/skills/firebase.svg", 
+      icon: "/icons/skills/firebase.svg",
       desc: "Firebase로 실시간 데이터베이스를 구현할 수 있습니다.",
       descEn: "Can implement real-time databases using Firebase."
     },
