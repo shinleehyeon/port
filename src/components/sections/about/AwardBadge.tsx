@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trophy } from 'lucide-react';
 import type { AwardBadgeProps } from '@/types/common';
 
 const AwardBadge: React.FC<AwardBadgeProps> = ({ type, typeEn, isEnglish }) => {
@@ -14,12 +15,13 @@ const AwardBadge: React.FC<AwardBadgeProps> = ({ type, typeEn, isEnglish }) => {
                 return "bg-amber-50 text-amber-600";
         }
     };
-    
+
     return (
-        <div className={`rounded-full px-3 py-1 text-sm font-medium ${getBadgeColors(type)}`}>
+        <div className={`rounded-full px-3 py-1 text-sm font-medium ${getBadgeColors(type)} flex items-center gap-1`}>
             {isEnglish ? typeEn : type}
+            <Trophy size={14} />
         </div>
     );
 };
 
-export default AwardBadge;  
+export default AwardBadge;
