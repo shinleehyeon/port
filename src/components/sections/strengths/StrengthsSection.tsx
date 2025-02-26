@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ScrollAnimationWrapper from "@/components/ui/ScrollAnimationWrapper";
 
 const strengthsList = [
     {
@@ -95,26 +96,26 @@ const StrengthsSection: React.FC = () => {
             />
 
             <div className="max-w-full mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex flex-col space-y-6"
-                >
+                <ScrollAnimationWrapper>
                     <h2 className="text-4xl font-semibold text-black">{t("strengths.title")}</h2>
+                </ScrollAnimationWrapper>
 
-                    <div className="flex flex-col space-y-4">
-                        {strengthsList.map((strength, index) => (
+                <div className="flex flex-col space-y-4 mt-6">
+                    {strengthsList.map((strength, index) => (
+                        <ScrollAnimationWrapper
+                            key={index}
+                            delay={0.2 * (index + 1)}
+                            direction="up"
+                        >
                             <StrengthCard
-                                key={index}
                                 id={strength.id}
                                 color={strength.color}
                                 isOpen={openStates[index]}
                                 onToggle={() => toggleCard(index)}
                             />
-                        ))}
-                    </div>
-                </motion.div>
+                        </ScrollAnimationWrapper>
+                    ))}
+                </div>
             </div>
         </section>
     );
