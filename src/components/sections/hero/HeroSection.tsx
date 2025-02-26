@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sprout } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import ScrollAnimationWrapper from '@/components/ui/ScrollAnimationWrapper';
 
 const HangulTypingEffect: React.FC<{ text: string; onComplete: () => void }> = ({ text, onComplete }) => {
   const [displayText, setDisplayText] = useState('');
@@ -115,38 +116,32 @@ const HeroSection = () => {
   return (
     <section className="lg:py-16">
       <div className="grid grid-cols-1">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            ease: [0.43, 0.13, 0.23, 0.96]
-          }}
-          className="place-self-center text-center sm:text-left justify-self-start"
-        >
-          <h1 className="mb-4 text-4xl sm:text-5xl lg:text-7xl lg:leading-normal font-extrabold">
-            <span className="text-black block">
-              {t("hero.title1")}
-            </span>
-            <span className="text-[#6f4f28] mb-1 flex items-center justify-center sm:justify-start">
-              <HangulTypingEffect
-                text={t("hero.title2")}
-                onComplete={handleTypingComplete}
-              />
-              <AnimatePresence mode="wait">
-                {isTypingComplete && (
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <Sprout className="ml-2" color="#22c55e" size={38} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </span>
-          </h1>
-        </motion.div>
+        <ScrollAnimationWrapper direction="up" delay={0.1}>
+          <div className="place-self-center text-center sm:text-left justify-self-start">
+            <h1 className="mb-4 text-4xl sm:text-5xl lg:text-7xl lg:leading-normal font-extrabold">
+              <span className="text-black block">
+                {t("hero.title1")}
+              </span>
+              <span className="text-[#6f4f28] mb-1 flex items-center justify-center sm:justify-start">
+                <HangulTypingEffect
+                  text={t("hero.title2")}
+                  onComplete={handleTypingComplete}
+                />
+                <AnimatePresence mode="wait">
+                  {isTypingComplete && (
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Sprout className="ml-2" color="#22c55e" size={38} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </span>
+            </h1>
+          </div>
+        </ScrollAnimationWrapper>
       </div>
     </section>
   );
