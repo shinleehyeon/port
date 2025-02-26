@@ -33,7 +33,7 @@ interface StrengthCardProps {
 
 const StrengthCard: React.FC<StrengthCardProps> = ({ id, color, isOpen, onToggle }) => {
     const { t } = useLanguage();
-    
+
     return (
         <div className="w-full">
             <motion.div

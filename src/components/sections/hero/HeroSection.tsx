@@ -63,7 +63,7 @@ const HangulTypingEffect: React.FC<{ text: string; onComplete: () => void }> = (
         currentText += currentJamo;
         setDisplayText(currentText);
         currentJamoIndex++;
-        
+
         if (currentJamoIndex >= decomposedChars[currentCharIndex].length) {
           currentCharIndex++;
           currentJamoIndex = 0;
@@ -129,8 +129,8 @@ const HeroSection = () => {
               {t("hero.title1")}
             </span>
             <span className="text-[#6f4f28] mb-1 flex items-center justify-center sm:justify-start">
-              <HangulTypingEffect 
-                text={t("hero.title2")} 
+              <HangulTypingEffect
+                text={t("hero.title2")}
                 onComplete={handleTypingComplete}
               />
               <AnimatePresence mode="wait">
