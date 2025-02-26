@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Check, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ScrollAnimationWrapper from '@/components/ui/ScrollAnimationWrapper';
 
 const EmailSection = () => {
     const { t } = useLanguage();
@@ -67,19 +68,6 @@ const EmailSection = () => {
     const inputStyles =
         "bg-transparent border border-[#6D6D6D] text-black text-sm rounded-lg focus:ring-2 focus:ring-gray-400 focus:outline-none block w-full p-4 transition-all duration-300 ease-in-out";
 
-    const containerVariants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: "easeOut",
-                staggerChildren: 0.1
-            }
-        }
-    };
-
     const childVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: {
@@ -94,122 +82,120 @@ const EmailSection = () => {
     return (
         <AnimatePresence>
             {mounted && (
-                <motion.section
-                    id="contact"
-                    className="mt-24 pt-24"
-                    initial="hidden"
-                    animate="visible"
-                    variants={containerVariants}
-                >
-                    <motion.h2
-                        className="text-4xl font-semibold text-black mb-8"
-                        variants={childVariants}
-                    >
-                        {t('contact.title')}
-                    </motion.h2>
+                <section id="contact" className="mt-24 pt-24">
+                    <ScrollAnimationWrapper direction="up" delay={0.1}>
+                        <h2 className="text-4xl font-semibold text-black mb-8">
+                            {t('contact.title')}
+                        </h2>
+                    </ScrollAnimationWrapper>
 
                     {showAnimation ? (
-                        <motion.section
-                            className="flex flex-col items-center justify-center h-full max-w-xl ml-0"
-                            variants={childVariants}
-                        >
-                            <article className="bg-green-500 rounded-full p-2 mb-4 animate-bounce">
-                                <Check className="w-8 h-8 text-black" />
-                            </article>
-                            <p className="text-green-500 text-lg font-medium animate-fade-in">
-                                {t('contact.success')}
-                            </p>
-                        </motion.section>
+                        <ScrollAnimationWrapper direction="up" delay={0.2}>
+                            <div className="flex flex-col items-center justify-center h-full max-w-xl ml-0">
+                                <div className="bg-green-500 rounded-full p-2 mb-4 animate-bounce">
+                                    <Check className="w-8 h-8 text-black" />
+                                </div>
+                                <p className="text-green-500 text-lg font-medium animate-fade-in">
+                                    {t('contact.success')}
+                                </p>
+                            </div>
+                        </ScrollAnimationWrapper>
                     ) : (
-                        <motion.form
+                        <form
                             className="flex flex-col space-y-6 max-w-xl pb-24"
                             onSubmit={handleSubmit}
-                            variants={containerVariants}
                         >
-                            <motion.div className="flex space-x-4" variants={childVariants}>
-                                <div className="w-1/2">
-                                    <label htmlFor="email" className="text-black block mb-2 text-sm font-medium">
-                                        {t('contact.email')}
-                                    </label>
-                                    <input
-                                        name="email"
-                                        type="email"
-                                        id="email"
-                                        required
-                                        className={inputStyles}
-                                        placeholder="example@email.com"
-                                        onChange={handleInputChange}
-                                        value={formData.email}
-                                    />
+                            <ScrollAnimationWrapper direction="up" delay={0.2}>
+                                <div className="flex space-x-4">
+                                    <div className="w-1/2">
+                                        <label htmlFor="email" className="text-black block mb-2 text-sm font-medium">
+                                            {t('contact.email')}
+                                        </label>
+                                        <input
+                                            name="email"
+                                            type="email"
+                                            id="email"
+                                            required
+                                            className={inputStyles}
+                                            placeholder="example@email.com"
+                                            onChange={handleInputChange}
+                                            value={formData.email}
+                                        />
+                                    </div>
+                                    <div className="w-1/2">
+                                        <label htmlFor="phoneNumber" className="text-black block mb-2 text-sm font-medium">
+                                            {t('contact.phone')}
+                                        </label>
+                                        <input
+                                            name="phoneNumber"
+                                            type="text"
+                                            id="phoneNumber"
+                                            required
+                                            className={inputStyles}
+                                            placeholder={t('contact.phoneNumber')}
+                                            onChange={handleInputChange}
+                                            value={formData.phoneNumber}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="w-1/2">
-                                    <label htmlFor="phoneNumber" className="text-black block mb-2 text-sm font-medium">
-                                        {t('contact.phone')}
+                            </ScrollAnimationWrapper>
+
+                            <ScrollAnimationWrapper direction="up" delay={0.3}>
+                                <div>
+                                    <label htmlFor="subject" className="text-black block text-sm mb-2 font-medium">
+                                        {t('contact.subject')}
                                     </label>
                                     <input
-                                        name="phoneNumber"
+                                        name="subject"
                                         type="text"
-                                        id="phoneNumber"
+                                        id="subject"
                                         required
                                         className={inputStyles}
-                                        placeholder={t('contact.phoneNumber')}
+                                        placeholder={t('contact.subject')}
                                         onChange={handleInputChange}
-                                        value={formData.phoneNumber}
+                                        value={formData.subject}
                                     />
                                 </div>
-                            </motion.div>
+                            </ScrollAnimationWrapper>
 
-                            <motion.div variants={childVariants}>
-                                <label htmlFor="subject" className="text-black block text-sm mb-2 font-medium">
-                                    {t('contact.subject')}
-                                </label>
-                                <input
-                                    name="subject"
-                                    type="text"
-                                    id="subject"
-                                    required
-                                    className={inputStyles}
-                                    placeholder={t('contact.subject')}
-                                    onChange={handleInputChange}
-                                    value={formData.subject}
-                                />
-                            </motion.div>
+                            <ScrollAnimationWrapper direction="up" delay={0.4}>
+                                <div>
+                                    <label htmlFor="message" className="text-black block text-sm mb-2 font-medium">
+                                        {t('contact.message')}
+                                    </label>
+                                    <textarea
+                                        name="message"
+                                        id="message"
+                                        className={inputStyles}
+                                        rows={4}
+                                        placeholder={t('contact.message')}
+                                        onChange={handleInputChange}
+                                        value={formData.message}
+                                    />
+                                </div>
+                            </ScrollAnimationWrapper>
 
-                            <motion.div variants={childVariants}>
-                                <label htmlFor="message" className="text-black block text-sm mb-2 font-medium">
-                                    {t('contact.message')}
-                                </label>
-                                <textarea
-                                    name="message"
-                                    id="message"
-                                    className={inputStyles}
-                                    rows={4}
-                                    placeholder={t('contact.message')}
-                                    onChange={handleInputChange}
-                                    value={formData.message}
-                                />
-                            </motion.div>
-
-                            <motion.button
-                                variants={childVariants}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                type="submit"
-                                disabled={isLoading}
-                                className="group bg-[#6D6D6D] border border-[#6D6D6D] text-white font-medium py-3 px-5 rounded-lg w-full disabled:opacity-50 transition-all duration-300 hover:text-white"
-                            >
-                                {isLoading ? (
-                                    "Sending..."
-                                ) : (
-                                    <span className="flex items-center justify-center gap-2">
-                                        {t('contact.send')}
-                                        <Send className="w-4 h-4 transform group-hover:rotate-12 transition-transform" />
-                                    </span>
-                                )}
-                            </motion.button>
-                        </motion.form>
+                            <ScrollAnimationWrapper direction="up" delay={0.5}>
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    type="submit"
+                                    disabled={isLoading}
+                                    className="group bg-[#6D6D6D] border border-[#6D6D6D] text-white font-medium py-3 px-5 rounded-lg w-full disabled:opacity-50 transition-all duration-300 hover:text-white"
+                                >
+                                    {isLoading ? (
+                                        "Sending..."
+                                    ) : (
+                                        <span className="flex items-center justify-center gap-2">
+                                            {t('contact.send')}
+                                            <Send className="w-4 h-4 transform group-hover:rotate-12 transition-transform" />
+                                        </span>
+                                    )}
+                                </motion.button>
+                            </ScrollAnimationWrapper>
+                        </form>
                     )}
-                </motion.section>
+                </section>
             )}
         </AnimatePresence>
     );
