@@ -1,8 +1,6 @@
 "use client";
-
-import React, { ReactNode } from "react";
+import React, { ReactNode, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 
 interface ScrollAnimationWrapperProps {
     children: ReactNode;
@@ -27,15 +25,15 @@ const ScrollAnimationWrapper: React.FC<ScrollAnimationWrapperProps> = ({
     const getInitialPosition = () => {
         switch (direction) {
             case "up":
-                return { y: 50, opacity: 0 };
+                return { y: 30, opacity: 0 };
             case "down":
-                return { y: -50, opacity: 0 };
+                return { y: -30, opacity: 0 };
             case "left":
-                return { x: 50, opacity: 0 };
+                return { x: 30, opacity: 0 };
             case "right":
-                return { x: -50, opacity: 0 };
+                return { x: -30, opacity: 0 };
             default:
-                return { y: 50, opacity: 0 };
+                return { y: 30, opacity: 0 };
         }
     };
 
@@ -53,7 +51,7 @@ const ScrollAnimationWrapper: React.FC<ScrollAnimationWrapperProps> = ({
                         : getInitialPosition()
                 }
                 transition={{
-                    duration: 0.8,
+                    duration: 0.5,
                     delay,
                     ease: [0.17, 0.55, 0.55, 1],
                 }}
