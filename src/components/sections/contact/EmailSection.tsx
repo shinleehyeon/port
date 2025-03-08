@@ -9,7 +9,7 @@ const EmailSection = () => {
     const { t } = useLanguage();
     const [emailSubmitted, setEmailSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [showAnimation, setShowAnimation] = useState(false);
+    const [showAnimation, setShowAnimation] = useState(false); // 애니메이션 상태
     const [mounted, setMounted] = useState(false);
 
     const [formData, setFormData] = useState({
@@ -44,7 +44,7 @@ const EmailSection = () => {
             });
             if (response.ok) {
                 setEmailSubmitted(true);
-                setShowAnimation(true);
+                setShowAnimation(true); // 이메일 전송 후 애니메이션 실행
                 setFormData({ email: "", phoneNumber: "", subject: "", message: "" });
                 e.currentTarget.reset();
             }
@@ -60,7 +60,7 @@ const EmailSection = () => {
             const timer = setTimeout(() => {
                 setShowAnimation(false);
                 setEmailSubmitted(false);
-            }, 3000);
+            }, 3000); // 3초 후 애니메이션 종료
             return () => clearTimeout(timer);
         }
     }, [showAnimation]);
@@ -177,8 +177,6 @@ const EmailSection = () => {
 
                             <ScrollAnimationWrapper direction="up" delay={0.5}>
                                 <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
                                     type="submit"
                                     disabled={isLoading}
                                     className="group bg-[#6D6D6D] border border-[#6D6D6D] text-white font-medium py-3 px-5 rounded-lg w-full disabled:opacity-50 transition-all duration-300 hover:text-white"
