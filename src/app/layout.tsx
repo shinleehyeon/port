@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: '신이현 | 개발자 포트폴리오',
-    description: '성장하는 개발자 신이현의 공식 포트폴리오 웹사이트입니다.',
+    description: '성장하는 개발자 신이현의 포트폴리오 웹사이트입니다.',
     url: 'https://www.2hyundev.com/',
     siteName: '신이현 포트폴리오',
     images: [

@@ -9,7 +9,7 @@ const EmailSection = () => {
     const { t } = useLanguage();
     const [emailSubmitted, setEmailSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [showAnimation, setShowAnimation] = useState(false); // 애니메이션 상태
+    const [showAnimation, setShowAnimation] = useState(false);
     const [mounted, setMounted] = useState(false);
 
     const [formData, setFormData] = useState({
