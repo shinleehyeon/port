@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import Tracker from '@openreplay/tracker';
 import trackerAssist from '@openreplay/tracker-assist';
