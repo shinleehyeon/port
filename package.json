@@ -11,6 +11,8 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@heroicons/react": "^2.0.18",
+    "@openreplay/tracker": "^16.0.1",
+    "@openreplay/tracker-assist": "^11.0.0",
     "autoprefixer": "10.4.15",
     "encoding": "^0.1.13",
     "framer-motion": "^11.18.2",

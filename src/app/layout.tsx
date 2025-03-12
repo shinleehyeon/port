@@ -1,6 +1,7 @@
 import './globals.css'
 import { Metadata } from 'next'
 import { LanguageProvider } from '@/contexts/LanguageContext'
+import OpenReplayTracker from '@/components/analytics/OpenReplayTracker';
 
 export const metadata: Metadata = {
   title: 'shinleehyeon | Developer Portfolio',
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: '신이현 | 개발자 포트폴리오',
-    description: '성장하는 개발자 신이현의 포트폴리오 웹사이트입니다.',
+    description: '성장하는 개발자 신이현 포트폴리오 웹사이트입니다.',
     url: 'https://www.2hyundev.com/',
     siteName: '신이현 포트폴리오',
     images: [
@@ -50,9 +51,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             `,
           }}
         />
-
         <link rel="me" href="https://www.instagram.com/hyun._.s08/" />
-
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -79,6 +78,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <LanguageProvider>
           {children}
         </LanguageProvider>
+        <OpenReplayTracker />
       </body>
     </html>
   )
