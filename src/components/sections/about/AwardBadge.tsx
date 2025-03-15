@@ -24,4 +24,5 @@ const AwardBadge: React.FC<AwardBadgeProps> = ({ type, typeEn, isEnglish }) => {
     );
 };
 
+
 export default AwardBadge;
