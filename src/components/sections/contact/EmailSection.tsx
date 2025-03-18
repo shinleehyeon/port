@@ -44,7 +44,7 @@ const EmailSection = () => {
             });
             if (response.ok) {
                 setEmailSubmitted(true);
-                setShowAnimation(true); // 이메일 전송 후 애니메이션 실행
+                setShowAnimation(true);
                 setFormData({ email: "", phoneNumber: "", subject: "", message: "" });
                 e.currentTarget.reset();
             }
@@ -60,7 +60,7 @@ const EmailSection = () => {
             const timer = setTimeout(() => {
                 setShowAnimation(false);
                 setEmailSubmitted(false);
-            }, 3000); // 3초 후 애니메이션 종료
+            }, 3000);
             return () => clearTimeout(timer);
         }
     }, [showAnimation]);
