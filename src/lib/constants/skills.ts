@@ -36,7 +36,7 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
     },
     {
       icon: "/icons/skills/express.svg",
-      desc: "Express.js를 활용하여 간단한 웹 서버와 API를 만들 수 있습니다.",
+      desc: "Express.js 프레임워크를 기반으로 HTTP 요청 처리, 라우팅, 미들웨어 구성 등을 통해 효율적인 웹 서버 및 RESTful API를 설계하고 구현할 수 있습니다.",
       descEn: "Can design and implement RESTful APIs using Express.js."
     },
     {
