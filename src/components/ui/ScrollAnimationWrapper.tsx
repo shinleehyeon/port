@@ -13,7 +13,7 @@ interface ScrollAnimationWrapperProps {
 
 const ScrollAnimationWrapper: React.FC<ScrollAnimationWrapperProps> = ({
     children,
-    delay = 0.2,
+    delay = 0.1,
     direction = "up",
     threshold = 0.1,
     className = "",
@@ -51,7 +51,7 @@ const ScrollAnimationWrapper: React.FC<ScrollAnimationWrapperProps> = ({
                         : getInitialPosition()
                 }
                 transition={{
-                    duration: 0.5,
+                    duration: 0.3,
                     delay,
                     ease: [0.17, 0.55, 0.55, 1],
                 }}
