@@ -3,9 +3,9 @@ import type { Skill } from '@/types/common';
 export const skillData: Record<'frontend' | 'backend', Skill[]> = {
   frontend: [
     {
-      icon: "/icons/skills/react.svg",
-      desc: "React를 활용한 컴포넌트 기반 개발과 상태관리에 익숙합니다.",
-      descEn: "Familiar with component-based development and state management using React."
+      "icon": "/icons/skills/react.svg",
+      "desc": "React를 활용한 컴포넌트 기반 아키텍처 설계 및 상태 관리에 능숙합니다.",
+      "descEn": "Skilled in architecting component-based user interfaces and managing application state using React."
     },
     {
       icon: "/icons/skills/nextjs.svg",
