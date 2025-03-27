@@ -18,9 +18,9 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       "descEn": "Capable of configuring modern front-end build environments and achieving fast HMR (Hot Module Replacement) using Vite."
     },
     {
-      icon: "/icons/skills/tailwindcss.svg",
-      desc: "Tailwind CSS로 반응형 디자인을 구현할 수 있습니다.",
-      descEn: "Can implement responsive designs using Tailwind CSS."
+      "icon": "/icons/skills/tailwindcss.svg",
+      "desc": "Tailwind CSS를 사용하여 유틸리티 우선 스타일링 기반의 반응형 UI를 설계하고 구현할 수 있습니다.",
+      "descEn": "Proficient in designing and developing responsive UIs using utility-first CSS with Tailwind CSS."
     },
     {
       icon: "/icons/skills/scss.svg",
