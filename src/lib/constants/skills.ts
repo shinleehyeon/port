@@ -13,9 +13,9 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       "descEn": "Experienced in optimizing performance using server-side rendering (SSR) and static site generation (SSG) with Next.js."
     },
     {
-      icon: "/icons/skills/vite.svg",
-      desc: "Vite를 활용하여 빠른 개발 환경을 구축할 수 있습니다.",
-      descEn: "Can set up fast development environments using Vite."
+      "icon": "/icons/skills/vite.svg",
+      "desc": "Vite를 활용한 모던 프론트엔드 빌드 환경 구성 및 빠른 핫 리로딩 개발 경험이 있습니다.",
+      "descEn": "Capable of configuring modern front-end build environments and achieving fast HMR (Hot Module Replacement) using Vite."
     },
     {
       icon: "/icons/skills/tailwindcss.svg",
