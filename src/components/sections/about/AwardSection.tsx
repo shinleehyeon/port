@@ -1,44 +1,163 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import AwardBadge from '@/components/sections/about/AwardBadge';
 import { awardsData } from '@/lib/constants/award';
-import { fadeInAnimationVariants } from '@/lib/utils/animations';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const AwardSection: React.FC = () => {
     const { language } = useLanguage();
+    const [currentPage, setCurrentPage] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+    const [containerHeight, setContainerHeight] = useState<number | null>(null);
+    const [direction, setDirection] = useState(0);
+    const firstPageRef = useRef<HTMLDivElement>(null);
+
+    const itemsPerPage = 3;
+    const totalPages = Math.ceil(awardsData.length / itemsPerPage);
+
+    useEffect(() => {
+        if (firstPageRef.current) {
+            setContainerHeight(firstPageRef.current.offsetHeight);
+        }
+    }, []);
+
+    const handleDragEnd = (event: any, info: { offset: { x: number } }) => {
+        const dragOffset = info.offset.x;
+        if (dragOffset < -100 && currentPage < totalPages - 1) {
+            setDirection(1);
+            setCurrentPage((prev) => prev + 1);
+        } else if (dragOffset > 100 && currentPage > 0) {
+            setDirection(-1);
+            setCurrentPage((prev) => prev - 1);
+        }
+    };
+
+    const handleNext = () => {
+        if (currentPage < totalPages - 1) {
+            setDirection(1);
+            setCurrentPage((prev) => prev + 1);
+        }
+    };
+
+    const handlePrev = () => {
+        if (currentPage > 0) {
+            setDirection(-1);
+            setCurrentPage((prev) => prev - 1);
+        }
+    };
+
+    const pageVariants = {
+        initial: (direction: number) => ({
+            x: direction > 0 ? 300 : -300,
+            opacity: 0,
+        }),
+        animate: {
+            x: 0,
+            opacity: 1,
+        },
+        exit: (direction: number) => ({
+            x: direction > 0 ? -300 : 300,
+            opacity: 0,
+        }),
+    };
 
     return (
-        <div className="grid grid-cols-1 gap-4">
-            {awardsData.map((award, index) => (
-                <motion.div
-                    key={index}
-                    variants={fadeInAnimationVariants}
-                    initial="initial"
-                    animate="animate"
-                    viewport={{ once: true }}
-                    custom={index}
-                    className="bg-white rounded-xl overflow-hidden border border-primary-400 p-4 max-w-[500px]"
+        <div
+            className="relative overflow-hidden"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {isHovered && currentPage > 0 && (
+                <button
+                    onClick={handlePrev}
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 hover:text-gray-500"
                 >
-                    <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                            <div className="text-sm text-gray-500 space-x-2">
-                                <span>{award.year}</span>
-                                <span>•</span>
-                                <span>{language === 'en' ? award.organizationEn : award.organizationKo}</span>
-                            </div>
-                            <AwardBadge
-                                type={award.typeKo}
-                                typeEn={award.typeEn}
-                                isEnglish={language === 'en'}
-                            />
+                    <ChevronLeft size={24} />
+                </button>
+            )}
+
+            {isHovered && currentPage < totalPages - 1 && (
+                <button
+                    onClick={handleNext}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 hover:text-gray-500"
+                >
+                    <ChevronRight size={24} />
+                </button>
+            )}
+
+            <div
+                className="overflow-hidden"
+                style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
+            >
+                <AnimatePresence initial={false} custom={direction}>
+                    <motion.div
+                        key={currentPage}
+                        className="flex flex-col space-y-4 absolute w-full"
+                        custom={direction}
+                        variants={pageVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={{
+                            duration: 0.4,
+                            ease: 'easeInOut',
+                        }}
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        onDragEnd={handleDragEnd}
+                    >
+                        <div ref={firstPageRef} className="flex flex-col space-y-4">
+                            {awardsData
+                                .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+                                .map((award, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-white rounded-xl overflow-hidden border border-primary-400 p-4 mx-12"
+                                    >
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between">
+                                                <div className="text-sm text-gray-500 space-x-2">
+                                                    <span>{award.year}</span>
+                                                    <span>•</span>
+                                                    <span>
+                                                        {language === 'en'
+                                                            ? award.organizationEn
+                                                            : award.organizationKo}
+                                                    </span>
+                                                </div>
+                                                <AwardBadge
+                                                    type={award.typeKo}
+                                                    typeEn={award.typeEn}
+                                                    isEnglish={language === 'en'}
+                                                />
+                                            </div>
+                                            <h3 className="font-medium text-gray-900">
+                                                {language === 'en'
+                                                    ? award.titleEn
+                                                    : award.titleKo}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                ))}
                         </div>
-                        <h3 className="font-medium text-gray-900">
-                            {language === 'en' ? award.titleEn : award.titleKo}
-                        </h3>
-                    </div>
-                </motion.div>
-            ))}
+                    </motion.div>
+                </AnimatePresence>
+            </div>
+
+            <div className="flex justify-center mt-4 space-x-2">
+                {Array.from({ length: totalPages }).map((_, index) => (
+                    <motion.div
+                        key={index}
+                        className={`h-2 rounded-full ${
+                            index === currentPage ? 'bg-black' : 'bg-gray-300'
+                        }`}
+                        initial={{ width: index === currentPage ? 12 : 8 }}
+                        animate={{ width: index === currentPage ? 20 : 8 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    ></motion.div>
+                ))}
+            </div>
         </div>
     );
 };
