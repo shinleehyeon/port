@@ -11,6 +11,12 @@ const AwardBadge: React.FC<AwardBadgeProps> = ({ type, typeEn, isEnglish }) => {
             case "한국 과학 창의재단 이사장상":
             case "Korea Foundation for Science and Creativity Chairman's Award":
                 return "bg-emerald-50 text-emerald-600";
+            case "가작상":
+            case "Honorable Mention":
+                return "bg-blue-50 text-blue-600"; 
+            case "본선진출":
+            case "Final":
+                return "bg-orange-50 text-orange-600"; 
             default:
                 return "bg-amber-50 text-amber-600";
         }
@@ -23,6 +29,5 @@ const AwardBadge: React.FC<AwardBadgeProps> = ({ type, typeEn, isEnglish }) => {
         </div>
     );
 };
-
 
 export default AwardBadge;
