@@ -28,4 +28,13 @@ export const awardsData: Award[] = [
         typeKo: "가작상",
         typeEn: "Honorable Mention"
     },
+    {
+        titleKo: "넥슨 청소년 프로그래밍 챌린지(NYPC) 본선진츨",
+        titleEn: "Nexon Youth Programming Challenge(NYPC) Final",
+        year: "2021",
+        organizationKo: "넥슨",
+        organizationEn: "Nexon",
+        typeKo: "본선진출",
+        typeEn: "Final"
+    }
 ];
