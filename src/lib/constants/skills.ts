@@ -23,10 +23,10 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       "descEn": "Proficient in designing and developing responsive UIs using utility-first CSS with Tailwind CSS."
     },
     {
-      icon: "/icons/skills/scss.svg",
-      desc: "SCSS를 사용하여 효율적이고 유지보수가 쉬운 스타일링을 구현할 수 있습니다.",
-      descEn: "Can implement efficient and maintainable styling using SCSS."
-    },
+      "icon": "/icons/skills/scss.svg",
+      "desc": "SCSS의 중첩, 믹스인, 변수 등을 활용하여 확장성과 유지보수성이 뛰어난 스타일 구조를 구현할 수 있습니다.",
+      "descEn": "Capable of building scalable and maintainable style architectures using SCSS features such as nesting, mixins, and variables."
+    }    
   ],
   backend: [
     {
