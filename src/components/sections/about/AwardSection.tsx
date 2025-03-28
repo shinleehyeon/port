@@ -11,7 +11,7 @@ const AwardSection: React.FC = () => {
     const [isHovered, setIsHovered] = useState(false);
     const [containerHeight, setContainerHeight] = useState<number | null>(null);
     const [direction, setDirection] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(3); // 기본값: 3개
+    const [itemsPerPage, setItemsPerPage] = useState(3); 
     const firstPageRef = useRef<HTMLDivElement>(null);
 
     const totalPages = Math.ceil(awardsData.length / itemsPerPage);
@@ -20,17 +20,15 @@ const AwardSection: React.FC = () => {
         if (firstPageRef.current) {
             setContainerHeight(firstPageRef.current.offsetHeight);
         }
-
-        // 반응형: 화면 크기에 따라 itemsPerPage 변경
         const handleResize = () => {
             if (window.innerWidth <= 768) {
-                setItemsPerPage(2); // 핸드폰 화면에서는 2개
+                setItemsPerPage(2); 
             } else {
-                setItemsPerPage(3); // 기본값: 3개
+                setItemsPerPage(3); 
             }
         };
 
-        handleResize(); // 초기 실행
+        handleResize(); 
         window.addEventListener('resize', handleResize);
 
         return () => {
