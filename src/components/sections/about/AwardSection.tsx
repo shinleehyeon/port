@@ -20,6 +20,7 @@ const AwardSection: React.FC = () => {
         if (firstPageRef.current) {
             setContainerHeight(firstPageRef.current.offsetHeight);
         }
+
         const handleResize = () => {
             if (window.innerWidth <= 768) {
                 setItemsPerPage(2); 
@@ -30,10 +31,7 @@ const AwardSection: React.FC = () => {
 
         handleResize(); 
         window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const handleDragEnd = (event: any, info: { offset: { x: number } }) => {
@@ -82,23 +80,37 @@ const AwardSection: React.FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {isHovered && currentPage > 0 && (
-                <button
-                    onClick={handlePrev}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 hover:text-gray-500"
-                >
-                    <ChevronLeft size={24} />
-                </button>
-            )}
+            <AnimatePresence>
+                {isHovered && currentPage > 0 && (
+                    <motion.button
+                        key="prev-button"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={handlePrev}
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 hover:text-gray-500"
+                    >
+                        <ChevronLeft size={24} />
+                    </motion.button>
+                )}
+            </AnimatePresence>
 
-            {isHovered && currentPage < totalPages - 1 && (
-                <button
-                    onClick={handleNext}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 hover:text-gray-500"
-                >
-                    <ChevronRight size={24} />
-                </button>
-            )}
+            <AnimatePresence>
+                {isHovered && currentPage < totalPages - 1 && (
+                    <motion.button
+                        key="next-button"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={handleNext}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 hover:text-gray-500"
+                    >
+                        <ChevronRight size={24} />
+                    </motion.button>
+                )}
+            </AnimatePresence>
 
             <div
                 className="overflow-hidden"
