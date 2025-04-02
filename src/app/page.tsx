@@ -9,15 +9,17 @@ import StrengthsSection from "@/components/sections/strengths/StrengthsSection";
 
 const Home: NextPage = () => {
     return (
-        <main className="relative flex min-h-screen flex-col bg-[#fff]">
+        <main className="relative flex flex-col min-h-screen bg-white"> {/* 여기 흰색 */}
             <Navbar />
-            <div className="container mx-auto px-10 py-4 max-w-[1400px] mt-[96px]">
-                <HeroSection />
+            <HeroSection /> {/* 여기만 배경 적용 */}
+
+            <div className="container mx-auto px-10 py-4 max-w-[1400px]">
                 <AboutSection />
                 <StrengthsSection />
                 <ProjectsSection />
                 <EmailSection />
             </div>
+
             <Footer />
         </main>
     );
