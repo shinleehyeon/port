@@ -8,6 +8,11 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       "descEn": "Skilled in architecting component-based user interfaces and managing application state using React."
     },
     {
+      "icon" : "/icons/skills/reactnative.svg",
+      "desc": "React Native를 활용한 모바일 애플리케이션 개발 경험이 있습니다.",
+      "descEn": "Experience in developing mobile applications using React Native."
+    },
+    {
       "icon": "/icons/skills/nextjs.svg",
       "desc": "Next.js 기반의 서버 사이드 렌더링 및 정적 사이트 생성을 활용한 퍼포먼스 최적화 경험이 있습니다.",
       "descEn": "Experienced in optimizing performance using server-side rendering (SSR) and static site generation (SSG) with Next.js."
