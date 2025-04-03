@@ -59,5 +59,10 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       desc: "Firebase로 실시간 데이터베이스를 구현할 수 있습니다.",
       descEn: "Can implement real-time databases using Firebase."
     },
+    {
+      icon: "/icons/skills/springboot.svg",
+      desc: "Spring Boot를 활용한 RESTful API 개발 경험이 있습니다.(공부중)",
+      descEn: "Experience in developing RESTful APIs using Spring Boot. (Learning)"
+    }
   ]
 };
