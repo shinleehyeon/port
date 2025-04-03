@@ -113,7 +113,7 @@ const HeroSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowScrollHint(true);
-    }, 4000);
+    }, 3000);
 
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.3) {
