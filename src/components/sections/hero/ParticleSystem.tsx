@@ -188,7 +188,7 @@ const ParticleSystem: React.FC = () => {
 
           if (opacity > 0) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(150, 120, 90, ${opacity})`; 
+            ctx.strokeStyle = `rgba(140, 110, 85, ${opacity})`;
             ctx.lineWidth = config.particles.line.width;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouseX, mouseY);
