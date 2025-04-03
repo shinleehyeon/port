@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sprout } from 'lucide-react';
+import { Sprout, ChevronsDown } from 'lucide-react';
 import ScrollAnimationWrapper from '@/components/ui/ScrollAnimationWrapper';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ParticleSystem from '@/components/sections/hero/ParticleSystem';
@@ -104,17 +104,38 @@ const HangulTypingEffect: React.FC<{ text: string; onComplete: () => void }> = (
 const HeroSection = () => {
   const { t } = useLanguage();
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [showScrollHint, setShowScrollHint] = useState(false);
 
   const handleTypingComplete = () => {
     setIsTypingComplete(true);
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowScrollHint(true);
+    }, 4000);
+
+    const handleScroll = () => {
+      if (window.scrollY > window.innerHeight * 0.3) {
+        setShowScrollHint(false); 
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden bg-white text-black">
       <div className="absolute inset-0 z-0 will-change-transform">
         <ParticleSystem />
       </div>
-      <div 
+
+      <div
         className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
         style={{
           willChange: 'transform',
@@ -146,6 +167,23 @@ const HeroSection = () => {
           </ScrollAnimationWrapper>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showScrollHint && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+            className="fixed bottom-10 inset-x-0 z-[9999] flex justify-center"
+          >
+            <div className="flex items-center gap-2 px-5 py-2 rounded-full shadow-lg backdrop-blur-sm bg-black text-white text-sm sm:text-base font-medium">
+              <ChevronsDown className="w-5 h-5 animate-bounce" />
+              아래로 스크롤해서 더보기
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

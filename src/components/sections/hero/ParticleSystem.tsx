@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 type Particle = {
   x: number;
@@ -19,28 +19,28 @@ const ParticleSystem: React.FC = () => {
 
   const isMobileDevice = () => {
     return (
-      typeof window !== 'undefined' && 
-      (window.innerWidth <= 768 || 
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+      typeof window !== 'undefined' &&
+      (window.innerWidth <= 768 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     );
   };
 
   const particlesConfig = useRef({
     particles: {
       array: [] as Particle[],
-      count: isMobileDevice() ? 10 : 40,
-      color: '#6f4f28',
+      count: isMobileDevice() ? 10 : 30,
+      color: '#F0E6DC', 
       size: { value: 3, random: true },
       opacity: { value: 0.6, random: false },
       line: {
         enable: true,
-        color: '#6f4f28',
+        color: '#F0E6DC',
         opacity: 0.6,
         width: 1,
         distance: isMobileDevice() ? 200 : 350
       },
       move: {
-        speed: 1.5,
+        speed: 1.9,
         outMode: 'bounce'
       }
     },
@@ -55,8 +55,8 @@ const ParticleSystem: React.FC = () => {
       status: null as string | null,
       modes: {
         grab: {
-          distance: isMobileDevice() ? 200 : 400,
-          opacity: 0.7
+          distance: isMobileDevice() ? 200 : 550,
+          opacity: 0.9
         },
         bubble: {
           distance: 1500,
@@ -91,15 +91,15 @@ const ParticleSystem: React.FC = () => {
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
-    particlesConfig.current.particles.count = isMobileDevice() ? 10 : 45;
+
+    particlesConfig.current.particles.count = isMobileDevice() ? 10 : 36;
 
     particlesConfig.current.particles.array = [];
     for (let i = 0; i < particlesConfig.current.particles.count; i++) {
       const size = particlesConfig.current.particles.size.random
         ? 1 + Math.random() * particlesConfig.current.particles.size.value
         : particlesConfig.current.particles.size.value;
-        
+
       particlesConfig.current.particles.array.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -120,14 +120,13 @@ const ParticleSystem: React.FC = () => {
     if (!ctx) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     const config = particlesConfig.current;
     const particles = config.particles.array;
 
     if (config.particles.line.enable) {
       for (let i = 0; i < particles.length; i++) {
         const p1 = particles[i];
-        
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p1.x - p2.x;
@@ -139,10 +138,10 @@ const ParticleSystem: React.FC = () => {
               config.particles.line.opacity,
               config.particles.line.opacity - (dist / config.particles.line.distance) * 0.5
             );
-            
+
             if (opacity > 0.05) {
               ctx.beginPath();
-              ctx.strokeStyle = `rgba(111, 79, 40, ${opacity})`;
+              ctx.strokeStyle = `rgba(210, 190, 170, ${opacity})`; 
               ctx.lineWidth = config.particles.line.width;
               ctx.moveTo(p1.x, p1.y);
               ctx.lineTo(p2.x, p2.y);
@@ -154,7 +153,7 @@ const ParticleSystem: React.FC = () => {
       }
     }
 
-    particles.forEach((p, i) => {
+    particles.forEach((p) => {
       p.x += p.vx;
       p.y += p.vy;
 
@@ -182,14 +181,14 @@ const ParticleSystem: React.FC = () => {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist <= config.interactivity.modes.grab.distance) {
-          const opacity = Math.min(
-            config.interactivity.modes.grab.opacity, 
-            config.interactivity.modes.grab.opacity - (dist / config.interactivity.modes.grab.distance) * 0.3
-          );
-          
+          const maxGrabOpacity = config.interactivity.modes.grab.opacity;
+          const grabDistance = config.interactivity.modes.grab.distance;
+          const normalized = dist / grabDistance;
+          const opacity = Math.max(0, maxGrabOpacity * (1 - Math.sqrt(normalized)));
+
           if (opacity > 0) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(111, 79, 40, ${opacity})`;
+            ctx.strokeStyle = `rgba(150, 120, 90, ${opacity})`; 
             ctx.lineWidth = config.particles.line.width;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouseX, mouseY);
@@ -201,7 +200,7 @@ const ParticleSystem: React.FC = () => {
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(111, 79, 40, ${p.opacity})`;
+      ctx.fillStyle = `rgba(210, 190, 170, ${p.opacity})`; 
       ctx.fill();
       ctx.closePath();
     });
@@ -212,12 +211,12 @@ const ParticleSystem: React.FC = () => {
   const pushParticles = (x: number, y: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     for (let i = 0; i < particlesConfig.current.interactivity.modes.push.particles_nb; i++) {
       particlesConfig.current.particles.array.push({
         x: x,
         y: y,
-        size: particlesConfig.current.particles.size.random 
+        size: particlesConfig.current.particles.size.random
           ? 1 + Math.random() * particlesConfig.current.particles.size.value
           : particlesConfig.current.particles.size.value,
         color: particlesConfig.current.particles.color,
@@ -231,7 +230,7 @@ const ParticleSystem: React.FC = () => {
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const config = particlesConfig.current;
     const rect = canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
@@ -239,7 +238,7 @@ const ParticleSystem: React.FC = () => {
     const dx = mouseX - prevMousePos.current.x;
     const dy = mouseY - prevMousePos.current.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
-    
+
     if (distance > 1.5) {
       config.interactivity.mouse.pos_x = mouseX;
       config.interactivity.mouse.pos_y = mouseY;
@@ -259,8 +258,7 @@ const ParticleSystem: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
-    const config = particlesConfig.current;
+
     const rect = canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
@@ -270,12 +268,12 @@ const ParticleSystem: React.FC = () => {
   const handleResize = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     particlesConfig.current.particles.count = isMobileDevice() ? 10 : 45;
-    particlesConfig.current.particles.line.distance = isMobileDevice() ? 200 : 350;
-    particlesConfig.current.interactivity.modes.grab.distance = isMobileDevice() ? 200 : 400;
+    particlesConfig.current.particles.line.distance = isMobileDevice() ? 200 : 300;
+    particlesConfig.current.interactivity.modes.grab.distance = isMobileDevice() ? 200 : 300;
     initParticles();
   };
 
@@ -293,9 +291,9 @@ const ParticleSystem: React.FC = () => {
   }, []);
 
   return (
-    <div 
+    <div
       className="w-full h-full absolute top-0 left-0 overflow-hidden"
-      style={{ 
+      style={{
         willChange: 'transform',
         transform: 'translateZ(0)'
       }}
@@ -303,9 +301,9 @@ const ParticleSystem: React.FC = () => {
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full"
-        style={{ 
+        style={{
           willChange: 'transform',
-          transform: 'translateZ(0)',
+          transform: 'translateZ(0)'
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
