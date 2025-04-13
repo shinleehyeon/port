@@ -180,7 +180,7 @@ export async function POST(request: Request) {
         console.log('error', error);
         return NextResponse.json(
             { error: error.message }, 
-            { status: 500 }
+            { status: 500}
         );
     }
 }
