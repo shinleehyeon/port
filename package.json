@@ -13,7 +13,9 @@
     "@heroicons/react": "^2.0.18",
     "@openreplay/tracker": "^16.0.1",
     "@openreplay/tracker-assist": "^11.0.0",
+    "@radix-ui/react-accordion": "^1.2.10",
     "autoprefixer": "10.4.15",
+    "clsx": "^2.1.1",
     "encoding": "^0.1.13",
     "framer-motion": "^11.18.2",
     "hangang": "^2.0.0",
@@ -29,6 +31,7 @@
     "react-icons": "^5.4.0",
     "react-type-animation": "^3.1.0",
     "resend": "^1.1.0",
+    "tailwind-merge": "^3.3.0",
     "tailwindcss": "3.3.3",
     "typed.js": "^2.1.0"
   },
