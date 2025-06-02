@@ -56,5 +56,15 @@ export const skillData: Record<'frontend' | 'backend' | 'infrastructure', Skill[
       desc: "Dokploy를 활용한 애플리케이션 배포 및 관리 경험이 있습니다.",
       descEn: "Experience in application deployment and management using Dokploy."
     },
+    {
+      icon: "/icons/skills/aws.svg",
+      desc: "Terraform을 이용해 IaC 구현 및 클라우드 리소스 관리 경험이 있습니다.",
+      descEn: "Experience in IaC and managing cloud resources using Terraform."
+    },
+    {
+      icon: "/icons/skills/vercel.svg",
+      desc: "Vercel을 활용한 프론트엔드 애플리케이션의 자동 배포 및 성능 최적화 경험이 있습니다.",
+      descEn: "Experience in automated deployment and performance optimization of frontend applications using Vercel."
+    }
   ]
 };
