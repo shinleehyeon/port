@@ -1,6 +1,6 @@
 import type { Skill } from '@/types/common';
 
-export const skillData: Record<'frontend' | 'backend', Skill[]> = {
+export const skillData: Record<'frontend' | 'backend' | 'infrastructure', Skill[]> = {
   frontend: [
     {
       "icon": "/icons/skills/react.svg",
@@ -26,7 +26,7 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       "icon": "/icons/skills/scss.svg",
       "desc": "SCSS의 중첩, 믹스인, 변수 등을 활용하여 확장성과 유지보수성이 뛰어난 스타일 구조를 구현할 수 있습니다.",
       "descEn": "Capable of building scalable and maintainable style architectures using SCSS features such as nesting, mixins, and variables."
-    }    
+    }
   ],
   backend: [
     {
@@ -49,5 +49,12 @@ export const skillData: Record<'frontend' | 'backend', Skill[]> = {
       desc: "Spring Boot를 활용한 RESTful API 개발 경험이 있습니다.(공부중)",
       descEn: "Experience in developing RESTful APIs using Spring Boot. (Learning)"
     }
+  ],
+  infrastructure: [
+    {
+      icon: "/icons/skills/dokploy.svg",
+      desc: "Dokploy를 활용한 애플리케이션 배포 및 관리 경험이 있습니다.",
+      descEn: "Experience in application deployment and management using Dokploy."
+    },
   ]
 };

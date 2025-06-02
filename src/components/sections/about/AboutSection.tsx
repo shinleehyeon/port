@@ -12,6 +12,7 @@ import ScrollAnimationWrapper from '@/components/ui/ScrollAnimationWrapper';
 const AboutSection: React.FC = () => {
   const [selectedFrontend, setSelectedFrontend] = useState<Skill | null>(null);
   const [selectedBackend, setSelectedBackend] = useState<Skill | null>(null);
+  const [selectedInfrastructure, setSelectedInfrastructure] = useState<Skill | null>(null);
   const { t } = useLanguage();
 
   return (
@@ -69,6 +70,12 @@ const AboutSection: React.FC = () => {
               skills={skillData.backend}
               selectedSkill={selectedBackend}
               onSkillClick={setSelectedBackend}
+            />
+            <SkillSection
+              title="Infrastructure"
+              skills={skillData.infrastructure}
+              selectedSkill={selectedInfrastructure}
+              onSkillClick={setSelectedInfrastructure}
             />
             <p className="text-sm text-gray-500 mt-4 flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-info w-4 h-4">
