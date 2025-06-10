@@ -1,22 +1,24 @@
 "use client";
-import React from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { Globe } from 'lucide-react';
+import React from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Globe } from "lucide-react";
 
 interface LanguageButtonProps {
   onLanguageChange?: () => void;
 }
 
-const LanguageButton: React.FC<LanguageButtonProps> = ({ onLanguageChange }) => {
+const LanguageButton: React.FC<LanguageButtonProps> = ({
+  onLanguageChange,
+}) => {
   const { language, setLanguage } = useLanguage();
 
   const toggleLanguage = () => {
-    setLanguage(language === 'ko' ? 'en' : 'ko');
+    setLanguage(language === "ko" ? "en" : "ko");
     if (onLanguageChange) {
       onLanguageChange();
     }
   };
-  const displayLanguage = language === 'ko' ? 'EN' : 'KO';
+  const displayLanguage = language === "ko" ? "EN" : "KO";
 
   return (
     <button

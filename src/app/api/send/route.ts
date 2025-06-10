@@ -4,17 +4,18 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface EmailRequest {
-    email: string;
-    phoneNumber: string;
-    subject: string;
-    message: string;
+  email: string;
+  phoneNumber: string;
+  subject: string;
+  message: string;
 }
 
 export async function POST(request: Request) {
-    try {
-        const { email, phoneNumber, subject, message }: EmailRequest = await request.json();
+  try {
+    const { email, phoneNumber, subject, message }: EmailRequest =
+      await request.json();
 
-        const emailTemplate = `<!DOCTYPE html>
+    const emailTemplate = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -167,20 +168,17 @@ export async function POST(request: Request) {
 </body>
 </html>`;
 
-        const data = await resend.emails.send({
-            from: 'Portfolio <port@resend.dev>',
-            to: ['shinlee7878@gmail.com'],
-            reply_to: email,
-            subject: `[포트폴리오 문의]`,
-            html: emailTemplate
-        });
+    const data = await resend.emails.send({
+      from: "Portfolio <port@resend.dev>",
+      to: ["shinlee7878@gmail.com"],
+      reply_to: email,
+      subject: `[포트폴리오 문의]`,
+      html: emailTemplate,
+    });
 
-        return NextResponse.json({ success: true, data });
-    } catch (error: any) {
-        console.log('error', error);
-        return NextResponse.json(
-            { error: error.message }, 
-            { status: 500}
-        );
-    }
+    return NextResponse.json({ success: true, data });
+  } catch (error: any) {
+    console.log("error", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }

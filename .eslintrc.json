@@ -1,11 +1,14 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "no-undef": "off"
+    "no-undef": "off",
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }

@@ -1,4 +1,4 @@
-import type { NavItem } from '@/types/common';
+import type { NavItem } from "@/types/common";
 
 export const navLinks: NavItem[] = [
   { title: "About", path: "#about" },

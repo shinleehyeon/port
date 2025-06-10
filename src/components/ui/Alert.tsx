@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

@@ -1,4 +1,4 @@
-type Language = 'ko' | 'en';
+type Language = "ko" | "en";
 
 interface TranslationData {
   tags: {
@@ -21,69 +21,70 @@ export const projectTranslations: ProjectTranslations = {
   ko: {
     title: "포트폴리오",
     tags: {
-      "All": "All",
-      "Web": "Web",
-      "App": "App"
+      All: "All",
+      Web: "Web",
+      App: "App",
     },
     projects: {
-      "fresio": {
+      fresio: {
         title: "fresio",
-        description: "AI 냉장고 어시스턴트 서비스"
+        description: "AI 냉장고 어시스턴트 서비스",
       },
-      "Speakit": {
+      Speakit: {
         title: "Speakit",
-        description: "발표를 압도적으로 편안하게 도와주는 서비스"
+        description: "발표를 압도적으로 편안하게 도와주는 서비스",
       },
-      "SaveQuest": {
+      SaveQuest: {
         title: "SaveQuest",
-        description: "절약을 쉽고 재미있게 하도록 도와주는 서비스"
+        description: "절약을 쉽고 재미있게 하도록 도와주는 서비스",
       },
-      "Chromate": {
+      Chromate: {
         title: "Chromate",
-        description: "지체 장애인을 위한 AI 음성 확장 프로그램"
+        description: "지체 장애인을 위한 AI 음성 확장 프로그램",
       },
-      "Albant": {
+      Albant: {
         title: "Albant",
-        description: "선린 내에서 이룰 수 있는 심부름 서비스"
+        description: "선린 내에서 이룰 수 있는 심부름 서비스",
       },
-      "PortFolio": {
+      PortFolio: {
         title: "포트폴리오",
-        description: "포트폴리오 사이트"
-      }
-    }
+        description: "포트폴리오 사이트",
+      },
+    },
   },
   en: {
     title: "Portfolio",
     tags: {
-      "All": "All",
-      "Web": "Web",
-      "App": "App"
+      All: "All",
+      Web: "Web",
+      App: "App",
     },
     projects: {
-      "fresio": {
+      fresio: {
         title: "fresio",
-        description: "AI Refrigerator Assistant Service"
+        description: "AI Refrigerator Assistant Service",
       },
-      "Speakit": {
+      Speakit: {
         title: "Speakit",
-        description: "A Service that Makes Presentations Overwhelmingly Comfortable"
+        description:
+          "A Service that Makes Presentations Overwhelmingly Comfortable",
       },
-      "SaveQuest": {
+      SaveQuest: {
         title: "SaveQuest",
-        description: "Service to Make Saving Money Easy and Fun"
+        description: "Service to Make Saving Money Easy and Fun",
       },
-      "Chromate": {
+      Chromate: {
         title: "Chromate",
-        description: "AI Voice Extension for People with Physical Disabilities"
+        description: "AI Voice Extension for People with Physical Disabilities",
       },
-      "Albant": {
+      Albant: {
         title: "Albant",
-        description: "Errand Service within Sunrin High School"
+        description: "Errand Service within Sunrin High School",
       },
-      "PortFolio": {
+      PortFolio: {
         title: "Portfolio",
-        description: "Portfolio Website"
-      }
-    }
-  }
+        description: "Portfolio Website",
+      },
+    },
+  },
 };

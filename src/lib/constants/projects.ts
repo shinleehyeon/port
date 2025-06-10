@@ -1,4 +1,4 @@
-import type { Project } from '@/types/common';
+import type { Project } from "@/types/common";
 
 export const projectsData: Project[] = [
   {
@@ -11,8 +11,8 @@ export const projectsData: Project[] = [
     techStack: [
       "/icons/skills/react.svg",
       "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg",
-      "/icons/skills/typescript.svg"
-    ]
+      "/icons/skills/typescript.svg",
+    ],
   },
   {
     id: 2,
@@ -24,8 +24,8 @@ export const projectsData: Project[] = [
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
-      "/icons/skills/typescript.svg"
-    ]
+      "/icons/skills/typescript.svg",
+    ],
   },
   {
     id: 3,
@@ -37,8 +37,8 @@ export const projectsData: Project[] = [
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
-      "/icons/skills/typescript.svg"
-    ]
+      "/icons/skills/typescript.svg",
+    ],
   },
   {
     id: 4,
@@ -50,8 +50,8 @@ export const projectsData: Project[] = [
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg"
-    ]
+      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg",
+    ],
   },
   {
     id: 5,
@@ -62,8 +62,8 @@ export const projectsData: Project[] = [
     gitUrl: "https://github.com/shinleehyun/albant",
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg"
-    ]
+      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg",
+    ],
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ export const projectsData: Project[] = [
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-      "/icons/skills/typescript.svg"
-    ]
-  }
+      "/icons/skills/typescript.svg",
+    ],
+  },
 ];

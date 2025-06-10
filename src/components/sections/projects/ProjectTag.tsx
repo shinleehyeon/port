@@ -7,11 +7,11 @@ export interface ProjectTagProps {
   isSelected: boolean;
 }
 
-const ProjectTag: React.FC<ProjectTagProps> = ({ 
-  name, 
-  displayName, 
-  onClick, 
-  isSelected 
+const ProjectTag: React.FC<ProjectTagProps> = ({
+  name,
+  displayName,
+  onClick,
+  isSelected,
 }) => {
   const buttonStyles = isSelected
     ? "text-white border-primary-500 bg-black"

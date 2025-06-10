@@ -7,7 +7,7 @@ import { projectsData } from "@/lib/constants/projects";
 import { projectTranslations } from "@/lib/constants/projectTranslations";
 import { fadeInAnimationVariants } from "@/lib/utils/animations";
 import { useLanguage } from "@/contexts/LanguageContext";
-import ScrollAnimationWrapper from '@/components/ui/ScrollAnimationWrapper';
+import ScrollAnimationWrapper from "@/components/ui/ScrollAnimationWrapper";
 import type { Project } from "@/types/common";
 
 const ProjectsSection: React.FC = () => {
@@ -21,7 +21,7 @@ const ProjectsSection: React.FC = () => {
   };
 
   const filteredProjects = projectsData.filter((project: Project) =>
-    project.tag.includes(tag)
+    project.tag.includes(tag),
   );
 
   return (
@@ -60,7 +60,7 @@ const ProjectsSection: React.FC = () => {
               <ScrollAnimationWrapper
                 key={project.id}
                 direction="up"
-                delay={0.1 + (index * 0.1)}
+                delay={0.1 + index * 0.1}
                 className="h-full"
               >
                 <motion.li
@@ -73,8 +73,14 @@ const ProjectsSection: React.FC = () => {
                   className="h-full"
                 >
                   <ProjectCard
-                    title={projectTranslations[language].projects[project.title].title}
-                    description={projectTranslations[language].projects[project.title].description}
+                    title={
+                      projectTranslations[language].projects[project.title]
+                        .title
+                    }
+                    description={
+                      projectTranslations[language].projects[project.title]
+                        .description
+                    }
                     imgUrl={project.image}
                     gitUrl={project.gitUrl}
                     techStack={project.techStack}

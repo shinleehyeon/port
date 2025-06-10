@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sprout, ChevronsDown } from 'lucide-react';
-import ScrollAnimationWrapper from '@/components/ui/ScrollAnimationWrapper';
-import { useLanguage } from '@/contexts/LanguageContext';
-import ParticleSystem from '@/components/sections/hero/ParticleSystem';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sprout, ChevronsDown } from "lucide-react";
+import ScrollAnimationWrapper from "@/components/ui/ScrollAnimationWrapper";
+import { useLanguage } from "@/contexts/LanguageContext";
+import ParticleSystem from "@/components/sections/hero/ParticleSystem";
 
-const HangulTypingEffect: React.FC<{ text: string; onComplete: () => void }> = ({
-  text,
-  onComplete,
-}) => {
-  const [displayText, setDisplayText] = useState('');
+const HangulTypingEffect: React.FC<{
+  text: string;
+  onComplete: () => void;
+}> = ({ text, onComplete }) => {
+  const [displayText, setDisplayText] = useState("");
   const [decomposedChars, setDecomposedChars] = useState<string[][]>([]);
   const intervalRef = useRef<number | null>(null);
   const hasCompletedRef = useRef(false);
@@ -26,14 +26,14 @@ const HangulTypingEffect: React.FC<{ text: string; onComplete: () => void }> = (
 
     const chosung = String.fromCharCode(0x1100 + cho);
     const jungsung = String.fromCharCode(0x1161 + jung);
-    const jongsung = jong > 0 ? String.fromCharCode(0x11a7 + jong) : '';
+    const jongsung = jong > 0 ? String.fromCharCode(0x11a7 + jong) : "";
 
     return [[chosung, jungsung, jongsung].filter(Boolean)];
   };
 
   useEffect(() => {
-    setDecomposedChars(text.split('').flatMap(decomposeHangul));
-    setDisplayText('');
+    setDecomposedChars(text.split("").flatMap(decomposeHangul));
+    setDisplayText("");
     hasCompletedRef.current = false;
 
     return () => {
@@ -48,7 +48,7 @@ const HangulTypingEffect: React.FC<{ text: string; onComplete: () => void }> = (
 
     let currentCharIndex = 0;
     let currentJamoIndex = 0;
-    let currentText = '';
+    let currentText = "";
     let lastTime = 0;
 
     const smoothWrite = (currentTime: number): void => {
@@ -113,19 +113,19 @@ const HeroSection = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowScrollHint(true);
-    }, 3000);
+    });
 
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.3) {
-        setShowScrollHint(false); 
+        setShowScrollHint(false);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -138,19 +138,20 @@ const HeroSection = () => {
       <div
         className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
         style={{
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden'
+          willChange: "transform",
+          transform: "translateZ(0)",
+          backfaceVisibility: "hidden",
         }}
       >
         <div className="text-center">
           <ScrollAnimationWrapper direction="up" delay={0.1}>
             <h1 className="mb-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-snug text-[#333]">
-              <span className="text-black block">
-                {t("hero.title1")}
-              </span>
+              <span className="text-black block">{t("hero.title1")}</span>
               <span className="text-[#6f4f28] flex items-center justify-center lg:text-7xl">
-                <HangulTypingEffect text={t("hero.title2")} onComplete={handleTypingComplete} />
+                <HangulTypingEffect
+                  text={t("hero.title2")}
+                  onComplete={handleTypingComplete}
+                />
                 <AnimatePresence mode="wait">
                   {isTypingComplete && (
                     <motion.div

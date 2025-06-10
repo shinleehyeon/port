@@ -9,26 +9,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   gitUrl,
   techStack = [],
-  tag
+  tag,
 }) => {
   const getIconStyle = (iconUrl: string) => {
-    if (iconUrl.includes('fastapi')) {
-      return { filter: 'invert(41%) sepia(68%) saturate(434%) hue-rotate(127deg) brightness(95%) contrast(94%)' };
+    if (iconUrl.includes("fastapi")) {
+      return {
+        filter:
+          "invert(41%) sepia(68%) saturate(434%) hue-rotate(127deg) brightness(95%) contrast(94%)",
+      };
     }
     return {};
   };
 
   const getTechName = (iconUrl: string) => {
-    const isMobile = tag.includes('App');
-    if (iconUrl.includes('react')) {
-      return isMobile ? 'React Native' : 'React';
+    const isMobile = tag.includes("App");
+    if (iconUrl.includes("react")) {
+      return isMobile ? "React Native" : "React";
     }
-    if (iconUrl.includes('nextjs')) return 'Next.js';
-    if (iconUrl.includes('typescript')) return 'TypeScript';
-    if (iconUrl.includes('tailwindcss')) return 'Tailwind CSS';
-    if (iconUrl.includes('fastapi')) return 'FastAPI';
-    if (iconUrl.includes('nestjs')) return 'NestJS';
-    const namePart = iconUrl.split('/').pop()?.split('-')[0] || '';
+    if (iconUrl.includes("nextjs")) return "Next.js";
+    if (iconUrl.includes("typescript")) return "TypeScript";
+    if (iconUrl.includes("tailwindcss")) return "Tailwind CSS";
+    if (iconUrl.includes("fastapi")) return "FastAPI";
+    if (iconUrl.includes("nestjs")) return "NestJS";
+    const namePart = iconUrl.split("/").pop()?.split("-")[0] || "";
     return namePart.charAt(0).toUpperCase() + namePart.slice(1);
   };
 
@@ -41,7 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          backgroundColor: "#181818"
+          backgroundColor: "#181818",
         }}
       >
         <div className="overlay flex items-center justify-center absolute top-0 left-0 w-full h-full bg-[#181818] opacity-0 group-hover:opacity-80 group-hover:rounded-t-xl transition-all duration-500 ease-in-out">
@@ -49,9 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={gitUrl}
             className="h-14 w-14 border-2 relative rounded-full border-[#ADB7BE] hover:border-white transition-all duration-300 hover:scale-110"
           >
-            <FaGithub
-              className="h-10 w-10 text-[#ADB7BE] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:text-white transition-colors duration-300"
-            />
+            <FaGithub className="h-10 w-10 text-[#ADB7BE] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:text-white transition-colors duration-300" />
           </Link>
         </div>
       </div>

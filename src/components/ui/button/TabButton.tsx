@@ -2,36 +2,40 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 const variants = {
-    default: { width: 0 },
-    active: { width: "calc(100% - 0.75rem)" },
+  default: { width: 0 },
+  active: { width: "calc(100% - 0.75rem)" },
 };
 
 interface TabButtonProps {
-    active: boolean;
-    selectTab: () => void;
-    children: ReactNode;
+  active: boolean;
+  selectTab: () => void;
+  children: ReactNode;
 }
 
-const TabButton: React.FC<TabButtonProps> = ({ active, selectTab, children }) => {
-    const buttonClasses = active
-        ? "text-black"
-        : "text-gray-400";
+const TabButton: React.FC<TabButtonProps> = ({
+  active,
+  selectTab,
+  children,
+}) => {
+  const buttonClasses = active ? "text-black" : "text-gray-400";
 
-    return (
-        <button
-            onClick={selectTab}
-            className={`relative flex items-center py-2 px-4 rounded-lg transition-all duration-300 ${buttonClasses}`}
-        >
-            <p className={`mr-3 font-semibold ${active ? "text-black" : "text-gray-400"}`}>
-                {children}
-            </p>
-            <motion.div
-                animate={active ? "active" : "default"}
-                variants={variants}
-                className="h-1 bg-primary-500 absolute bottom-0 left-0 transition-all duration-300"
-            ></motion.div>
-        </button>
-    );
+  return (
+    <button
+      onClick={selectTab}
+      className={`relative flex items-center py-2 px-4 rounded-lg transition-all duration-300 ${buttonClasses}`}
+    >
+      <p
+        className={`mr-3 font-semibold ${active ? "text-black" : "text-gray-400"}`}
+      >
+        {children}
+      </p>
+      <motion.div
+        animate={active ? "active" : "default"}
+        variants={variants}
+        className="h-1 bg-primary-500 absolute bottom-0 left-0 transition-all duration-300"
+      ></motion.div>
+    </button>
+  );
 };
 
 export default TabButton;
