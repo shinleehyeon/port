@@ -36,7 +36,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ko">
-      <head>
+    <head>
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-JZZ3PWV3FP"

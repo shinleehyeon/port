@@ -12,7 +12,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, title, onClick }) => {
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (href.startsWith("#")) {
       e.preventDefault();
-      const targetId = href.replace('#', '');
+      const targetId = href.replace("#", "");
       const elem = document.getElementById(targetId);
       if (elem) {
         const navHeight = 80;
@@ -20,7 +20,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, title, onClick }) => {
         const offsetPosition = elementPosition + window.pageYOffset - navHeight;
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth"
+          behavior: "smooth",
         });
         setTimeout(() => {
           if (onClick) {
