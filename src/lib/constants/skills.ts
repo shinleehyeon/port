@@ -58,8 +58,8 @@ export const skillData: Record<'frontend' | 'backend' | 'infrastructure', Skill[
     },
     {
       icon: "/icons/skills/aws.svg",
-      desc: "Terraform을 이용해 IaC 구현 및 클라우드 리소스 관리 경험이 있습니다.",
-      descEn: "Experience in IaC and managing cloud resources using Terraform."
+      desc: "AWS EC2, S3, RDS, CloudWatch 등의 서비스를 활용한 웹 애플리케이션 인프라 구축 및 운영 경험이 있습니다.",
+      descEn: "Experience in building and operating web application infrastructure using AWS services such as EC2, S3, RDS, and CloudWatch."
     },
     {
       icon: "/icons/skills/vercel.svg",
