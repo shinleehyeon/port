@@ -20,6 +20,15 @@ export const awardsData: Award[] = [
     typeEn: "Grand Prize",
   },
   {
+    titleKo: "11th 선린 해커톤",
+    titleEn: "11th Sunrin Hackathon",
+    year: "2025",
+    organizationKo: "선린인터넷고등학교",
+    organizationEn: "Sunrin Internet High School",
+    typeKo: "은상",
+    typeEn: "Silver Prize",
+  },
+  {
     titleKo: "스마틴 앱챌린지 (STAC)",
     titleEn: "Smart Teen App Challenge (STAC)",
     year: "2024",
