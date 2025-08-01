@@ -8,8 +8,8 @@ const AwardBadge: React.FC<AwardBadgeProps> = ({ type, typeEn, isEnglish }) => {
       case "최우수상":
       case "Grand Prize":
         return "bg-purple-50 text-purple-600";
-      case "한국 과학 창의재단 이사장상":
-      case "Korea Foundation for Science and Creativity Chairman's Award":
+      case "한국 과학 창의재단 이사장상 (2등)":
+      case "Korea Foundation for Science and Creativity Chairman's Award (2nd)":
         return "bg-emerald-50 text-emerald-600";
       case "가작상":
       case "Honorable Mention":
@@ -17,6 +17,12 @@ const AwardBadge: React.FC<AwardBadgeProps> = ({ type, typeEn, isEnglish }) => {
       case "본선진출":
       case "Final":
         return "bg-orange-50 text-orange-600";
+      case "은상 (2등)":
+      case "Silver Prize (2nd)":
+        return "bg-gray-50 text-gray-600";
+      case "우수상 (2등)":
+      case "Excellence Award (2nd)":
+        return "bg-indigo-50 text-indigo-600";
       default:
         return "bg-amber-50 text-amber-600";
     }
