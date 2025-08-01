@@ -1,5 +1,3 @@
-type Language = "ko" | "en";
-
 interface TranslationData {
   tags: {
     [key: string]: string;
@@ -33,6 +31,10 @@ export const projectTranslations: ProjectTranslations = {
       Speakit: {
         title: "Speakit",
         description: "발표를 압도적으로 편안하게 도와주는 서비스",
+      },
+      "Fusion M": {
+        title: "Fusion M",
+        description: "자연어를 통해 자동으로 MCP 생성, 배포를 해주는 서비스",
       },
       SaveQuest: {
         title: "SaveQuest",
@@ -68,6 +70,11 @@ export const projectTranslations: ProjectTranslations = {
         title: "Speakit",
         description:
           "A Service that Makes Presentations Overwhelmingly Comfortable",
+      },
+      "Fusion M": {
+        title: "Fusion M",
+        description:
+          "Service that automatically creates and deploys MCP through natural language",
       },
       SaveQuest: {
         title: "SaveQuest",
