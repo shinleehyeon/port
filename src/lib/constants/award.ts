@@ -29,15 +29,7 @@ export const awardsData: Award[] = [
     typeKo: "은상 (2등)",
     typeEn: "Silver Prize (2nd)",
   },
-  {
-    titleKo: "스마틴 앱챌린지 (STAC)",
-    titleEn: "Smart Teen App Challenge (STAC)",
-    year: "2024",
-    organizationKo: "SK플래닛",
-    organizationEn: "SK Planet",
-    typeKo: "가작상",
-    typeEn: "Honorable Mention",
-  },
+
   {
     titleKo: "U/THON 25",
     titleEn: "U/THON 25",
@@ -46,6 +38,15 @@ export const awardsData: Award[] = [
     organizationEn: "USLASH",
     typeKo: "우수상 (2등)",
     typeEn: "Excellence Award (2nd)",
+  },
+  {
+    titleKo: "스마틴 앱챌린지 (STAC)",
+    titleEn: "Smart Teen App Challenge (STAC)",
+    year: "2024",
+    organizationKo: "SK플래닛",
+    organizationEn: "SK Planet",
+    typeKo: "가작상",
+    typeEn: "Honorable Mention",
   },
   {
     titleKo: "넥슨 청소년 프로그래밍 챌린지(NYPC) 본선진츨",
