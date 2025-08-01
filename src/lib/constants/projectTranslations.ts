@@ -36,6 +36,10 @@ export const projectTranslations: ProjectTranslations = {
         title: "Fusion M",
         description: "자연어를 통해 자동으로 MCP 생성, 배포를 해주는 서비스",
       },
+      십시일반: {
+        title: "십시일반",
+        description: "한끼 기부 서비스",
+      },
       SaveQuest: {
         title: "SaveQuest",
         description: "절약을 쉽고 재미있게 하도록 도와주는 서비스",
@@ -75,6 +79,10 @@ export const projectTranslations: ProjectTranslations = {
         title: "Fusion M",
         description:
           "Service that automatically creates and deploys MCP through natural language",
+      },
+      십시일반: {
+        title: "Meal Donation",
+        description: "One Meal Donation Service",
       },
       SaveQuest: {
         title: "SaveQuest",

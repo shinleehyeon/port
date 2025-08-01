@@ -35,13 +35,26 @@ export const projectsData: Project[] = [
     tag: ["All", "Web"],
     gitUrl: "https://github.com/uslash25",
     techStack: [
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
       "/icons/skills/typescript.svg",
     ],
   },
   {
     id: 4,
+    title: "십시일반",
+    description: "한끼 기부 서비스",
+    image: "/images/projects/십시일반.png",
+    tag: ["All", "App"],
+    gitUrl: "https://github.com/sunrinthon2025",
+    techStack: [
+      "/icons/skills/react.svg",
+      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg",
+      "/icons/skills/typescript.svg",
+    ],
+  },
+  {
+    id: 5,
     title: "SaveQuest",
     description: "절약을 쉽고 재미있게 하도록 도와주는 서비스",
     image: "/images/projects/SaveQuest.png",
@@ -54,7 +67,7 @@ export const projectsData: Project[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     title: "Chromate",
     description: "지체 장애인을 위한 AI 음성 확장 프로그램",
     image: "/images/projects/Chromate.png",
@@ -67,7 +80,7 @@ export const projectsData: Project[] = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     title: "Albant",
     description: "선린 내에서 이룰 수 있는 심부름 서비스",
     image: "/images/projects/Albant.png",
@@ -79,7 +92,7 @@ export const projectsData: Project[] = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     title: "PortFolio",
     description: "포트폴리오 사이트",
     image: "/images/projects/port.png",
