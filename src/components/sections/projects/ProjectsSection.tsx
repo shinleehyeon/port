@@ -38,7 +38,7 @@ const ProjectsSection: React.FC = () => {
               },
             }}
           >
-            {[...projectsData, ...projectsData].map(
+            {[...projectsData, ...projectsData, ...projectsData].map(
               (project: Project, index: number) => (
                 <div
                   key={`row1-${project.id}-${index}`}
@@ -47,11 +47,11 @@ const ProjectsSection: React.FC = () => {
                   <ProjectCard
                     title={
                       projectTranslations[language].projects[project.title]
-                        .title
+                        ?.title || project.title
                     }
                     description={
                       projectTranslations[language].projects[project.title]
-                        .description
+                        ?.description || project.description
                     }
                     imgUrl={project.image}
                     gitUrl={project.gitUrl}
@@ -77,7 +77,7 @@ const ProjectsSection: React.FC = () => {
               },
             }}
           >
-            {[...projectsData, ...projectsData].map(
+            {[...projectsData, ...projectsData, ...projectsData].map(
               (project: Project, index: number) => (
                 <div
                   key={`row2-${project.id}-${index}`}
@@ -86,11 +86,11 @@ const ProjectsSection: React.FC = () => {
                   <ProjectCard
                     title={
                       projectTranslations[language].projects[project.title]
-                        .title
+                        ?.title || project.title
                     }
                     description={
                       projectTranslations[language].projects[project.title]
-                        .description
+                        ?.description || project.description
                     }
                     imgUrl={project.image}
                     gitUrl={project.gitUrl}

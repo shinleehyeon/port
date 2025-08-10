@@ -40,6 +40,10 @@ export const projectTranslations: ProjectTranslations = {
         title: "십시일반",
         description: "한끼 기부 서비스",
       },
+      EcoQuest: {
+        title: "EcoQuest",
+        description: "환경 보호를 게임처럼 재미있게 실천할 수 있는 서비스",
+      },
       SaveQuest: {
         title: "SaveQuest",
         description: "절약을 쉽고 재미있게 하도록 도와주는 서비스",
@@ -47,6 +51,10 @@ export const projectTranslations: ProjectTranslations = {
       Chromate: {
         title: "Chromate",
         description: "지체 장애인을 위한 AI 음성 확장 프로그램",
+      },
+      마음이랑: {
+        title: "마음이랑",
+        description: "ASD 아동 표정인식 치료 서비스",
       },
       Albant: {
         title: "Albant",
@@ -83,6 +91,14 @@ export const projectTranslations: ProjectTranslations = {
       십시일반: {
         title: "Meal Donation",
         description: "One Meal Donation Service",
+      },
+      EcoQuest: {
+        title: "EcoQuest",
+        description: "SDG 13 Climate Action Practice Service",
+      },
+      마음이랑: {
+        title: "Maumi-rang",
+        description: "ASD Children Facial Recognition Therapy Service",
       },
       SaveQuest: {
         title: "SaveQuest",

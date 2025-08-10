@@ -55,6 +55,33 @@ export const projectsData: Project[] = [
   },
   {
     id: 5,
+    title: "EcoQuest",
+    description: "환경 보호를 게임처럼 재미있게 실천할 수 있는 서비스",
+    image: "/images/projects/EcoQuest.png",
+    tag: ["All", "App"],
+    gitUrl: "https://github.com/EcoQuest",
+    techStack: [
+      "/icons/skills/react.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
+      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg",
+    ],
+  },
+
+  {
+    id: 6,
+    title: "마음이랑",
+    description: "ASD 아동 표정인식 치료 서비스",
+    image: "/images/projects/마음이랑.png",
+    tag: ["All", "Web"],
+    gitUrl: "https://github.com/shinleehyeon/마음이랑",
+    techStack: [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
+      "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fastapi.svg",
+    ],
+  },
+  {
+    id: 7,
     title: "SaveQuest",
     description: "절약을 쉽고 재미있게 하도록 도와주는 서비스",
     image: "/images/projects/SaveQuest.png",
@@ -67,7 +94,7 @@ export const projectsData: Project[] = [
     ],
   },
   {
-    id: 6,
+    id: 8,
     title: "Chromate",
     description: "지체 장애인을 위한 AI 음성 확장 프로그램",
     image: "/images/projects/Chromate.png",
@@ -80,7 +107,7 @@ export const projectsData: Project[] = [
     ],
   },
   {
-    id: 7,
+    id: 9,
     title: "Albant",
     description: "선린 내에서 이룰 수 있는 심부름 서비스",
     image: "/images/projects/Albant.png",
@@ -92,7 +119,7 @@ export const projectsData: Project[] = [
     ],
   },
   {
-    id: 8,
+    id: 10,
     title: "Portfolio",
     description: "개인 프로젝트 사이트",
     image: "/images/projects/port.png",
