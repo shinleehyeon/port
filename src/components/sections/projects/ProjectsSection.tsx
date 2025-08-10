@@ -5,7 +5,6 @@ import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
 import { projectsData } from "@/lib/constants/projects";
 import { projectTranslations } from "@/lib/constants/projectTranslations";
-import { fadeInAnimationVariants } from "@/lib/utils/animations";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ScrollAnimationWrapper from "@/components/ui/ScrollAnimationWrapper";
 import type { Project } from "@/types/common";
@@ -25,71 +24,117 @@ const ProjectsSection: React.FC = () => {
   );
 
   return (
-    <section id="portfolio" className="mb-24">
-      <ScrollAnimationWrapper direction="up" delay={0.1}>
-        <h2 className="text-left text-4xl font-semibold text-black mt-4 mb-8 md:mb-12">
-          {projectTranslations[language].title}
-        </h2>
-      </ScrollAnimationWrapper>
+    <section id="portfolio" className="mb-24 overflow-hidden">
+      <div className="container mx-auto px-10 max-w-[1400px]">
+        <ScrollAnimationWrapper direction="up" delay={0.1}>
+          <h2 className="text-left text-4xl font-semibold text-black mt-4 mb-8 md:mb-12">
+            {projectTranslations[language].title}
+          </h2>
+        </ScrollAnimationWrapper>
 
-      <ScrollAnimationWrapper direction="down" delay={0.2}>
-        <div className="text-white flex flex-row justify-center items-center gap-4 py-8">
-          {["All", "Web", "App"].map((tagName, index) => (
-            <ProjectTag
-              key={tagName}
-              name={tagName}
-              displayName={projectTranslations[language].tags[tagName]}
-              isSelected={tag === tagName}
-              onClick={handleTagChange}
-            />
-          ))}
-        </div>
-      </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper direction="down" delay={0.2}>
+          <div className="text-white flex flex-row justify-center items-center gap-4 py-8">
+            {["All", "Web", "App"].map((tagName) => (
+              <ProjectTag
+                key={tagName}
+                name={tagName}
+                displayName={projectTranslations[language].tags[tagName]}
+                isSelected={tag === tagName}
+                onClick={handleTagChange}
+              />
+            ))}
+          </div>
+        </ScrollAnimationWrapper>
+      </div>
 
-      <div ref={ref} className="relative">
+      <div ref={ref} className="relative w-full">
         <AnimatePresence mode="wait">
-          <motion.ul
+          <motion.div
             key={tag}
-            className="grid md:grid-cols-3 gap-8 md:gap-12"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            className="relative overflow-hidden space-y-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {filteredProjects.map((project: Project, index: number) => (
-              <ScrollAnimationWrapper
-                key={project.id}
-                direction="up"
-                delay={0.1 + index * 0.1}
-                className="h-full"
-              >
-                <motion.li
-                  variants={fadeInAnimationVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  custom={index}
-                  layout
-                  className="h-full"
-                >
-                  <ProjectCard
-                    title={
-                      projectTranslations[language].projects[project.title]
-                        .title
-                    }
-                    description={
-                      projectTranslations[language].projects[project.title]
-                        .description
-                    }
-                    imgUrl={project.image}
-                    gitUrl={project.gitUrl}
-                    techStack={project.techStack}
-                    tag={project.tag}
-                  />
-                </motion.li>
-              </ScrollAnimationWrapper>
-            ))}
-          </motion.ul>
+            <motion.div
+              className="flex gap-8"
+              animate={{
+                x: ["0%", "-100%"],
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 40,
+                  ease: "linear",
+                },
+              }}
+            >
+              {[...filteredProjects, ...filteredProjects].map(
+                (project: Project, index: number) => (
+                  <div
+                    key={`row1-${project.id}-${index}`}
+                    className="flex-shrink-0 w-[350px] md:w-[400px]"
+                  >
+                    <ProjectCard
+                      title={
+                        projectTranslations[language].projects[project.title]
+                          .title
+                      }
+                      description={
+                        projectTranslations[language].projects[project.title]
+                          .description
+                      }
+                      imgUrl={project.image}
+                      gitUrl={project.gitUrl}
+                      techStack={project.techStack}
+                      tag={project.tag}
+                    />
+                  </div>
+                ),
+              )}
+            </motion.div>
+
+            <motion.div
+              className="flex gap-8"
+              animate={{
+                x: ["-100%", "0%"],
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 40,
+                  ease: "linear",
+                },
+              }}
+            >
+              {[...filteredProjects, ...filteredProjects].map(
+                (project: Project, index: number) => (
+                  <div
+                    key={`row2-${project.id}-${index}`}
+                    className="flex-shrink-0 w-[350px] md:w-[400px]"
+                  >
+                    <ProjectCard
+                      title={
+                        projectTranslations[language].projects[project.title]
+                          .title
+                      }
+                      description={
+                        projectTranslations[language].projects[project.title]
+                          .description
+                      }
+                      imgUrl={project.image}
+                      gitUrl={project.gitUrl}
+                      techStack={project.techStack}
+                      tag={project.tag}
+                    />
+                  </div>
+                ),
+              )}
+            </motion.div>
+          </motion.div>
         </AnimatePresence>
       </div>
     </section>

@@ -16,7 +16,11 @@ const Home: NextPage = () => {
       <div className="container mx-auto px-10 py-4 max-w-[1400px]">
         <AboutSection />
         <StrengthsSection />
-        <ProjectsSection />
+      </div>
+
+      <ProjectsSection />
+
+      <div className="container mx-auto px-10 py-4 max-w-[1400px]">
         <EmailSection />
       </div>
 
