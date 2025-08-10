@@ -27,22 +27,22 @@ const ProjectsSection: React.FC = () => {
           <motion.div
             className="flex gap-8"
             animate={{
-              x: ["0%", "-100%"],
+              x: [0, -((500 + 32) * projectsData.length)],
             }}
             transition={{
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 40,
+                duration: 60,
                 ease: "linear",
               },
             }}
           >
-            {[...projectsData, ...projectsData, ...projectsData].map(
+            {[...projectsData, ...projectsData].map(
               (project: Project, index: number) => (
                 <div
                   key={`row1-${project.id}-${index}`}
-                  className="flex-shrink-0 w-[350px] md:w-[400px]"
+                  className="flex-shrink-0 w-[450px] md:w-[500px]"
                 >
                   <ProjectCard
                     title={
@@ -66,22 +66,22 @@ const ProjectsSection: React.FC = () => {
           <motion.div
             className="flex gap-8"
             animate={{
-              x: ["-100%", "0%"],
+              x: [-((500 + 32) * projectsData.length), 0],
             }}
             transition={{
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 40,
+                duration: 60,
                 ease: "linear",
               },
             }}
           >
-            {[...projectsData, ...projectsData, ...projectsData].map(
+            {[...projectsData, ...projectsData].map(
               (project: Project, index: number) => (
                 <div
                   key={`row2-${project.id}-${index}`}
-                  className="flex-shrink-0 w-[350px] md:w-[400px]"
+                  className="flex-shrink-0 w-[450px] md:w-[500px]"
                 >
                   <ProjectCard
                     title={
