@@ -13,6 +13,7 @@ const AwardSection: React.FC = () => {
   const [direction, setDirection] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const firstPageRef = useRef<HTMLDivElement>(null);
+  const autoIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const totalPages = Math.ceil(awardsData.length / itemsPerPage);
 
@@ -33,6 +34,30 @@ const AwardSection: React.FC = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    const startAutoSlide = () => {
+      autoIntervalRef.current = setInterval(() => {
+        setDirection(1);
+        setCurrentPage((prev) => (prev + 1) % totalPages);
+      }, 4000);
+    };
+
+    const stopAutoSlide = () => {
+      if (autoIntervalRef.current) {
+        clearInterval(autoIntervalRef.current);
+        autoIntervalRef.current = null;
+      }
+    };
+
+    if (!isHovered) {
+      startAutoSlide();
+    } else {
+      stopAutoSlide();
+    }
+
+    return stopAutoSlide;
+  }, [isHovered, totalPages]);
 
   const handleDragEnd = (event: any, info: { offset: { x: number } }) => {
     const dragOffset = info.offset.x;
