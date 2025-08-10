@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
 import { projectsData } from "@/lib/constants/projects";
@@ -12,7 +12,6 @@ import type { Project } from "@/types/common";
 const ProjectsSection: React.FC = () => {
   const [tag, setTag] = useState<string>("All");
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
   const { language } = useLanguage();
 
   const handleTagChange = (newTag: string): void => {
