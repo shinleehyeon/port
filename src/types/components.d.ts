@@ -5,7 +5,8 @@ export interface ProjectCardProps {
   title: string;
   description: string;
   gitUrl: string;
-  techStack?: IconType[];
+  techStack?: string[];
+  tag?: string[];
 }
 
 export interface ProjectTagProps {

@@ -62,7 +62,7 @@ export const translations: Translations = {
   ko: {
     "nav.about": "자기소개",
     "nav.strengths": "강점",
-    "nav.portfolio": "포트폴리오",
+    "nav.portfolio": "프로젝트",
     "nav.contact": "문의",
     menu: "메뉴",
     close: "닫기",
@@ -87,7 +87,7 @@ export const translations: Translations = {
     "strengths.4.keyword": "맡은 일을 포기하지 않는 열정",
     "strengths.4.detail":
       "한 번 시작한 일은 끝까지 해내려는 강한 의지가 있고, 깊은 몰입을 통해 최상의 결과물을 만들어냅니다.",
-    "projects.title": "포트폴리오",
+    "projects.title": "프로젝트",
     "contact.title": "문의",
     "contact.email": "이메일",
     "contact.phone": "전화번호",
@@ -100,7 +100,7 @@ export const translations: Translations = {
   en: {
     "nav.about": "About",
     "nav.strengths": "Strengths",
-    "nav.portfolio": "Portfolio",
+    "nav.portfolio": "Projects",
     "nav.contact": "Contact",
     menu: "Menu",
     close: "Close",
@@ -125,7 +125,7 @@ export const translations: Translations = {
     "strengths.4.keyword": "Unwavering Dedication",
     "strengths.4.detail":
       "I have a strong will to complete what I start and create the best results through deep focus and commitment.",
-    "projects.title": "Portfolio",
+    "projects.title": "Projects",
     "contact.title": "Contact",
     "contact.email": "Your email",
     "contact.phone": "Phone Number",

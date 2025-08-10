@@ -1,7 +1,7 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
-import type { ProjectCardProps } from "@/types/common";
+import type { ProjectCardProps } from "@/types/components";
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   imgUrl,
@@ -22,7 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   const getTechName = (iconUrl: string) => {
-    const isMobile = tag.includes("App");
+    const isMobile = tag?.includes("App") || false;
     if (iconUrl.includes("react")) {
       return isMobile ? "React Native" : "React";
     }

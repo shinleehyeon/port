@@ -17,7 +17,7 @@ interface ProjectTranslations {
 
 export const projectTranslations: ProjectTranslations = {
   ko: {
-    title: "포트폴리오",
+    title: "프로젝트",
     tags: {
       All: "All",
       Web: "Web",
@@ -52,9 +52,9 @@ export const projectTranslations: ProjectTranslations = {
         title: "Albant",
         description: "선린 내에서 이룰 수 있는 심부름 서비스",
       },
-      PortFolio: {
+      Portfolio: {
         title: "포트폴리오",
-        description: "포트폴리오 사이트",
+        description: "개인 프로젝트 사이트",
       },
     },
   },
@@ -96,9 +96,9 @@ export const projectTranslations: ProjectTranslations = {
         title: "Albant",
         description: "Errand Service within Sunrin High School",
       },
-      PortFolio: {
+      Portfolio: {
         title: "Portfolio",
-        description: "Portfolio Website",
+        description: "Personal Project Website",
       },
     },
   },

@@ -93,8 +93,8 @@ export const projectsData: Project[] = [
   },
   {
     id: 8,
-    title: "PortFolio",
-    description: "포트폴리오 사이트",
+    title: "Portfolio",
+    description: "개인 프로젝트 사이트",
     image: "/images/projects/port.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/shinleehyeon/port",
