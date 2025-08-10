@@ -59,7 +59,7 @@ export const projectsData: Project[] = [
     description: "환경 보호를 게임처럼 재미있게 실천할 수 있는 서비스",
     image: "/images/projects/EcoQuest.png",
     tag: ["All", "App"],
-    gitUrl: "https://github.com/EcoQuest",
+    gitUrl: "https://github.com/ecoquest-h5",
     techStack: [
       "/icons/skills/react.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
@@ -73,7 +73,7 @@ export const projectsData: Project[] = [
     description: "ASD 아동 표정인식 치료 서비스",
     image: "/images/projects/마음이랑.png",
     tag: ["All", "Web"],
-    gitUrl: "https://github.com/shinleehyeon/마음이랑",
+    gitUrl: "https://github.com/maum-irang",
     techStack: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
