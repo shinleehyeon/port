@@ -33,7 +33,7 @@ const ProjectsSection: React.FC = () => {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 60,
+                duration: 80,
                 ease: "linear",
               },
             }}
@@ -72,7 +72,7 @@ const ProjectsSection: React.FC = () => {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 60,
+                duration: 80,
                 ease: "linear",
               },
             }}
