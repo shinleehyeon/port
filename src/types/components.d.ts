@@ -1,5 +1,3 @@
-import { IconType } from "react-icons";
-
 export interface ProjectCardProps {
   imgUrl: string;
   title: string;

@@ -20,7 +20,6 @@ const ProjectsSection: React.FC = () => {
             {projectTranslations[language].title}
           </h2>
         </ScrollAnimationWrapper>
-
       </div>
 
       <div ref={ref} className="relative w-full">
