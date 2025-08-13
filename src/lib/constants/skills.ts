@@ -75,7 +75,7 @@ export const skillData: Record<
     },
     {
       icon: "/icons/skills/vercel.svg",
-      desc: "Vercel을 활용한 프론트엔드 애플리케이션의 자동 배포 및 성능 최적화 경험이 있습니다.",
+      desc: "Vercel을 이용한 프론트엔드 애플리케이션의 자동 배포 및 성능 최적화 경험이 있습니다.",
       descEn:
         "Experience in automated deployment and performance optimization of frontend applications using Vercel.",
     },
