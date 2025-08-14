@@ -2,6 +2,7 @@ import "./globals.css";
 import { Metadata } from "next";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import OpenReplayTracker from "@/components/analytics/OpenReplayTracker";
+import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
 
 export const metadata: Metadata = {
   title: "shinleehyeon | Developer Portfolio",
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body>
+        <ScrollProgressBar />
         <LanguageProvider>{children}</LanguageProvider>
         <OpenReplayTracker />
       </body>
