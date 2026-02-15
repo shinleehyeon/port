@@ -43,7 +43,7 @@ function buildPRBody(commits) {
     "### 🧐 수정한 UI",
     "| Before | After |",
     "| :---: | :---: |",
-    "| <img width='300' src='' /> | <img width='300' src='' /> |",
+    "| 스크린샷 붙여넣기 | 스크린샷 붙여넣기 |",
     "",
     "### ✏️ 제안 사항 (선택)",
     "- …",
