@@ -34,32 +34,47 @@ const pipe =
 // 2. Configuration
 const CONFIG = {
   presets: [
-    { label: "✨ 새로운 기능 추가", task: "feat", ghLabel: "feature" },
-    { label: "🐛 버그 수정", task: "fix", ghLabel: "bugfix" },
-    { label: "🎨 UI/스타일 변경", task: "style", ghLabel: "ui" },
-    { label: "♻️  리팩토링", task: "refactor", ghLabel: "refactor" },
-    { label: "⚡ 성능 개선", task: "perf", ghLabel: "performance" },
-    { label: "📝 문서 작업", task: "docs", ghLabel: "docs" },
-    { label: "🧪 테스트 추가", task: "test", ghLabel: "test" },
-    { label: "🔧 기타 작업", task: "chore", ghLabel: "chore" },
-    { label: "🗑️  코드 제거", task: "prune", ghLabel: "cleanup" },
-    { label: "⏪ 코드 되돌리기", task: "revert", ghLabel: "revert" },
+    {
+      label: "✨ 새로운 기능 추가",
+      icon: "✨",
+      task: "feat",
+      ghLabel: "feature",
+    },
+    { label: "🐛 버그 수정", icon: "🐛", task: "fix", ghLabel: "bugfix" },
+    { label: "🎨 UI/스타일 변경", icon: "🎨", task: "style", ghLabel: "ui" },
+    {
+      label: "♻️  리팩토링",
+      icon: "♻️",
+      task: "refactor",
+      ghLabel: "refactor",
+    },
+    { label: "⚡ 성능 개선", icon: "⚡", task: "perf", ghLabel: "performance" },
+    { label: "📝 문서 작업", icon: "📝", task: "docs", ghLabel: "docs" },
+    { label: "🧪 테스트 추가", icon: "🧪", task: "test", ghLabel: "test" },
+    { label: "🔧 기타 작업", icon: "🔧", task: "chore", ghLabel: "chore" },
+    { label: "🗑️  코드 제거", icon: "🗑️", task: "prune", ghLabel: "cleanup" },
+    {
+      label: "⏪ 코드 되돌리기",
+      icon: "⏪",
+      task: "revert",
+      ghLabel: "revert",
+    },
   ],
   branches: {
     main: "main",
   },
   pr: {
     templates: {
-      feature: ({ what, how, commits }) =>
+      feature: (commits) =>
         [
           "## 무엇을 작업했나요",
-          what || "적어주세요",
+          "---무엇을 작업했는지 적어주세요---",
           "",
           "## 어떤 방식으로 작업했나요?",
-          how || "적어주세요",
+          "---어떤 방식으로 작업했는지 적어주세요---",
           "",
           "## 구현 뷰",
-          "이미지",
+          "---이미지를 첨부해주세요---",
           "",
           commits.length > 0
             ? `## 커밋 내역\n${commits.map((c) => `- ${c}`).join("\n")}`
@@ -92,13 +107,6 @@ const createGitClient = () => {
         return log ? log.split("\n").map((s) => s.replace(/^"|"$/g, "")) : [];
       } catch {
         return [];
-      }
-    },
-    getDiffStat: (base, head) => {
-      try {
-        return execGit(`git diff ${base}..${head} --stat`);
-      } catch {
-        return "";
       }
     },
     getLastCommitMessage: () => {
@@ -277,48 +285,16 @@ const collectIntentions = async () => {
         input.trim().length === 0 ? "설명을 입력해주세요." : true,
     },
   ]);
-  const { bodyMode } = await inquirer.prompt([
-    {
-      type: "select",
-      name: "bodyMode",
-      message: "PR 설명을 어떻게 작성할까요?",
-      choices: [
-        { name: "자동 생성 (커밋 기반)", value: "auto" },
-        { name: "직접 작성", value: "manual" },
-        { name: "건너뛰기", value: "skip" },
-      ],
-    },
-  ]);
-  let what = "";
-  let how = "";
-  if (bodyMode === "auto") {
-    const git = createGitClient();
-    const base = `origin/${CONFIG.branches.main}`;
-    const commits = git.getCommitMessages(base, "HEAD");
-    const diffStat = git.getDiffStat(base, "HEAD");
-    what = commits.length > 0 ? commits.map((c) => `- ${c}`).join("\n") : "";
-    how = diffStat ? `변경된 파일:\n\`\`\`\n${diffStat}\n\`\`\`` : "";
-  } else if (bodyMode === "manual") {
-    const answers = await inquirer.prompt([
-      {
-        type: "input",
-        name: "what",
-        message: "무엇을 작업했나요?",
-      },
-      {
-        type: "input",
-        name: "how",
-        message: "어떤 방식으로 작업했나요?",
-      },
-    ]);
-    what = answers.what;
-    how = answers.how;
-  }
-  return { task: preset.task, ghLabel: preset.ghLabel, description, what, how };
+  return {
+    icon: preset.icon,
+    task: preset.task,
+    ghLabel: preset.ghLabel,
+    description,
+  };
 };
 
-const formatPRTitle = ({ task, description }) => {
-  return `${task}: ${description}`;
+const formatPRTitle = ({ icon, task, description }) => {
+  return `${icon} ${task}: ${description}`;
 };
 
 const checkExistingPR = async (github, context) => {
@@ -357,11 +333,7 @@ const createFeaturePR = async (github, context) => {
     `origin/${CONFIG.branches.main}`,
     "HEAD",
   );
-  const body = CONFIG.pr.templates.feature({
-    what: intentions.what,
-    how: intentions.how,
-    commits,
-  });
+  const body = CONFIG.pr.templates.feature(commits);
   const result = await github.createPullRequest({
     title,
     head: currentBranch,
