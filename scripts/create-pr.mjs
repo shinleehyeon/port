@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { Octokit } from "@octokit/rest";
+ㄱimport { Octokit } from "@octokit/rest";
 import chalk from "chalk";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
@@ -63,14 +63,12 @@ const CONFIG = {
     templates: {
       feature: () =>
         [
-          "## PR 목적",
+          "## 무엇을 작업했나요",
           "<!-- 작업 내용을 요약하여 적어주세요 -->\n\n",
-          "## 작업 내용",
+          "## 어떤 방식으로 작업했나요?",
           "<!-- 작업한 내용에 대한 설명을 적어주세요 -->\n\n",
           "## 구현 뷰",
-          "<!-- 작업 내용을 파악할 수 있는 레코딩이나 캡처를 추가해주세요 -->\n\n",
-          "## Preview URL",
-          "<!-- AUTOFILLED_PREVIEW_URL -->\n_Waiting for deployment..._\n<!-- AUTOFILLED_PREVIEW_URL -->",
+          "<!-- 이미지 -->\n\n",
         ].join("\n"),
       release: (commits) =>
         commits
@@ -311,7 +309,7 @@ const createFeaturePR = async (github, context) => {
   return github.createPullRequest({
     title,
     head: currentBranch,
-    base: CONFIG.branches.develop,
+    base: CONFIG.branches.main,
     body,
     draft: !skipDraft,
   });
