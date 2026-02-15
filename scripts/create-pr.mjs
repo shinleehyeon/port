@@ -4,214 +4,288 @@ import chalk from "chalk";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
 
-// 1. Core Abstractions
-const Effect = {
-  of: (x) => () => Promise.resolve(x),
-  fail: (e) => () => Promise.reject(e),
-  chain: (f) => (effect) => async () => {
-    const value = await effect();
-    return f(value)();
-  },
-  map: (f) => (effect) => async () => {
-    const value = await effect();
-    return f(value);
-  },
-  catch: (f) => (effect) => async () => {
-    try {
-      return await effect();
-    } catch (error) {
-      return f(error)();
+const PR_TYPES = [
+  { label: "✨ 새로운 기능 추가", icon: "✨", prefix: "feat", tag: "feature" },
+  { label: "🐛 버그 수정", icon: "🐛", prefix: "fix", tag: "bugfix" },
+  { label: "🎨 UI/스타일 변경", icon: "🎨", prefix: "style", tag: "ui" },
+  { label: "♻️  리팩토링", icon: "♻️", prefix: "refactor", tag: "refactor" },
+  { label: "⚡ 성능 개선", icon: "⚡", prefix: "perf", tag: "performance" },
+  { label: "📝 문서 작업", icon: "📝", prefix: "docs", tag: "docs" },
+  { label: "🧪 테스트 추가", icon: "🧪", prefix: "test", tag: "test" },
+  { label: "🔧 기타 작업", icon: "🔧", prefix: "chore", tag: "chore" },
+  { label: "🗑️  코드 제거", icon: "🗑️", prefix: "prune", tag: "cleanup" },
+  { label: "⏪ 코드 되돌리기", icon: "⏪", prefix: "revert", tag: "revert" },
+];
+
+const BASE_BRANCH = "main";
+
+// --- Git 명령 유틸 ---
+
+function run(cmd) {
+  return execSync(cmd).toString().trim();
+}
+
+function runSilent(cmd) {
+  execSync(cmd, { stdio: "ignore" });
+}
+
+// --- PR 본문 생성 ---
+
+function buildPRBody(commits) {
+  const lines = [
+    "### 이 PR에서 주요 변경 사항:",
+    "- …",
+    "",
+    "### 작업 배경",
+    "- …",
+    "",
+    "### 수정한 UI",
+    "| Before | After |",
+    "| :---: | :---: |",
+    "| 스크린샷 붙여넣기 | 스크린샷 붙여넣기 |",
+    "| 스크린샷 붙여넣기 | 스크린샷 붙여넣기 |",
+    "| 스크린샷 붙여넣기 | 스크린샷 붙여넣기 |",
+    "",
+    "### 제안 사항 (선택)",
+    "- …",
+    "",
+    "### 리뷰 결론",
+    "- [ ] 단순 의견 공유 (머지 여부에 영향 없음)",
+    "- [ ] 사소한 수정 후 머지 가능",
+    "- [ ] 추가 수정 필요 (변경 요청)",
+  ];
+
+  if (commits.length > 0) {
+    lines.push("", "### 커밋 내역");
+    for (const msg of commits) {
+      lines.push(`- ${msg}`);
     }
-  },
-  run: async (effect) => await effect(),
-};
+  }
 
-const pipe =
-  (...fns) =>
-  (x) =>
-    fns.reduce((y, f) => f(y), x);
+  return lines.join("\n");
+}
 
-// 2. Configuration
-const CONFIG = {
-  presets: [
-    {
-      label: "✨ 새로운 기능 추가",
-      icon: "✨",
-      task: "feat",
-      ghLabel: "feature",
-    },
-    { label: "🐛 버그 수정", icon: "🐛", task: "fix", ghLabel: "bugfix" },
-    { label: "🎨 UI/스타일 변경", icon: "🎨", task: "style", ghLabel: "ui" },
-    {
-      label: "♻️  리팩토링",
-      icon: "♻️",
-      task: "refactor",
-      ghLabel: "refactor",
-    },
-    { label: "⚡ 성능 개선", icon: "⚡", task: "perf", ghLabel: "performance" },
-    { label: "📝 문서 작업", icon: "📝", task: "docs", ghLabel: "docs" },
-    { label: "🧪 테스트 추가", icon: "🧪", task: "test", ghLabel: "test" },
-    { label: "🔧 기타 작업", icon: "🔧", task: "chore", ghLabel: "chore" },
-    { label: "🗑️  코드 제거", icon: "🗑️", task: "prune", ghLabel: "cleanup" },
-    {
-      label: "⏪ 코드 되돌리기",
-      icon: "⏪",
-      task: "revert",
-      ghLabel: "revert",
-    },
-  ],
-  branches: {
-    main: "main",
-  },
-  pr: {
-    templates: {
-      feature: (commits) =>
-        [
-          "## 무엇을 작업했나요",
-          "---무엇을 작업했는지 적어주세요---",
-          "",
-          "## 어떤 방식으로 작업했나요?",
-          "---어떤 방식으로 작업했는지 적어주세요---",
-          "",
-          "## 구현 뷰",
-          "---이미지를 첨부해주세요---",
-          "",
-          commits.length > 0
-            ? `## 커밋 내역\n${commits.map((c) => `- ${c}`).join("\n")}`
-            : "",
-        ]
-          .filter(Boolean)
-          .join("\n"),
-    },
-  },
-};
+// --- PRCreator 클래스 ---
 
-// 3. Infrastructure
-const createGitClient = () => {
-  const execGit = (cmd) => execSync(cmd).toString().trim();
-  const execGitSilent = (cmd) => {
-    execSync(cmd, { stdio: "ignore" });
-  };
-  return {
-    getCurrentBranch: () => execGit("git rev-parse --abbrev-ref HEAD"),
-    getRepoInfo: () => {
-      const remoteUrl = execGit("git config --get remote.origin.url");
-      const [owner, repo] = remoteUrl
-        .match(/github\.com[:/]([^/]+)\/([^/.]+)(?:\.git)?$/i)
-        .slice(1);
-      return { owner, repo };
-    },
-    getCommitMessages: (base, head) => {
-      try {
-        const log = execGit(`git log ${base}..${head} --pretty=format:"%s"`);
-        return log ? log.split("\n").map((s) => s.replace(/^"|"$/g, "")) : [];
-      } catch {
-        return [];
-      }
-    },
-    getLastCommitMessage: () => {
-      const message = execGit("git log -1 --pretty=%B").split("\n")[0];
-      return message.replace(
-        /^(feat|fix|style|revert|refactor|chore|prune|docs|perf|test):\s*/,
-        "",
+class PRCreator {
+  constructor(token) {
+    if (!token) {
+      throw new Error("GITHUB_TOKEN 환경변수가 설정되어 있지 않아요.");
+    }
+    this.octokit = new Octokit({ auth: token });
+    this.branch = run("git rev-parse --abbrev-ref HEAD");
+    this._loadRepoInfo();
+  }
+
+  _loadRepoInfo() {
+    const url = run("git config --get remote.origin.url");
+    const match = url.match(/github\.com[:/]([^/]+)\/([^/.]+)(?:\.git)?$/i);
+    if (!match) throw new Error("GitHub remote URL을 파싱할 수 없어요.");
+    [, this.owner, this.repo] = match;
+  }
+
+  // --- Git ---
+
+  get lastCommitSummary() {
+    const msg = run("git log -1 --pretty=%B").split("\n")[0];
+    return msg.replace(
+      /^(feat|fix|style|revert|refactor|chore|prune|docs|perf|test):\s*/,
+      "",
+    );
+  }
+
+  get localHash() {
+    return run("git rev-parse HEAD");
+  }
+
+  remoteHash(branch) {
+    try {
+      return run(`git rev-parse origin/${branch}`);
+    } catch {
+      return null;
+    }
+  }
+
+  hasRemoteBranch(branch) {
+    try {
+      const result = run(`git ls-remote --heads origin ${branch}`);
+      return result.length > 0;
+    } catch {
+      return false;
+    }
+  }
+
+  commitsBetween(base, head) {
+    try {
+      const log = run(`git log ${base}..${head} --pretty=format:"%s"`);
+      return log ? log.split("\n").map((s) => s.replace(/^"|"$/g, "")) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  async syncRemote() {
+    const exists = this.hasRemoteBranch(this.branch);
+    const needsPush =
+      !exists || this.localHash !== this.remoteHash(this.branch);
+
+    if (!needsPush) return;
+
+    const label = exists ? "최신 커밋 동기화 중" : "브랜치 push 중";
+    process.stdout.write(chalk.dim(`${label}...`));
+
+    try {
+      runSilent(`git push -u origin ${this.branch}`);
+      process.stdout.write(chalk.green(" 완료\n"));
+    } catch {
+      process.stdout.write(chalk.red(" 실패\n"));
+      throw new Error(`브랜치 '${this.branch}' push에 실패했어요.`);
+    }
+  }
+
+  // --- GitHub API ---
+
+  async findExistingPR() {
+    const { data: pulls } = await this.octokit.pulls.list({
+      owner: this.owner,
+      repo: this.repo,
+      state: "open",
+      base: BASE_BRANCH,
+      head: `${this.owner}:${this.branch}`,
+    });
+    return pulls[0] ?? null;
+  }
+
+  async submitPR({ title, body, draft }) {
+    const { data } = await this.octokit.pulls.create({
+      owner: this.owner,
+      repo: this.repo,
+      title,
+      head: `${this.owner}:${this.branch}`,
+      base: BASE_BRANCH,
+      body,
+      draft,
+    });
+    return data;
+  }
+
+  async applyLabel(prNumber, label) {
+    try {
+      await this.octokit.issues.addLabels({
+        owner: this.owner,
+        repo: this.repo,
+        issue_number: prNumber,
+        labels: [label],
+      });
+    } catch {
+      // 라벨 없으면 무시
+    }
+  }
+
+  async assignSelf(prNumber) {
+    try {
+      const { data: me } = await this.octokit.users.getAuthenticated();
+      await this.octokit.issues.addAssignees({
+        owner: this.owner,
+        repo: this.repo,
+        issue_number: prNumber,
+        assignees: [me.login],
+      });
+    } catch {
+      // 실패 시 무시
+    }
+  }
+
+  // --- 인터랙션 ---
+
+  async askPRType() {
+    const { selected } = await inquirer.prompt([
+      {
+        type: "select",
+        name: "selected",
+        message: "어떤 작업인가요?",
+        choices: PR_TYPES.map((t) => ({ name: t.label, value: t })),
+      },
+    ]);
+    return selected;
+  }
+
+  async askDescription() {
+    const { desc } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "desc",
+        message: "작업 내용을 입력하세요 (비우면 최근 커밋 메시지 사용):",
+        default: this.lastCommitSummary,
+        validate: (v) => (v.trim() ? true : "설명을 입력해주세요."),
+      },
+    ]);
+    return desc;
+  }
+
+  // --- 메인 플로우 ---
+
+  async run(options) {
+    if (options.help) {
+      console.log(HELP_TEXT);
+      return;
+    }
+
+    if (this.branch === BASE_BRANCH) {
+      console.log(chalk.red(`${BASE_BRANCH} 브랜치에서는 실행할 수 없어요.`));
+      process.exit(1);
+    }
+
+    const existing = await this.findExistingPR();
+    if (existing) {
+      console.log(
+        chalk.yellow(
+          `이미 열린 PR이 있어요: ${existing.head.ref} → ${existing.base.ref}`,
+        ),
       );
-    },
-    getLocalCommitHash: () => execGit("git rev-parse HEAD"),
-    checkRemoteBranchExists: (branch) => {
-      try {
-        execGit(`git ls-remote --heads origin ${branch}`);
-        return true;
-      } catch {
-        return false;
-      }
-    },
-    getRemoteCommitHash: (branch) => {
-      try {
-        return execGit(`git rev-parse origin/${branch}`);
-      } catch {
-        return null;
-      }
-    },
-    pushWithProgress: async (branch, isUpdate = false) => {
-      const message = isUpdate
-        ? "remote에 최신 커밋 push하는 중"
-        : "remote로 push하는 중";
-      for (let i = 0; i <= 100; i += 10) {
-        process.stdout.write(`\r${message}(${i}%)`);
-        if (i < 100) {
-          await new Promise((resolve) => setTimeout(resolve, 100));
-        }
-      }
-      process.stdout.write("\n");
-      try {
-        execGitSilent(`git push -u origin ${branch}`);
-        process.stdout.write("\n");
-      } catch {
-        process.stdout.write("\n");
-        throw new Error(`브랜치 '${branch}'를 push하는 데 실패했어요.`);
-      }
-    },
-  };
-};
+      console.log(chalk.white(`  ${existing.html_url}`));
+      openURL(existing.html_url);
+      return;
+    }
 
-const createGitHubClient = (token) => {
-  const octokit = new Octokit({ auth: token });
-  const git = createGitClient();
-  const { owner, repo } = git.getRepoInfo();
-  return {
-    owner,
-    repo,
-    octokit,
-    findOpenPullRequest: async (base, head) => {
-      const { data: pulls } = await octokit.pulls.list({
-        owner,
-        repo,
-        state: "open",
-        base,
-        head: `${owner}:${head}`,
-      });
-      return pulls[0];
-    },
-    createPullRequest: async ({ title, head, base, body, draft = true }) => {
-      return octokit.pulls.create({
-        owner,
-        repo,
-        title,
-        head: `${owner}:${head}`,
-        base,
-        body,
-        draft,
-      });
-    },
-    addLabels: async (prNumber, labels) => {
-      try {
-        await octokit.issues.addLabels({
-          owner,
-          repo,
-          issue_number: prNumber,
-          labels,
-        });
-      } catch {
-        // 라벨이 없으면 무시
-      }
-    },
-    addAssignees: async (prNumber) => {
-      try {
-        const { data: user } = await octokit.users.getAuthenticated();
-        await octokit.issues.addAssignees({
-          owner,
-          repo,
-          issue_number: prNumber,
-          assignees: [user.login],
-        });
-      } catch {
-        // assign 실패 시 무시
-      }
-    },
-  };
-};
+    await this.syncRemote();
 
-const openInBrowser = (url) => {
+    const prType = await this.askPRType();
+    const description = await this.askDescription();
+    const title = `${prType.icon} ${prType.prefix}: ${description}`;
+    const commits = this.commitsBetween(`origin/${BASE_BRANCH}`, "HEAD");
+    const body = buildPRBody(commits);
+
+    const pr = await this.submitPR({
+      title,
+      body,
+      draft: !options.ready,
+    });
+
+    await Promise.all([
+      this.applyLabel(pr.number, prType.tag),
+      this.assignSelf(pr.number),
+    ]);
+
+    console.log(chalk.green("PR 생성 완료!"));
+    console.log(chalk.white(`  ${pr.html_url}`));
+    openURL(pr.html_url);
+  }
+}
+
+// --- 헬퍼 ---
+
+const HELP_TEXT = `사용법: yarn pr [옵션]
+
+옵션:
+  --ready, -r    일반 PR로 생성 (기본: Draft)
+  --help, -h     도움말 표시
+
+예시:
+  yarn pr          # Draft PR 생성
+  yarn pr --ready  # 일반 PR 생성`;
+
+function openURL(url) {
   const cmd =
     process.platform === "darwin"
       ? "open"
@@ -221,179 +295,29 @@ const openInBrowser = (url) => {
   try {
     execSync(`${cmd} ${url}`, { stdio: "ignore" });
   } catch {
-    // 브라우저 열기 실패 시 무시
+    // 무시
   }
-};
+}
 
-const getHelpMessage = () => `사용법: yarn pr [옵션]
-옵션:
-  --ready, -r    Draft PR이 아닌 일반 PR로 생성해요.
-  --help, -h     도움말을 표시해요.
-예시:
-  yarn pr          # Draft PR로 생성
-  yarn pr --ready  # 일반 PR로 생성
-  yarn pr -r       # 일반 PR로 생성 (축약형)`;
-
-const parseOptions = (args = process.argv.slice(2)) => ({
-  skipDraft: args.includes("--ready") || args.includes("-r"),
-  showHelp: args.includes("--help") || args.includes("-h"),
-});
-
-const createContext = (github) => ({
-  github,
-  currentBranch: createGitClient().getCurrentBranch(),
-  skipDraft: parseOptions().skipDraft,
-});
-
-const validateEnvironment = (token) =>
-  token
-    ? Effect.of(token)
-    : Effect.fail(new Error("GITHUB_TOKEN 환경변수가 설정되어 있지 않아요."));
-
-// 4. Domain Logic
-const collectIntentions = async () => {
-  const lastCommitMessage = createGitClient().getLastCommitMessage();
-  const { preset } = await inquirer.prompt([
-    {
-      type: "select",
-      name: "preset",
-      message: "어떤 작업인가요?",
-      choices: CONFIG.presets.map((p) => ({
-        name: p.label,
-        value: p,
-      })),
-    },
-  ]);
-  const { description } = await inquirer.prompt([
-    {
-      type: "input",
-      name: "description",
-      message: "작업 내용을 설명해요. 미입력시 마지막 커밋 메시지를 사용해요.",
-      default: lastCommitMessage,
-      validate: (input) =>
-        input.trim().length === 0 ? "설명을 입력해주세요." : true,
-    },
-  ]);
+function parseArgs(argv = process.argv.slice(2)) {
   return {
-    icon: preset.icon,
-    task: preset.task,
-    ghLabel: preset.ghLabel,
-    description,
+    ready: argv.includes("--ready") || argv.includes("-r"),
+    help: argv.includes("--help") || argv.includes("-h"),
   };
-};
+}
 
-const formatPRTitle = ({ icon, task, description }) => {
-  return `${icon} ${task}: ${description}`;
-};
+// --- 실행 ---
 
-const checkExistingPR = async (github, context) => {
-  const { currentBranch } = context;
-  const existingPR = await github.findOpenPullRequest(
-    CONFIG.branches.main,
-    currentBranch,
-  );
-  return existingPR;
-};
+const args = parseArgs();
 
-const handleExistingPR = (existingPR) => {
-  console.log(
-    chalk.yellowBright(
-      `PR(${existingPR.head.ref} → ${existingPR.base.ref})이 이미 존재해요`,
-    ),
-  );
-  console.log(chalk.whiteBright(`PR 링크: ${existingPR.html_url}`));
-  openInBrowser(existingPR.html_url);
-};
-
-const createFeaturePR = async (github, context) => {
-  const { currentBranch, skipDraft } = context;
-  const git = createGitClient();
-  const remoteBranchExists = git.checkRemoteBranchExists(currentBranch);
-  const localCommitHash = git.getLocalCommitHash();
-  const remoteCommitHash = git.getRemoteCommitHash(currentBranch);
-  if (!remoteBranchExists) {
-    await git.pushWithProgress(currentBranch, false);
-  } else if (localCommitHash !== remoteCommitHash) {
-    await git.pushWithProgress(currentBranch, true);
-  }
-  const intentions = await collectIntentions();
-  const title = formatPRTitle(intentions);
-  const commits = git.getCommitMessages(
-    `origin/${CONFIG.branches.main}`,
-    "HEAD",
-  );
-  const body = CONFIG.pr.templates.feature(commits);
-  const result = await github.createPullRequest({
-    title,
-    head: currentBranch,
-    base: CONFIG.branches.main,
-    body,
-    draft: !skipDraft,
-  });
-
-  const prNumber = result.data.number;
-  await Promise.all([
-    github.addLabels(prNumber, [intentions.ghLabel]),
-    github.addAssignees(prNumber),
-  ]);
-
-  return result;
-};
-
-const createPullRequest = (github) => async (context) => {
-  const existingPR = await checkExistingPR(github, context);
-  if (existingPR) {
-    return handleExistingPR(existingPR);
-  }
-  return createFeaturePR(github, context);
-};
-
-// 5. Main Program
-const executeWorkflow = async (context) => {
-  if (parseOptions().showHelp) {
-    console.log(getHelpMessage());
-    return;
-  }
-  const currentBranch = context.currentBranch;
-  if (currentBranch === CONFIG.branches.main) {
-    console.log(chalk.red("main 브랜치에서는 실행할 수 없어요."));
+if (args.help) {
+  console.log(HELP_TEXT);
+} else {
+  try {
+    const creator = new PRCreator(process.env.GITHUB_TOKEN);
+    await creator.run(args);
+  } catch (err) {
+    console.error(chalk.red("오류:"), err.message);
     process.exit(1);
   }
-  const github = createGitHubClient(process.env.GITHUB_TOKEN);
-  try {
-    const result = await createPullRequest(github)(context);
-    if (result) {
-      const prUrl = result.data.html_url;
-      console.log(chalk.green("PR이 성공적으로 생성되었어요."));
-      console.log(chalk.whiteBright(`PR 링크: ${prUrl}`));
-      openInBrowser(prUrl);
-    }
-  } catch (error) {
-    throw new Error(`PR 생성 실패: ${error.message}`);
-  }
-};
-
-const handleError = (error) => {
-  console.error(chalk.red("작업 중단:"), error.message);
-  return process.exit(1);
-};
-
-const withGithub = (token) => Effect.of(createGitHubClient(token));
-const withContext = (github) => Effect.of(createContext(github));
-const withWorkflow = (github) => Effect.of(executeWorkflow(github));
-const createPRWorkflow = pipe(
-  validateEnvironment,
-  Effect.chain(withGithub),
-  Effect.chain(withContext),
-  Effect.chain(withWorkflow),
-);
-
-const main = async () => {
-  try {
-    await Effect.run(createPRWorkflow(process.env.GITHUB_TOKEN));
-  } catch (error) {
-    handleError(error);
-  }
-};
-
-main();
+}
