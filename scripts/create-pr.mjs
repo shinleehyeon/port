@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-ㄱimport { Octokit } from "@octokit/rest";
+import { Octokit } from "@octokit/rest";
 import chalk from "chalk";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
