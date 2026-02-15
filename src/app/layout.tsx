@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         url: "https://www.2hyundev.com/images/about.png",
         width: 800,
         height: 600,
-        alt: "신이현 포트폴리오",
+        alt: "신이현 포트폴리오 사이트",
       },
     ],
   },
