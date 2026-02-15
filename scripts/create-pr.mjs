@@ -94,6 +94,13 @@ const createGitClient = () => {
         return [];
       }
     },
+    getDiffStat: (base, head) => {
+      try {
+        return execGit(`git diff ${base}..${head} --stat`);
+      } catch {
+        return "";
+      }
+    },
     getLastCommitMessage: () => {
       const message = execGit("git log -1 --pretty=%B").split("\n")[0];
       return message.replace(
@@ -270,17 +277,28 @@ const collectIntentions = async () => {
         input.trim().length === 0 ? "설명을 입력해주세요." : true,
     },
   ]);
-  const { fillBody } = await inquirer.prompt([
+  const { bodyMode } = await inquirer.prompt([
     {
-      type: "confirm",
-      name: "fillBody",
-      message: "PR 설명을 지금 작성할까요?",
-      default: false,
+      type: "select",
+      name: "bodyMode",
+      message: "PR 설명을 어떻게 작성할까요?",
+      choices: [
+        { name: "자동 생성 (커밋 기반)", value: "auto" },
+        { name: "직접 작성", value: "manual" },
+        { name: "건너뛰기", value: "skip" },
+      ],
     },
   ]);
   let what = "";
   let how = "";
-  if (fillBody) {
+  if (bodyMode === "auto") {
+    const git = createGitClient();
+    const base = `origin/${CONFIG.branches.main}`;
+    const commits = git.getCommitMessages(base, "HEAD");
+    const diffStat = git.getDiffStat(base, "HEAD");
+    what = commits.length > 0 ? commits.map((c) => `- ${c}`).join("\n") : "";
+    how = diffStat ? `변경된 파일:\n\`\`\`\n${diffStat}\n\`\`\`` : "";
+  } else if (bodyMode === "manual") {
     const answers = await inquirer.prompt([
       {
         type: "input",
