@@ -50,28 +50,23 @@ const CONFIG = {
   },
   pr: {
     templates: {
-      feature: (commits) =>
+      feature: ({ what, how, commits }) =>
         [
           "## 무엇을 작업했나요",
-          "<!-- 작업 내용을 요약하여 적어주세요 -->\n\n",
+          what || "적어주세요",
+          "",
           "## 어떤 방식으로 작업했나요?",
-          "<!-- 작업한 내용에 대한 설명을 적어주세요 -->\n\n",
+          how || "적어주세요",
+          "",
           "## 구현 뷰",
-          "<!-- 이미지 -->\n\n",
+          "이미지",
+          "",
           commits.length > 0
             ? `## 커밋 내역\n${commits.map((c) => `- ${c}`).join("\n")}`
             : "",
         ]
           .filter(Boolean)
           .join("\n"),
-      release: (commits) =>
-        commits
-          .map(formatCommitMessage)
-          .map((commit) => `- ${commit}`)
-          .join("\n"),
-    },
-    titles: {
-      release: "Release",
     },
   },
 };
@@ -93,9 +88,7 @@ const createGitClient = () => {
     },
     getCommitMessages: (base, head) => {
       try {
-        const log = execGit(
-          `git log ${base}..${head} --pretty=format:"%s"`,
-        );
+        const log = execGit(`git log ${base}..${head} --pretty=format:"%s"`);
         return log ? log.split("\n").map((s) => s.replace(/^"|"$/g, "")) : [];
       } catch {
         return [];
@@ -277,7 +270,33 @@ const collectIntentions = async () => {
         input.trim().length === 0 ? "설명을 입력해주세요." : true,
     },
   ]);
-  return { task: preset.task, ghLabel: preset.ghLabel, description };
+  const { fillBody } = await inquirer.prompt([
+    {
+      type: "confirm",
+      name: "fillBody",
+      message: "PR 설명을 지금 작성할까요?",
+      default: false,
+    },
+  ]);
+  let what = "";
+  let how = "";
+  if (fillBody) {
+    const answers = await inquirer.prompt([
+      {
+        type: "input",
+        name: "what",
+        message: "무엇을 작업했나요?",
+      },
+      {
+        type: "input",
+        name: "how",
+        message: "어떤 방식으로 작업했나요?",
+      },
+    ]);
+    what = answers.what;
+    how = answers.how;
+  }
+  return { task: preset.task, ghLabel: preset.ghLabel, description, what, how };
 };
 
 const formatPRTitle = ({ task, description }) => {
@@ -303,28 +322,6 @@ const handleExistingPR = (existingPR) => {
   openInBrowser(existingPR.html_url);
 };
 
-const formatCommitMessage = (commit) => {
-  return commit.commit.message.split("\n")[0];
-};
-
-const createReleasePR = async (github) => {
-  const commits = await github.compareCommits(
-    CONFIG.branches.main,
-    CONFIG.branches.develop,
-  );
-  if (commits.length === 0) {
-    console.log(chalk.red("현재 main 브랜치와 develop 브랜치가 동일해요."));
-    return;
-  }
-  return github.createPullRequest({
-    title: CONFIG.pr.titles.release,
-    head: CONFIG.branches.develop,
-    base: CONFIG.branches.main,
-    body: CONFIG.pr.templates.release(commits),
-    draft: false,
-  });
-};
-
 const createFeaturePR = async (github, context) => {
   const { currentBranch, skipDraft } = context;
   const git = createGitClient();
@@ -342,7 +339,11 @@ const createFeaturePR = async (github, context) => {
     `origin/${CONFIG.branches.main}`,
     "HEAD",
   );
-  const body = CONFIG.pr.templates.feature(commits);
+  const body = CONFIG.pr.templates.feature({
+    what: intentions.what,
+    how: intentions.how,
+    commits,
+  });
   const result = await github.createPullRequest({
     title,
     head: currentBranch,
