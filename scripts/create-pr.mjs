@@ -215,7 +215,7 @@ const collectIntentions = async () => {
   const lastCommitMessage = createGitClient().getLastCommitMessage();
   const { label } = await inquirer.prompt([
     {
-      type: "list",
+      type: "select",
       name: "label",
       message: "어떤 종류의 작업인가요?",
       choices: CONFIG.labels.map((l) => ({
@@ -226,7 +226,7 @@ const collectIntentions = async () => {
   ]);
   const { task } = await inquirer.prompt([
     {
-      type: "list",
+      type: "select",
       name: "task",
       message: "작업의 종류는 무엇인가요?",
       choices: CONFIG.tasks.map((t) => ({
