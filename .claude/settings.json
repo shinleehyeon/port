@@ -21,17 +21,17 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ./.claude/hooks/inject-local.sh"
+          }
+        ]
+      }
     ]
   },
-  "UserPromptSubmit": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "bash ./.claude/hooks/inject-local.sh"
-        }
-      ]
-    }
-  ],
   "enabledMcpjsonServers": ["seed-design"]
 }

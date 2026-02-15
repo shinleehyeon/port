@@ -208,17 +208,6 @@ const createGitHubClient = (token) => {
         // assign 실패 시 무시
       }
     },
-    compareCommits: async (base, head) => {
-      const {
-        data: { commits },
-      } = await octokit.repos.compareCommits({
-        owner,
-        repo,
-        base,
-        head,
-      });
-      return commits;
-    },
   };
 };
 
