@@ -55,7 +55,7 @@ function buildPRBody(commits) {
   ];
 
   if (commits.length > 0) {
-    lines.push("", "### 📋 커밋 내역");
+    lines.push("", "### 커밋 내역");
     for (const msg of commits) {
       lines.push(`- ${msg}`);
     }
