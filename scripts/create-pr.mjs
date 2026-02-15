@@ -33,9 +33,8 @@ function runSilent(cmd) {
 
 function buildPRBody(commits) {
   const lines = [
-    "### 요약",
-    "- 이 PR에서 주요 변경 사항:",
-    "  - …",
+    "### 이 PR에서 주요 변경 사항:",
+    "- …",
     "",
     "### 작업 배경",
     "- …",
